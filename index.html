@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Free WiFi - Dark Knight</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+        }
+        .ad-banner {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        .ad-banner h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .ad-banner p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .promo-strip {
+            background: #2d3436;
+            color: #ffeaa7;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 35px 25px;
+            text-align: center;
+        }
+        .wifi-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+        }
+        .content h1 {
+            color: #2d3436;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .content .subtitle {
+            color: #636e72;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .connect-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 17px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+        .connect-btn:active {
+            transform: translateY(0);
+        }
+        .terms {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #b2bec3;
+            line-height: 1.5;
+        }
+        .terms a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            font-size: 11px;
+            color: #636e72;
+            border-top: 1px solid #eee;
+        }
+        .error {
+            background: #ffe6e6;
+            color: #c0392b;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ad-banner">
+            <h2>Demo Ad</h2>
+            <p>Your advertisement goes here<br>Contact: ads@example.com</p>
+        </div>
+        <div class="promo-strip">
+            Limited Time: 50% OFF Premium WiFi Plans!
+        </div>
+        <div class="content">
+            <div id="error-msg" class="error"></div>
+            <div class="wifi-icon">&#128246;</div>
+            <h1>Dark Knight WiFi</h1>
+            <p class="subtitle">Free internet access for 5 minutes.<br>Click below to connect instantly.</p>
+
+            <form id="login-form" method="post" action="">
+                <input type="hidden" name="username" value="guest">
+                <input type="hidden" name="password" value="guest">
+                <input type="hidden" name="dst" id="dst" value="">
+                <input type="hidden" name="popup" value="false">
+                <button type="submit" class="connect-btn">Connect Now</button>
+            </form>
+
+            <p class="terms">
+                By connecting, you agree to our<br>
+                <a href="#">Terms of Service</a> &amp; <a href="#">Privacy Policy</a>
+            </p>
+        </div>
+        <div class="footer">
+            Powered by Dark Knight Network
+        </div>
+    </div>
+
+    <script>
+        // Parse URL parameters from MikroTik redirect
+        const params = new URLSearchParams(window.location.search);
+
+        // Get the login URL from MikroTik
+        const linkLogin = params.get('link-login') || params.get('link_login');
+        const linkOrig = params.get('link-orig') || params.get('link_orig') || 'http://www.google.com/';
+        const error = params.get('error');
+
+        // Set form action to MikroTik login URL
+        const form = document.getElementById('login-form');
+        if (linkLogin) {
+            form.action = linkLogin;
+        } else {
+            // Fallback - try to construct from referrer or use default
+            form.action = 'http://192.168.50.1/login';
+        }
+
+        // Set destination
+        document.getElementById('dst').value = linkOrig;
+
+        // Show error if any
+        if (error) {
+            const errorDiv = document.getElementById('error-msg');
+            errorDiv.textContent = decodeURIComponent(error);
+            errorDiv.style.display = 'block';
+        }
+
+        // Debug - log parameters
+        console.log('Link Login:', linkLogin);
+        console.log('Link Orig:', linkOrig);
+        console.log('All params:', Object.fromEntries(params));
+    </script>
+</body>
+</html>
