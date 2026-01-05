@@ -6,7 +6,7 @@
     <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free WiFi - Dark Knight</title>
+    <title>Kahf Safe Internet - Free WiFi</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
@@ -31,7 +31,6 @@
             --radius-md: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
-            --ad-accent: #ff6b35;
         }
 
         html, body {
@@ -126,55 +125,12 @@
             font-size: 11px;
         }
 
-        /* WiFi Info */
-        .wifi-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .wifi-name {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 32px;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            text-align: center;
-        }
-
         /* Ad Section */
         .ad-section {
-            background: var(--bg-white);
-            border: 2px solid var(--ad-accent);
+            background: #000;
             border-radius: var(--radius-xl);
             overflow: hidden;
             margin-bottom: 24px;
-        }
-
-        .ad-header {
-            background: linear-gradient(135deg, var(--ad-accent) 0%, #ff8c42 100%);
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .ad-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .ad-sponsor {
-            font-size: 10px;
-            color: rgba(255,255,255,0.8);
         }
 
         .ad-video-container {
@@ -191,36 +147,6 @@
             width: 100%;
             height: 100%;
             border: none;
-        }
-
-        .ad-cta {
-            padding: 16px;
-            text-align: center;
-            background: #fff9f5;
-        }
-
-        .ad-cta-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        .ad-cta-link {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--ad-accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .ad-cta-link:hover {
-            background: #e55a2b;
-            transform: translateY(-1px);
         }
 
         /* Info Card */
@@ -329,6 +255,18 @@
             transform: translateY(0);
         }
 
+        .btn-disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            background: #ccc;
+            transform: none;
+            box-shadow: none;
+        }
+
         .terms {
             margin-top: 16px;
             font-size: 11px;
@@ -343,6 +281,23 @@
 
         .terms a:hover {
             text-decoration: underline;
+        }
+
+        /* Waiting message */
+        .waiting-message {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .countdown {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
         }
 
         /* Footer */
@@ -388,10 +343,6 @@
                 padding: 24px 0;
             }
 
-            .wifi-name {
-                font-size: 1.35rem;
-            }
-
             .info-card, .ad-section {
                 border-radius: var(--radius-lg);
             }
@@ -408,8 +359,8 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <div class="logo-icon">&#128246;</div>
-                <span class="logo-text">Dark Knight WiFi</span>
+                <div class="logo-icon">&#128737;</div>
+                <span class="logo-text">Kahf Safe Internet</span>
             </div>
         </div>
     </header>
@@ -426,28 +377,10 @@
                     </div>
                 </div>
 
-                <!-- WiFi Info -->
-                <div class="wifi-label">Connecting To</div>
-                <div class="wifi-name">Dark Knight - 2.4GHz</div>
-
                 <!-- Ad Section with Video -->
                 <div class="ad-section">
-                    <div class="ad-header">
-                        <span class="ad-label">Featured Ad</span>
-                        <span class="ad-sponsor">Sponsored</span>
-                    </div>
                     <div class="ad-video-container">
-                        <!-- Public YouTube video embed as placeholder -->
-                        <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1&controls=1&rel=0"
-                            title="Advertisement"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="ad-cta">
-                        <div class="ad-cta-text">Discover Amazing Deals Today!</div>
-                        <a href="https://example.com" class="ad-cta-link" target="_blank">Learn More</a>
+                        <div id="youtube-player"></div>
                     </div>
                 </div>
 
@@ -463,20 +396,34 @@
 
                 <!-- Connect Section -->
                 <div class="connect-section">
-                    <p class="connect-text">
-                        Click the button below to connect instantly.<br>
-                        Your session will last 5 minutes.
-                    </p>
-
-                    <form id="login-form" method="post" action="">
-                        <input type="hidden" name="username" value="guest">
-                        <input type="hidden" name="password" value="guest">
-                        <input type="hidden" name="dst" id="dst" value="">
-                        <input type="hidden" name="popup" value="false">
-                        <button type="submit" class="btn btn-primary">
+                    <!-- Waiting message (shown while ad plays) -->
+                    <div id="waiting-section">
+                        <p class="waiting-message">
+                            Please watch the ad to continue<br>
+                            <span class="countdown" id="countdown"></span>
+                        </p>
+                        <button type="button" class="btn btn-disabled" disabled>
                             <span>&#128274;</span> Connect to Internet
                         </button>
-                    </form>
+                    </div>
+
+                    <!-- Connect form (shown after ad ends) -->
+                    <div id="connect-section" class="hidden">
+                        <p class="connect-text">
+                            Click the button below to connect instantly.<br>
+                            Your session will last 5 minutes.
+                        </p>
+
+                        <form id="login-form" method="post" action="">
+                            <input type="hidden" name="username" value="guest">
+                            <input type="hidden" name="password" value="guest">
+                            <input type="hidden" name="dst" id="dst" value="">
+                            <input type="hidden" name="popup" value="false">
+                            <button type="submit" class="btn btn-primary">
+                                <span>&#128274;</span> Connect to Internet
+                            </button>
+                        </form>
+                    </div>
 
                     <p class="terms">
                         By connecting, you agree to our<br>
@@ -490,17 +437,88 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-logo">
-            <div class="footer-logo-icon">&#128246;</div>
-            <span>Dark Knight Network</span>
+            <div class="footer-logo-icon">&#128737;</div>
+            <span>Kahf Safe Internet</span>
         </div>
-        <p class="footer-text">Powered by MikroTik Hotspot</p>
+        <p class="footer-text">Protected WiFi Network</p>
     </footer>
 
+    <!-- YouTube IFrame API -->
     <script>
+        // Config
+        const AD_DURATION = 15; // seconds to wait (or until video ends)
+        let countdown = AD_DURATION;
+        let countdownInterval;
+        let player;
+
+        // Load YouTube IFrame API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Called by YouTube API when ready
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '100%',
+                width: '100%',
+                videoId: 'dQw4w9WgXcQ', // Placeholder video
+                playerVars: {
+                    'autoplay': 1,
+                    'mute': 1,
+                    'controls': 1,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+            startCountdown();
+        }
+
+        function onPlayerStateChange(event) {
+            // Video ended (state = 0)
+            if (event.data === YT.PlayerState.ENDED) {
+                enableConnect();
+            }
+        }
+
+        function startCountdown() {
+            updateCountdownDisplay();
+            countdownInterval = setInterval(function() {
+                countdown--;
+                updateCountdownDisplay();
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    enableConnect();
+                }
+            }, 1000);
+        }
+
+        function updateCountdownDisplay() {
+            const el = document.getElementById('countdown');
+            if (countdown > 0) {
+                el.textContent = 'Connect available in ' + countdown + ' seconds';
+            } else {
+                el.textContent = '';
+            }
+        }
+
+        function enableConnect() {
+            clearInterval(countdownInterval);
+            document.getElementById('waiting-section').classList.add('hidden');
+            document.getElementById('connect-section').classList.remove('hidden');
+        }
+
         // Parse URL parameters from MikroTik redirect
         const params = new URLSearchParams(window.location.search);
-
-        // Get the login URL from MikroTik
         const linkLogin = params.get('link-login') || params.get('link_login');
         const linkOrig = params.get('link-orig') || params.get('link_orig') || 'http://www.google.com/';
 
@@ -509,16 +527,18 @@
         if (linkLogin) {
             form.action = linkLogin;
         } else {
-            // Fallback
             form.action = 'http://192.168.50.1/login';
         }
 
         // Set destination
         document.getElementById('dst').value = linkOrig;
 
-        // Debug
-        console.log('Link Login:', linkLogin);
-        console.log('Link Orig:', linkOrig);
+        // Fallback if YouTube API doesn't load
+        setTimeout(function() {
+            if (!player) {
+                startCountdown();
+            }
+        }, 3000);
     </script>
 </body>
 </html>
