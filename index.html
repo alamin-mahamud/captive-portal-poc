@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kahf Safe Internet - Free WiFi</title>
+    <link rel="icon" href="https://dns.kahfguard.com/assets/images/kahfdns-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
@@ -48,7 +49,7 @@
             min-height: 100vh;
         }
 
-        /* Header */
+        /* Header - Same as blocked.kahfguard.com */
         .header {
             padding: 16px 0;
             background: var(--bg-white);
@@ -65,26 +66,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+        .logo img {
+            height: 22px;
+            width: auto;
         }
 
         .logo-text {
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 18px;
+            font-weight: 700;
             color: var(--text-dark);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
         /* Main Content */
@@ -97,6 +92,7 @@
 
         .content {
             width: 100%;
+            text-align: center;
         }
 
         /* Status Badge */
@@ -110,7 +106,7 @@
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .status-icon {
@@ -130,17 +126,18 @@
             background: #000;
             border-radius: var(--radius-xl);
             overflow: hidden;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .ad-video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             background: #000;
         }
 
-        .ad-video-container iframe {
+        .ad-video-container iframe,
+        .ad-video-container #youtube-player {
             position: absolute;
             top: 0;
             left: 0;
@@ -154,8 +151,8 @@
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-xl);
-            padding: 24px;
-            margin-bottom: 24px;
+            padding: 28px;
+            margin-bottom: 32px;
             text-align: left;
         }
 
@@ -211,14 +208,25 @@
         /* Connect Section */
         .connect-section {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
 
         .connect-text {
             font-size: 15px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .waiting-message {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .countdown {
+            font-weight: 700;
+            color: var(--primary-dark);
         }
 
         .btn {
@@ -226,17 +234,15 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 16px 32px;
-            font-size: 15px;
-            font-weight: 700;
+            padding: 14px 24px;
+            font-size: 14px;
+            font-weight: 600;
             border-radius: var(--radius-lg);
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
             border: none;
             font-family: inherit;
-            width: 100%;
-            max-width: 320px;
         }
 
         .btn-primary {
@@ -248,11 +254,7 @@
             background: #00e676;
             color: #000;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px var(--primary-glow);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
+            box-shadow: 0 8px 20px var(--primary-glow);
         }
 
         .btn-disabled {
@@ -268,7 +270,7 @@
         }
 
         .terms {
-            margin-top: 16px;
+            margin-top: 20px;
             font-size: 11px;
             color: var(--text-muted);
             line-height: 1.5;
@@ -279,31 +281,14 @@
             text-decoration: none;
         }
 
-        .terms a:hover {
-            text-decoration: underline;
-        }
-
-        /* Waiting message */
-        .waiting-message {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .countdown {
-            font-weight: 700;
-            color: var(--primary-dark);
-        }
-
-        /* Hidden */
         .hidden {
             display: none !important;
         }
 
-        /* Footer */
+        /* Footer - Same as blocked.kahfguard.com */
         .footer {
             background: var(--bg-dark);
-            padding: 40px 24px;
+            padding: 64px 24px;
             text-align: center;
         }
 
@@ -312,24 +297,37 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
-        .footer-logo-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
+        .footer-logo img {
+            height: 20px;
+            width: auto;
         }
 
         .footer-logo span {
             font-size: 16px;
             font-weight: 700;
             color: var(--text-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .footer-link {
+            font-size: 13px;
+            color: #888888;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
         }
 
         .footer-text {
@@ -340,7 +338,7 @@
         /* Responsive */
         @media (max-width: 600px) {
             .main {
-                padding: 24px 0;
+                padding: 32px 0;
             }
 
             .info-card, .ad-section {
@@ -349,19 +347,22 @@
 
             .btn {
                 width: 100%;
-                max-width: none;
+            }
+
+            .footer {
+                padding: 40px 24px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header - Same as blocked.kahfguard.com -->
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <div class="logo-icon">&#128737;</div>
-                <span class="logo-text">Kahf Safe Internet</span>
-            </div>
+            <a href="https://dns.kahfguard.com" class="logo" target="_blank" rel="noopener noreferrer">
+                <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
+                <span class="logo-text">Kahf</span>
+            </a>
         </div>
     </header>
 
@@ -370,11 +371,9 @@
         <div class="container">
             <div class="content">
                 <!-- Status Badge -->
-                <div style="text-align: center;">
-                    <div class="status-badge">
-                        <span class="status-icon">&#9889;</span>
-                        <span>Free WiFi Available</span>
-                    </div>
+                <div class="status-badge">
+                    <span class="status-icon">✓</span>
+                    <span>Free WiFi Available</span>
                 </div>
 
                 <!-- Ad Section with Video -->
@@ -390,7 +389,7 @@
                     <ul class="info-list">
                         <li>Free internet access for 5 minutes</li>
                         <li>No registration required</li>
-                        <li>Secure and fast connection</li>
+                        <li>Halal and family-safe browsing</li>
                     </ul>
                 </div>
 
@@ -403,15 +402,14 @@
                             <span class="countdown" id="countdown"></span>
                         </p>
                         <button type="button" class="btn btn-disabled" disabled>
-                            <span>&#128274;</span> Connect to Internet
+                            Connect to Internet
                         </button>
                     </div>
 
                     <!-- Connect form (shown after ad ends) -->
                     <div id="connect-section" class="hidden">
                         <p class="connect-text">
-                            Click the button below to connect instantly.<br>
-                            Your session will last 5 minutes.
+                            Click the button below to connect instantly.
                         </p>
 
                         <form id="login-form" method="post" action="">
@@ -420,33 +418,38 @@
                             <input type="hidden" name="dst" id="dst" value="">
                             <input type="hidden" name="popup" value="false">
                             <button type="submit" class="btn btn-primary">
-                                <span>&#128274;</span> Connect to Internet
+                                Connect to Internet
                             </button>
                         </form>
                     </div>
 
                     <p class="terms">
                         By connecting, you agree to our<br>
-                        <a href="#">Terms of Service</a> &amp; <a href="#">Privacy Policy</a>
+                        <a href="https://dns.kahfguard.com/privacy" target="_blank">Terms of Service</a> &amp; <a href="https://dns.kahfguard.com/privacy" target="_blank">Privacy Policy</a>
                     </p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer - Same as blocked.kahfguard.com -->
     <footer class="footer">
         <div class="footer-logo">
-            <div class="footer-logo-icon">&#128737;</div>
-            <span>Kahf Safe Internet</span>
+            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf Inc.">
+            <span>Kahf Inc.</span>
         </div>
-        <p class="footer-text">Protected WiFi Network</p>
+        <div class="footer-links">
+            <a href="https://dns.kahfguard.com" class="footer-link" target="_blank">Home</a>
+            <a href="https://kahfguard.com/support/" class="footer-link" target="_blank">Support</a>
+            <a href="https://dns.kahfguard.com/privacy" class="footer-link" target="_blank">Privacy</a>
+        </div>
+        <p class="footer-text">Protected by Kahf Safe Internet</p>
     </footer>
 
     <!-- YouTube IFrame API -->
     <script>
         // Config
-        const AD_DURATION = 15; // seconds to wait (or until video ends)
+        const AD_DURATION = 15; // seconds to wait
         let countdown = AD_DURATION;
         let countdownInterval;
         let player;
@@ -462,7 +465,8 @@
             player = new YT.Player('youtube-player', {
                 height: '100%',
                 width: '100%',
-                videoId: 'dQw4w9WgXcQ', // Placeholder video
+                // Halal Ad - Islamic Relief charity video
+                videoId: 'LaiN63o_BxA',
                 playerVars: {
                     'autoplay': 1,
                     'mute': 1,
@@ -484,7 +488,6 @@
         }
 
         function onPlayerStateChange(event) {
-            // Video ended (state = 0)
             if (event.data === YT.PlayerState.ENDED) {
                 enableConnect();
             }
