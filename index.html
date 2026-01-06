@@ -50,6 +50,7 @@
             max-width: 720px;
             margin: 0 auto;
             width: 100%;
+            text-align: center;
         }
         .wifi-badge {
             display: inline-flex;
@@ -162,7 +163,7 @@
         .terms a { color: var(--primary-dark); text-decoration: none; }
         .hidden { display: none !important; }
 
-        /* Powered By - Large Logos */
+        /* Powered By - Clean Card Design */
         .powered {
             text-align: center;
             margin-bottom: 20px;
@@ -173,29 +174,29 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         .powered-logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 24px;
+            gap: 16px;
             flex-wrap: wrap;
         }
-        .powered-logo {
+        .powered-card {
             display: block;
-            width: 250px;
-            background: #fff;
-            border-radius: 16px;
-            padding: 20px;
-            transition: transform 0.2s;
+            width: 150px;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
         }
-        .powered-logo:hover {
-            transform: scale(1.02);
+        .powered-card:hover {
+            transform: translateY(-4px);
+            opacity: 0.9;
         }
-        .powered-logo img {
+        .powered-card img {
             width: 100%;
             height: auto;
+            display: block;
         }
 
         .footer {
@@ -216,8 +217,8 @@
         .footer-links a:hover { color: var(--primary); }
         .footer-text { font-size: 11px; color: #666; }
 
-        @media (max-width: 600px) {
-            .powered-logo { width: 100%; max-width: 280px; }
+        @media (max-width: 500px) {
+            .powered-card { width: 120px; }
         }
     </style>
 </head>
@@ -229,7 +230,7 @@
         </a>
     </header>
 
-    <main class="main" style="text-align:center;">
+    <main class="main">
         <div class="wifi-badge">
             <span class="wifi-icon">✓</span>
             Free WiFi Available
@@ -268,14 +269,14 @@
         <div class="powered">
             <div class="powered-title">Powered By</div>
             <div class="powered-logos">
-                <a href="https://kahfbrowser.com" target="_blank" class="powered-logo">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
+                <a href="https://kahfinternet.com" target="_blank" class="powered-card">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
                 </a>
-                <a href="https://kahfguard.com" target="_blank" class="powered-logo">
+                <a href="https://kahfguard.com" target="_blank" class="powered-card">
                     <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
                 </a>
-                <a href="https://kahfinternet.com" target="_blank" class="powered-logo">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
+                <a href="https://kahfbrowser.com" target="_blank" class="powered-card">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
                 </a>
             </div>
         </div>
