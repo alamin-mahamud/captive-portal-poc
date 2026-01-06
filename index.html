@@ -163,40 +163,91 @@
         .terms a { color: var(--primary-dark); text-decoration: none; }
         .hidden { display: none !important; }
 
-        /* Powered By - Clean Card Design */
-        .powered {
-            text-align: center;
+        /* Ecosystem Section - Exact dns.kahfguard.com design */
+        .ecosystem {
             margin-bottom: 20px;
         }
-        .powered-title {
+        .ecosystem-heading {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .ecosystem-label {
+            display: inline-block;
             font-size: 11px;
             font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .ecosystem-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .ecosystem-title .highlight {
+            color: var(--primary);
+        }
+        .ecosystem-desc {
+            font-size: 13px;
             color: var(--text-muted);
+        }
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .ecosystem-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .ecosystem-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(0, 200, 81, 0.15);
+            transform: translateY(-4px);
+        }
+        .ecosystem-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 16px;
+        }
+        .ecosystem-layer {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+            padding: 4px 12px;
+            background: var(--primary-light);
+            border-radius: 12px;
         }
-        .powered-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
+        .ecosystem-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
         }
-        .powered-card {
-            display: block;
-            width: 150px;
-            text-decoration: none;
-            transition: transform 0.2s, opacity 0.2s;
+        .ecosystem-card p {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 12px;
+            flex: 1;
         }
-        .powered-card:hover {
-            transform: translateY(-4px);
-            opacity: 0.9;
-        }
-        .powered-card img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .ecosystem-link {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary-dark);
         }
 
         .footer {
@@ -217,8 +268,28 @@
         .footer-links a:hover { color: var(--primary); }
         .footer-text { font-size: 11px; color: #666; }
 
-        @media (max-width: 500px) {
-            .powered-card { width: 120px; }
+        @media (max-width: 600px) {
+            .ecosystem-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .ecosystem-card {
+                flex-direction: row;
+                text-align: left;
+                padding: 16px;
+                gap: 16px;
+            }
+            .ecosystem-logo {
+                width: 80px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            .ecosystem-card-content {
+                flex: 1;
+            }
+            .ecosystem-layer {
+                display: inline-block;
+            }
         }
     </style>
 </head>
@@ -266,17 +337,43 @@
             <p class="terms">By connecting, you agree to our <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy Policy</a></p>
         </div>
 
-        <div class="powered">
-            <div class="powered-title">Powered By</div>
-            <div class="powered-logos">
-                <a href="https://kahfinternet.com" target="_blank" class="powered-card">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
+        <!-- Ecosystem Section - Exact dns.kahfguard.com design -->
+        <div class="ecosystem">
+            <div class="ecosystem-heading">
+                <span class="ecosystem-label">Complete Protection</span>
+                <h2 class="ecosystem-title">Protection at <span class="highlight">Every Layer</span></h2>
+                <p class="ecosystem-desc">Three products working together — all powered by Kahf Guard technology.</p>
+            </div>
+
+            <div class="ecosystem-grid">
+                <a href="https://kahfinternet.com" target="_blank" class="ecosystem-card">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet" class="ecosystem-logo">
+                    <div class="ecosystem-card-content">
+                        <div class="ecosystem-layer">ISP Layer</div>
+                        <h4>Kahf Internet</h4>
+                        <p>Network-level filtering at ISP. Protection against DNS hijacking, phishing, and malware</p>
+                        <span class="ecosystem-link">kahfinternet.com →</span>
+                    </div>
                 </a>
-                <a href="https://kahfguard.com" target="_blank" class="powered-card">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
+
+                <a href="https://kahfguard.com" target="_blank" class="ecosystem-card">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard" class="ecosystem-logo">
+                    <div class="ecosystem-card-content">
+                        <div class="ecosystem-layer">Device Layer</div>
+                        <h4>Kahf Guard</h4>
+                        <p>DNS-based content filtering app for Android, iOS, Windows, and Mac</p>
+                        <span class="ecosystem-link">kahfguard.com →</span>
+                    </div>
                 </a>
-                <a href="https://kahfbrowser.com" target="_blank" class="powered-card">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
+
+                <a href="https://kahfbrowser.com" target="_blank" class="ecosystem-card">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser" class="ecosystem-logo">
+                    <div class="ecosystem-card-content">
+                        <div class="ecosystem-layer">Browser Layer</div>
+                        <h4>Kahf Browser</h4>
+                        <p>Privacy-first browser with built-in ad blocking and safe search enforcement</p>
+                        <span class="ecosystem-link">kahfbrowser.com →</span>
+                    </div>
                 </a>
             </div>
         </div>
