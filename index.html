@@ -32,9 +32,6 @@
             --radius-md: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
-            --browser: #6366f1;
-            --device: #8b5cf6;
-            --network: #06b6d4;
         }
 
         html, body {
@@ -97,7 +94,7 @@
         .stats-bar {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 32px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
@@ -107,7 +104,7 @@
         }
 
         .stat-value {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--primary-dark);
         }
@@ -160,20 +157,20 @@
             z-index: 10;
         }
 
-        /* Progress Bar */
-        .progress-container {
+        /* Connect Section */
+        .connect-section {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: 16px 20px;
+            border-radius: var(--radius-xl);
+            padding: 24px;
             margin-bottom: 20px;
             text-align: center;
         }
 
-        .progress-text {
+        .connect-status {
             font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .progress-bar {
@@ -181,6 +178,7 @@
             background: var(--border-light);
             border-radius: 3px;
             overflow: hidden;
+            margin-bottom: 12px;
         }
 
         .progress-fill {
@@ -194,123 +192,12 @@
         .countdown-text {
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 8px;
+            margin-bottom: 16px;
         }
 
         .countdown-text strong {
             color: var(--primary-dark);
             font-weight: 700;
-        }
-
-        /* Complete Protection Section */
-        .protection-section {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-xl);
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .protection-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .protection-layer {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px;
-            border-radius: var(--radius-lg);
-            background: var(--bg-light);
-            border: 1px solid var(--border-light);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .protection-layer:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .layer-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .layer-icon img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .layer-icon.browser { background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
-        .layer-icon.device { background: linear-gradient(135deg, #f3e8ff, #ede9fe); }
-        .layer-icon.network { background: linear-gradient(135deg, #ecfeff, #cffafe); }
-
-        .layer-content {
-            flex: 1;
-        }
-
-        .layer-badge {
-            display: inline-block;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-bottom: 4px;
-        }
-
-        .layer-badge.browser { background: #eef2ff; color: var(--browser); }
-        .layer-badge.device { background: #f3e8ff; color: var(--device); }
-        .layer-badge.network { background: #ecfeff; color: var(--network); }
-
-        .layer-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 2px;
-        }
-
-        .layer-desc {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        .layer-arrow {
-            color: var(--border-light);
-            font-size: 18px;
-        }
-
-        /* Connect Section */
-        .connect-section {
-            text-align: center;
-            margin-bottom: 20px;
         }
 
         .btn {
@@ -360,7 +247,6 @@
             font-size: 10px;
             color: var(--text-muted);
             line-height: 1.5;
-            text-align: center;
         }
 
         .terms a {
@@ -370,6 +256,111 @@
 
         .hidden {
             display: none !important;
+        }
+
+        /* Powered By Section - Refined UI */
+        .powered-section {
+            background: linear-gradient(135deg, #111111, #1a1a2e);
+            border-radius: var(--radius-xl);
+            padding: 28px 24px;
+            margin-bottom: 20px;
+        }
+
+        .powered-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .powered-headline {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .powered-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .powered-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            padding: 20px 12px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .powered-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .powered-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 12px;
+            background: #fff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .powered-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .powered-layer {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .powered-layer.browser {
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
+
+        .powered-layer.device {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+        }
+
+        .powered-layer.network {
+            background: rgba(6, 182, 212, 0.2);
+            color: #22d3ee;
+        }
+
+        .powered-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .powered-desc {
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
         }
 
         /* Footer */
@@ -424,18 +415,27 @@
 
         @media (max-width: 480px) {
             .stats-bar {
+                gap: 20px;
+            }
+            .powered-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .powered-card {
+                display: flex;
+                align-items: center;
                 gap: 16px;
+                text-align: left;
+                padding: 16px;
             }
-            .protection-layer {
-                padding: 12px;
+            .powered-icon {
+                margin: 0;
+                width: 48px;
+                height: 48px;
+                flex-shrink: 0;
             }
-            .layer-icon {
-                width: 40px;
-                height: 40px;
-            }
-            .layer-icon img {
-                width: 24px;
-                height: 24px;
+            .powered-content {
+                flex: 1;
             }
             .btn {
                 width: 100%;
@@ -458,15 +458,15 @@
     <main class="main">
         <div class="container">
             <div class="content">
-                <!-- Trust Stats -->
+                <!-- Trust Stats (reordered: 16B first, then 1.6M) -->
                 <div class="stats-bar">
-                    <div class="stat-item">
-                        <div class="stat-value">1.6M+</div>
-                        <div class="stat-label">Sites Blocked</div>
-                    </div>
                     <div class="stat-item">
                         <div class="stat-value">16B+</div>
                         <div class="stat-label">Queries Served</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1.6M+</div>
+                        <div class="stat-label">Sites Blocked</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">50+</div>
@@ -482,72 +482,24 @@
                     </div>
                 </div>
 
-                <!-- Progress Bar -->
-                <div class="progress-container" id="progress-section">
-                    <div class="progress-text">Your free WiFi is loading...</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill"></div>
-                    </div>
-                    <div class="countdown-text">
-                        Connect available in <strong id="countdown">15</strong> seconds
-                    </div>
-                </div>
-
-                <!-- Complete Protection Section -->
-                <div class="protection-section">
-                    <div class="section-title">Powered By</div>
-                    <div class="section-subtitle">Complete Protection at Every Layer</div>
-
-                    <div class="protection-stack">
-                        <a href="https://kahfbrowser.com" target="_blank" class="protection-layer" style="text-decoration:none;">
-                            <div class="layer-icon browser">
-                                <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
-                            </div>
-                            <div class="layer-content">
-                                <span class="layer-badge browser">Browser Layer</span>
-                                <div class="layer-name">Kahf Browser</div>
-                                <div class="layer-desc">Privacy-first browser with built-in ad blocking & safe search</div>
-                            </div>
-                            <span class="layer-arrow">→</span>
-                        </a>
-
-                        <a href="https://kahfguard.com" target="_blank" class="protection-layer" style="text-decoration:none;">
-                            <div class="layer-icon device">
-                                <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
-                            </div>
-                            <div class="layer-content">
-                                <span class="layer-badge device">Device Layer</span>
-                                <div class="layer-name">KahfGuard</div>
-                                <div class="layer-desc">DNS-based filtering app for Android, iOS, Windows & Mac</div>
-                            </div>
-                            <span class="layer-arrow">→</span>
-                        </a>
-
-                        <a href="https://kahfinternet.com" target="_blank" class="protection-layer" style="text-decoration:none;">
-                            <div class="layer-icon network">
-                                <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
-                            </div>
-                            <div class="layer-content">
-                                <span class="layer-badge network">Network Layer</span>
-                                <div class="layer-name">Kahf Internet</div>
-                                <div class="layer-desc">ISP-level filtering with no software needed</div>
-                            </div>
-                            <span class="layer-arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Connect Section -->
                 <div class="connect-section">
-                    <!-- Waiting state -->
-                    <div id="waiting-section">
+                    <!-- Loading state -->
+                    <div id="loading-state">
+                        <div class="connect-status">Your free WiFi is loading...</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="countdown-text">
+                            Available in <strong id="countdown">15</strong> seconds
+                        </div>
                         <button type="button" class="btn btn-disabled" disabled>
                             Connect to Free WiFi
                         </button>
                     </div>
 
-                    <!-- Ready state -->
-                    <div id="connect-section" class="hidden">
+                    <!-- Ready state - shows Connect button -->
+                    <div id="ready-state" class="hidden">
                         <form id="login-form" method="post" action="">
                             <input type="hidden" name="username" value="guest">
                             <input type="hidden" name="password" value="guest">
@@ -564,6 +516,47 @@
                         <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy Policy</a>
                         &amp; <a href="https://kahf.com.tr/terms/" target="_blank">Terms of Service</a>
                     </p>
+                </div>
+
+                <!-- Powered By Section (moved to bottom, refined UI) -->
+                <div class="powered-section">
+                    <div class="powered-title">Powered By</div>
+                    <div class="powered-headline">Complete Protection at Every Layer</div>
+
+                    <div class="powered-grid">
+                        <a href="https://kahfbrowser.com" target="_blank" class="powered-card">
+                            <div class="powered-icon">
+                                <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
+                            </div>
+                            <div class="powered-content">
+                                <span class="powered-layer browser">Browser</span>
+                                <div class="powered-name">Kahf Browser</div>
+                                <div class="powered-desc">Ad blocking & safe search</div>
+                            </div>
+                        </a>
+
+                        <a href="https://kahfguard.com" target="_blank" class="powered-card">
+                            <div class="powered-icon">
+                                <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
+                            </div>
+                            <div class="powered-content">
+                                <span class="powered-layer device">Device</span>
+                                <div class="powered-name">KahfGuard</div>
+                                <div class="powered-desc">All platforms protected</div>
+                            </div>
+                        </a>
+
+                        <a href="https://kahfinternet.com" target="_blank" class="powered-card">
+                            <div class="powered-icon">
+                                <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
+                            </div>
+                            <div class="powered-content">
+                                <span class="powered-layer network">Network</span>
+                                <div class="powered-name">Kahf Internet</div>
+                                <div class="powered-desc">ISP-level filtering</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -643,17 +636,13 @@
             const progress = ((AD_DURATION - countdown) / AD_DURATION) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             document.getElementById('countdown').textContent = Math.max(0, countdown);
-
-            if (countdown <= 0) {
-                document.getElementById('progress-section').innerHTML =
-                    '<div class="progress-text" style="color: var(--primary-dark); font-weight: 600;">✓ Ready to connect!</div>';
-            }
         }
 
         function enableConnect() {
             clearInterval(countdownInterval);
-            document.getElementById('waiting-section').classList.add('hidden');
-            document.getElementById('connect-section').classList.remove('hidden');
+            // Hide loading state, show ready state with Connect button
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('ready-state').classList.remove('hidden');
         }
 
         // Parse MikroTik parameters
