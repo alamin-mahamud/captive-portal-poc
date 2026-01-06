@@ -88,32 +88,68 @@
 
         .content {
             width: 100%;
+            text-align: center;
         }
 
-        /* Stats Bar */
-        .stats-bar {
+        /* Free WiFi Badge */
+        .wifi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .wifi-badge-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 32px;
+            color: white;
+            font-size: 11px;
+        }
+
+        /* Stats Bar - Prominent Display */
+        .stats-section {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: 20px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
         }
 
         .stat-item {
             text-align: center;
+            padding: 12px 8px;
         }
 
         .stat-value {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--text-dark);
+            line-height: 1.2;
         }
 
         .stat-label {
             font-size: 10px;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            margin-top: 4px;
         }
 
         /* Ad Section */
@@ -258,109 +294,56 @@
             display: none !important;
         }
 
-        /* Powered By Section - Refined UI */
+        /* Powered By Section - Logo Only */
         .powered-section {
-            background: linear-gradient(135deg, #111111, #1a1a2e);
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-xl);
-            padding: 28px 24px;
+            padding: 24px;
             margin-bottom: 20px;
         }
 
         .powered-title {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
-            color: rgba(255,255,255,0.5);
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 20px;
         }
 
-        .powered-headline {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 24px;
+        .powered-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
 
-        .powered-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .powered-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-lg);
-            padding: 20px 12px;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .powered-card:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        .powered-icon {
-            width: 56px;
-            height: 56px;
-            margin: 0 auto 12px;
-            background: #fff;
-            border-radius: 14px;
+        .powered-logo-card {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border: 2px solid var(--border-light);
+            border-radius: 20px;
+            padding: 16px;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
 
-        .powered-icon img {
+        .powered-logo-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .powered-logo-card img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }
-
-        .powered-layer {
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-
-        .powered-layer.browser {
-            background: rgba(99, 102, 241, 0.2);
-            color: #818cf8;
-        }
-
-        .powered-layer.device {
-            background: rgba(139, 92, 246, 0.2);
-            color: #a78bfa;
-        }
-
-        .powered-layer.network {
-            background: rgba(6, 182, 212, 0.2);
-            color: #22d3ee;
-        }
-
-        .powered-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .powered-desc {
-            font-size: 10px;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.4;
         }
 
         /* Footer */
@@ -414,28 +397,21 @@
         }
 
         @media (max-width: 480px) {
-            .stats-bar {
-                gap: 20px;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
             }
-            .powered-grid {
-                grid-template-columns: 1fr;
+            .stat-value {
+                font-size: 20px;
+            }
+            .powered-logos {
                 gap: 12px;
             }
-            .powered-card {
-                display: flex;
-                align-items: center;
-                gap: 16px;
-                text-align: left;
-                padding: 16px;
-            }
-            .powered-icon {
-                margin: 0;
-                width: 48px;
-                height: 48px;
-                flex-shrink: 0;
-            }
-            .powered-content {
-                flex: 1;
+            .powered-logo-card {
+                width: 80px;
+                height: 80px;
+                padding: 12px;
+                border-radius: 16px;
             }
             .btn {
                 width: 100%;
@@ -458,19 +434,31 @@
     <main class="main">
         <div class="container">
             <div class="content">
-                <!-- Trust Stats (reordered: 16B first, then 1.6M) -->
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <div class="stat-value">16B+</div>
-                        <div class="stat-label">Queries Served</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">1.6M+</div>
-                        <div class="stat-label">Sites Blocked</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">50+</div>
-                        <div class="stat-label">Countries</div>
+                <!-- Free WiFi Badge -->
+                <div class="wifi-badge">
+                    <span class="wifi-badge-icon">✓</span>
+                    <span>Free WiFi Available</span>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">1.6B+</div>
+                            <div class="stat-label">Queries Blocked</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">8M+</div>
+                            <div class="stat-label">Installs</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2M+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">100K+</div>
+                            <div class="stat-label">Reviews</div>
+                        </div>
                     </div>
                 </div>
 
@@ -498,7 +486,7 @@
                         </button>
                     </div>
 
-                    <!-- Ready state - shows Connect button -->
+                    <!-- Ready state -->
                     <div id="ready-state" class="hidden">
                         <form id="login-form" method="post" action="">
                             <input type="hidden" name="username" value="guest">
@@ -518,43 +506,18 @@
                     </p>
                 </div>
 
-                <!-- Powered By Section (moved to bottom, refined UI) -->
+                <!-- Powered By Section - Logos Only -->
                 <div class="powered-section">
                     <div class="powered-title">Powered By</div>
-                    <div class="powered-headline">Complete Protection at Every Layer</div>
-
-                    <div class="powered-grid">
-                        <a href="https://kahfbrowser.com" target="_blank" class="powered-card">
-                            <div class="powered-icon">
-                                <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
-                            </div>
-                            <div class="powered-content">
-                                <span class="powered-layer browser">Browser</span>
-                                <div class="powered-name">Kahf Browser</div>
-                                <div class="powered-desc">Ad blocking & safe search</div>
-                            </div>
+                    <div class="powered-logos">
+                        <a href="https://kahfbrowser.com" target="_blank" class="powered-logo-card">
+                            <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
                         </a>
-
-                        <a href="https://kahfguard.com" target="_blank" class="powered-card">
-                            <div class="powered-icon">
-                                <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
-                            </div>
-                            <div class="powered-content">
-                                <span class="powered-layer device">Device</span>
-                                <div class="powered-name">KahfGuard</div>
-                                <div class="powered-desc">All platforms protected</div>
-                            </div>
+                        <a href="https://kahfguard.com" target="_blank" class="powered-logo-card">
+                            <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
                         </a>
-
-                        <a href="https://kahfinternet.com" target="_blank" class="powered-card">
-                            <div class="powered-icon">
-                                <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
-                            </div>
-                            <div class="powered-content">
-                                <span class="powered-layer network">Network</span>
-                                <div class="powered-name">Kahf Internet</div>
-                                <div class="powered-desc">ISP-level filtering</div>
-                            </div>
+                        <a href="https://kahfinternet.com" target="_blank" class="powered-logo-card">
+                            <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
                         </a>
                     </div>
                 </div>
@@ -583,7 +546,6 @@
         let countdownInterval;
         let player;
 
-        // Load YouTube API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -640,12 +602,10 @@
 
         function enableConnect() {
             clearInterval(countdownInterval);
-            // Hide loading state, show ready state with Connect button
             document.getElementById('loading-state').classList.add('hidden');
             document.getElementById('ready-state').classList.remove('hidden');
         }
 
-        // Parse MikroTik parameters
         const params = new URLSearchParams(window.location.search);
         const linkLogin = params.get('link-login') || params.get('link_login');
         const linkOrig = params.get('link-orig') || params.get('link_orig') || 'http://www.google.com/';
@@ -658,7 +618,6 @@
         }
         document.getElementById('dst').value = linkOrig;
 
-        // Fallback if YouTube doesn't load
         setTimeout(function() {
             if (!player) {
                 startCountdown();
