@@ -10,88 +10,47 @@
     <link rel="icon" href="https://dns.kahfguard.com/assets/images/kahfdns-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #00c851;
             --primary-dark: #00a844;
             --primary-light: #e8f9ee;
-            --primary-glow: rgba(0, 200, 81, 0.2);
             --bg-white: #ffffff;
             --bg-light: #f8faf9;
             --bg-dark: #111111;
             --text-dark: #111111;
-            --text-secondary: #4b5563;
             --text-muted: #6b7280;
-            --text-light: #ffffff;
             --border-light: #e5e7eb;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 16px;
         }
-
-        html, body {
-            height: 100%;
-        }
-
         body {
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Manrope', -apple-system, sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
-
         .header {
-            padding: 16px 0;
+            padding: 16px;
             background: var(--bg-white);
             border-bottom: 1px solid var(--border-light);
+            text-align: center;
         }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
         .logo {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
             text-decoration: none;
         }
-
-        .logo img {
-            height: 22px;
-            width: auto;
-        }
-
-        .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-dark);
-            letter-spacing: -0.01em;
-        }
-
+        .logo img { height: 22px; }
+        .logo span { font-size: 18px; font-weight: 700; color: var(--text-dark); }
         .main {
             flex: 1;
-            padding: 24px 0;
-        }
-
-        .content {
+            padding: 24px;
+            max-width: 720px;
+            margin: 0 auto;
             width: 100%;
-            text-align: center;
         }
-
-        /* Free WiFi Badge */
         .wifi-badge {
             display: inline-flex;
             align-items: center;
@@ -102,10 +61,9 @@
             border-radius: 24px;
             font-size: 14px;
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
-
-        .wifi-badge-icon {
+        .wifi-icon {
             width: 20px;
             height: 20px;
             background: var(--primary);
@@ -116,68 +74,23 @@
             color: white;
             font-size: 11px;
         }
-
-        /* Stats Bar - Prominent Display */
-        .stats-section {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-xl);
-            padding: 20px;
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
             margin-bottom: 20px;
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 12px 8px;
-        }
-
-        .stat-value {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-top: 4px;
-        }
-
-        /* Ad Section */
+        .stat { text-align: center; }
+        .stat-value { font-size: 20px; font-weight: 800; color: var(--text-dark); }
+        .stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
         .ad-section {
             background: #000;
-            border-radius: var(--radius-xl);
+            border-radius: 16px;
             overflow: hidden;
             margin-bottom: 20px;
             position: relative;
         }
-
-        .ad-video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            background: #000;
-        }
-
-        .ad-video-container iframe,
-        .ad-video-container #youtube-player {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         .ad-badge {
             position: absolute;
             top: 12px;
@@ -189,26 +102,29 @@
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             z-index: 10;
         }
-
-        /* Connect Section */
-        .connect-section {
+        .ad-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+        }
+        .ad-video #youtube-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .connect-box {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
-            border-radius: var(--radius-xl);
+            border-radius: 16px;
             padding: 24px;
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 20px;
         }
-
-        .connect-status {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
         .progress-bar {
             height: 6px;
             background: var(--border-light);
@@ -216,387 +132,195 @@
             overflow: hidden;
             margin-bottom: 12px;
         }
-
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            border-radius: 3px;
-            transition: width 1s linear;
+            background: var(--primary);
             width: 0%;
+            transition: width 1s linear;
         }
-
-        .countdown-text {
+        .countdown {
             font-size: 12px;
             color: var(--text-muted);
             margin-bottom: 16px;
         }
-
-        .countdown-text strong {
-            color: var(--primary-dark);
-            font-weight: 700;
-        }
-
+        .countdown strong { color: var(--primary-dark); }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
             padding: 16px 40px;
             font-size: 15px;
             font-weight: 700;
-            border-radius: var(--radius-lg);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
+            border-radius: 12px;
             border: none;
-            font-family: inherit;
+            cursor: pointer;
             width: 100%;
-            max-width: 320px;
+            max-width: 300px;
+            font-family: inherit;
         }
+        .btn-disabled { background: #e5e7eb; color: #9ca3af; cursor: not-allowed; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #00e676; color: #000; }
+        .terms { font-size: 10px; color: var(--text-muted); margin-top: 16px; }
+        .terms a { color: var(--primary-dark); text-decoration: none; }
+        .hidden { display: none !important; }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #00e676;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--primary-glow);
-        }
-
-        .btn-disabled {
-            background: #e5e7eb;
-            color: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        .btn-disabled:hover {
-            background: #e5e7eb;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .terms {
-            margin-top: 16px;
-            font-size: 10px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .terms a {
-            color: var(--primary-dark);
-            text-decoration: none;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Powered By Section - Logo Only */
-        .powered-section {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-xl);
-            padding: 24px;
+        /* Powered By - Large Logos */
+        .powered {
+            text-align: center;
             margin-bottom: 20px;
         }
-
         .powered-title {
             font-size: 11px;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
-
         .powered-logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-        }
-
-        .powered-logo-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100px;
-            height: 100px;
-            background: #fff;
-            border: 2px solid var(--border-light);
-            border-radius: 20px;
-            padding: 16px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .powered-logo-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-        }
-
-        .powered-logo-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-dark);
-            padding: 48px 24px;
-            text-align: center;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .footer-logo img {
-            height: 20px;
-            width: auto;
-        }
-
-        .footer-logo span {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-light);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
             gap: 24px;
             flex-wrap: wrap;
+        }
+        .powered-logo {
+            display: block;
+            width: 250px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .powered-logo:hover {
+            transform: scale(1.02);
+        }
+        .powered-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer {
+            background: var(--bg-dark);
+            padding: 40px 24px;
+            text-align: center;
+        }
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-bottom: 12px;
         }
+        .footer-logo img { height: 20px; }
+        .footer-logo span { font-size: 16px; font-weight: 700; color: #fff; }
+        .footer-links { margin-bottom: 8px; }
+        .footer-links a { color: #888; font-size: 13px; text-decoration: none; margin: 0 12px; }
+        .footer-links a:hover { color: var(--primary); }
+        .footer-text { font-size: 11px; color: #666; }
 
-        .footer-link {
-            font-size: 13px;
-            color: #888888;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--primary);
-        }
-
-        .footer-text {
-            font-size: 11px;
-            color: #666666;
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 4px;
-            }
-            .stat-value {
-                font-size: 20px;
-            }
-            .powered-logos {
-                gap: 12px;
-            }
-            .powered-logo-card {
-                width: 80px;
-                height: 80px;
-                padding: 12px;
-                border-radius: 16px;
-            }
-            .btn {
-                width: 100%;
-            }
+        @media (max-width: 600px) {
+            .powered-logo { width: 100%; max-width: 280px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <a href="https://kahf.com.tr" class="logo" target="_blank" rel="noopener noreferrer">
-                <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
-                <span class="logo-text">Kahf</span>
-            </a>
-        </div>
+        <a href="https://kahf.com.tr" class="logo" target="_blank">
+            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
+            <span>Kahf</span>
+        </a>
     </header>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <div class="content">
-                <!-- Free WiFi Badge -->
-                <div class="wifi-badge">
-                    <span class="wifi-badge-icon">✓</span>
-                    <span>Free WiFi Available</span>
-                </div>
+    <main class="main" style="text-align:center;">
+        <div class="wifi-badge">
+            <span class="wifi-icon">✓</span>
+            Free WiFi Available
+        </div>
 
-                <!-- Stats Section -->
-                <div class="stats-section">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">1.6B+</div>
-                            <div class="stat-label">Queries Blocked</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">8M+</div>
-                            <div class="stat-label">Installs</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">2M+</div>
-                            <div class="stat-label">Active Users</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">100K+</div>
-                            <div class="stat-label">Reviews</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="stats">
+            <div class="stat"><div class="stat-value">1.6B+</div><div class="stat-label">Blocked</div></div>
+            <div class="stat"><div class="stat-value">8M+</div><div class="stat-label">Installs</div></div>
+            <div class="stat"><div class="stat-value">2M+</div><div class="stat-label">Users</div></div>
+            <div class="stat"><div class="stat-value">100K+</div><div class="stat-label">Reviews</div></div>
+        </div>
 
-                <!-- Ad Section -->
-                <div class="ad-section">
-                    <span class="ad-badge">Sponsor</span>
-                    <div class="ad-video-container">
-                        <div id="youtube-player"></div>
-                    </div>
-                </div>
+        <div class="ad-section">
+            <span class="ad-badge">Sponsor</span>
+            <div class="ad-video"><div id="youtube-player"></div></div>
+        </div>
 
-                <!-- Connect Section -->
-                <div class="connect-section">
-                    <!-- Loading state -->
-                    <div id="loading-state">
-                        <div class="connect-status">Your free WiFi is loading...</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress-fill"></div>
-                        </div>
-                        <div class="countdown-text">
-                            Available in <strong id="countdown">15</strong> seconds
-                        </div>
-                        <button type="button" class="btn btn-disabled" disabled>
-                            Connect to Free WiFi
-                        </button>
-                    </div>
+        <div class="connect-box">
+            <div id="loading-state">
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                <div class="countdown">Available in <strong id="countdown">15</strong>s</div>
+                <button class="btn btn-disabled" disabled>Connect to Free WiFi</button>
+            </div>
+            <div id="ready-state" class="hidden">
+                <form id="login-form" method="post" action="">
+                    <input type="hidden" name="username" value="guest">
+                    <input type="hidden" name="password" value="guest">
+                    <input type="hidden" name="dst" id="dst" value="">
+                    <input type="hidden" name="popup" value="false">
+                    <button type="submit" class="btn btn-primary">Connect to Free WiFi</button>
+                </form>
+            </div>
+            <p class="terms">By connecting, you agree to our <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy Policy</a></p>
+        </div>
 
-                    <!-- Ready state -->
-                    <div id="ready-state" class="hidden">
-                        <form id="login-form" method="post" action="">
-                            <input type="hidden" name="username" value="guest">
-                            <input type="hidden" name="password" value="guest">
-                            <input type="hidden" name="dst" id="dst" value="">
-                            <input type="hidden" name="popup" value="false">
-                            <button type="submit" class="btn btn-primary">
-                                Connect to Free WiFi
-                            </button>
-                        </form>
-                    </div>
-
-                    <p class="terms">
-                        By connecting, you agree to our
-                        <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy Policy</a>
-                        &amp; <a href="https://kahf.com.tr/terms/" target="_blank">Terms of Service</a>
-                    </p>
-                </div>
-
-                <!-- Powered By Section - Logos Only -->
-                <div class="powered-section">
-                    <div class="powered-title">Powered By</div>
-                    <div class="powered-logos">
-                        <a href="https://kahfbrowser.com" target="_blank" class="powered-logo-card">
-                            <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
-                        </a>
-                        <a href="https://kahfguard.com" target="_blank" class="powered-logo-card">
-                            <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
-                        </a>
-                        <a href="https://kahfinternet.com" target="_blank" class="powered-logo-card">
-                            <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
-                        </a>
-                    </div>
-                </div>
+        <div class="powered">
+            <div class="powered-title">Powered By</div>
+            <div class="powered-logos">
+                <a href="https://kahfbrowser.com" target="_blank" class="powered-logo">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
+                </a>
+                <a href="https://kahfguard.com" target="_blank" class="powered-logo">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
+                </a>
+                <a href="https://kahfinternet.com" target="_blank" class="powered-logo">
+                    <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
+                </a>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-logo">
-            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf Inc.">
+            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
             <span>Kahf Inc.</span>
         </div>
         <div class="footer-links">
-            <a href="https://kahf.com.tr" class="footer-link" target="_blank">Home</a>
-            <a href="https://kahf.com.tr/contact/" class="footer-link" target="_blank">Contact</a>
-            <a href="https://kahf.com.tr/privacy-policy/" class="footer-link" target="_blank">Privacy</a>
+            <a href="https://kahf.com.tr" target="_blank">Home</a>
+            <a href="https://kahf.com.tr/contact/" target="_blank">Contact</a>
+            <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy</a>
         </div>
         <p class="footer-text">Protected by Kahf Safe Internet</p>
     </footer>
 
-    <!-- YouTube IFrame API -->
     <script>
         const AD_DURATION = 15;
-        let countdown = AD_DURATION;
-        let countdownInterval;
-        let player;
+        let countdown = AD_DURATION, countdownInterval, player;
 
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        document.head.appendChild(tag);
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '100%',
-                width: '100%',
                 videoId: 'LaiN63o_BxA',
-                playerVars: {
-                    'autoplay': 1,
-                    'mute': 1,
-                    'controls': 1,
-                    'rel': 0,
-                    'modestbranding': 1,
-                    'playsinline': 1
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
+                playerVars: { autoplay:1, mute:1, controls:1, rel:0, modestbranding:1, playsinline:1 },
+                events: { onReady: e => { e.target.playVideo(); startCountdown(); }, onStateChange: e => { if(e.data === YT.PlayerState.ENDED) enableConnect(); } }
             });
-        }
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
-            startCountdown();
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                enableConnect();
-            }
         }
 
         function startCountdown() {
             updateProgress();
-            countdownInterval = setInterval(function() {
+            countdownInterval = setInterval(() => {
                 countdown--;
                 updateProgress();
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    enableConnect();
-                }
+                if (countdown <= 0) { clearInterval(countdownInterval); enableConnect(); }
             }, 1000);
         }
 
         function updateProgress() {
-            const progress = ((AD_DURATION - countdown) / AD_DURATION) * 100;
-            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-fill').style.width = ((AD_DURATION - countdown) / AD_DURATION * 100) + '%';
             document.getElementById('countdown').textContent = Math.max(0, countdown);
         }
 
@@ -607,22 +331,11 @@
         }
 
         const params = new URLSearchParams(window.location.search);
-        const linkLogin = params.get('link-login') || params.get('link_login');
-        const linkOrig = params.get('link-orig') || params.get('link_orig') || 'http://www.google.com/';
-
         const form = document.getElementById('login-form');
-        if (linkLogin) {
-            form.action = linkLogin;
-        } else {
-            form.action = 'http://192.168.50.1/login';
-        }
-        document.getElementById('dst').value = linkOrig;
+        form.action = params.get('link-login') || params.get('link_login') || 'http://192.168.50.1/login';
+        document.getElementById('dst').value = params.get('link-orig') || params.get('link_orig') || 'http://www.google.com/';
 
-        setTimeout(function() {
-            if (!player) {
-                startCountdown();
-            }
-        }, 3000);
+        setTimeout(() => { if (!player) startCountdown(); }, 3000);
     </script>
 </body>
 </html>
