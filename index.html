@@ -32,9 +32,9 @@
             --radius-md: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
-            --low: #22c55e;
-            --medium: #3b82f6;
-            --high: #8b5cf6;
+            --browser: #6366f1;
+            --device: #8b5cf6;
+            --network: #06b6d4;
         }
 
         html, body {
@@ -93,7 +93,7 @@
             width: 100%;
         }
 
-        /* Stats Bar - Social Proof */
+        /* Stats Bar */
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -202,7 +202,7 @@
             font-weight: 700;
         }
 
-        /* Protection Section */
+        /* Complete Protection Section */
         .protection-section {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
@@ -217,71 +217,94 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 16px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
-        .protection-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .section-subtitle {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .protection-stack {
+            display: flex;
+            flex-direction: column;
             gap: 12px;
         }
 
-        .protection-card {
-            text-align: center;
-            padding: 16px 8px;
+        .protection-layer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
             border-radius: var(--radius-lg);
             background: var(--bg-light);
             border: 1px solid var(--border-light);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .protection-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
+        .protection-layer:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .protection-name {
-            font-size: 12px;
+        .layer-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .layer-icon img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .layer-icon.browser { background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+        .layer-icon.device { background: linear-gradient(135deg, #f3e8ff, #ede9fe); }
+        .layer-icon.network { background: linear-gradient(135deg, #ecfeff, #cffafe); }
+
+        .layer-content {
+            flex: 1;
+        }
+
+        .layer-badge {
+            display: inline-block;
+            font-size: 9px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
             margin-bottom: 4px;
         }
 
-        .protection-name.low { color: var(--low); }
-        .protection-name.medium { color: var(--medium); }
-        .protection-name.high { color: var(--high); }
+        .layer-badge.browser { background: #eef2ff; color: var(--browser); }
+        .layer-badge.device { background: #f3e8ff; color: var(--device); }
+        .layer-badge.network { background: #ecfeff; color: var(--network); }
 
-        .protection-desc {
-            font-size: 10px;
+        .layer-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .layer-desc {
+            font-size: 12px;
             color: var(--text-muted);
             line-height: 1.4;
         }
 
-        /* Features List */
-        .features-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .feature-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-
-        .feature-tag::before {
-            content: "✓";
-            font-size: 9px;
+        .layer-arrow {
+            color: var(--border-light);
+            font-size: 18px;
         }
 
         /* Connect Section */
@@ -295,9 +318,9 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 14px 32px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 16px 40px;
+            font-size: 15px;
+            font-weight: 700;
             border-radius: var(--radius-lg);
             cursor: pointer;
             transition: all 0.2s ease;
@@ -330,72 +353,6 @@
             background: #e5e7eb;
             transform: none;
             box-shadow: none;
-        }
-
-        /* Optional Email */
-        .email-section {
-            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-            border: 1px solid var(--primary-light);
-            border-radius: var(--radius-lg);
-            padding: 16px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .email-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 4px;
-        }
-
-        .email-subtitle {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .email-input-group {
-            display: flex;
-            gap: 8px;
-            max-width: 320px;
-            margin: 0 auto;
-        }
-
-        .email-input {
-            flex: 1;
-            padding: 10px 14px;
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            font-size: 13px;
-            font-family: inherit;
-        }
-
-        .email-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .email-btn {
-            padding: 10px 16px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .skip-email {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
-
-        .skip-email a {
-            color: var(--primary-dark);
-            text-decoration: none;
         }
 
         .terms {
@@ -469,23 +426,16 @@
             .stats-bar {
                 gap: 16px;
             }
-            .protection-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
+            .protection-layer {
+                padding: 12px;
             }
-            .protection-card {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                text-align: left;
-                padding: 12px 16px;
+            .layer-icon {
+                width: 40px;
+                height: 40px;
             }
-            .protection-icon {
-                margin-bottom: 0;
-                font-size: 20px;
-            }
-            .email-input-group {
-                flex-direction: column;
+            .layer-icon img {
+                width: 24px;
+                height: 24px;
             }
             .btn {
                 width: 100%;
@@ -543,37 +493,47 @@
                     </div>
                 </div>
 
-                <!-- Protection Section -->
+                <!-- Complete Protection Section -->
                 <div class="protection-section">
-                    <div class="section-title">Choose Your Protection Level</div>
-                    <div class="protection-grid">
-                        <div class="protection-card">
-                            <div class="protection-icon">🌿</div>
-                            <div>
-                                <div class="protection-name low">LOW</div>
-                                <div class="protection-desc">Essential for adults</div>
+                    <div class="section-title">Powered By</div>
+                    <div class="section-subtitle">Complete Protection at Every Layer</div>
+
+                    <div class="protection-stack">
+                        <a href="https://kahfbrowser.com" target="_blank" class="protection-layer" style="text-decoration:none;">
+                            <div class="layer-icon browser">
+                                <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser">
                             </div>
-                        </div>
-                        <div class="protection-card">
-                            <div class="protection-icon">⚖️</div>
-                            <div>
-                                <div class="protection-name medium">MEDIUM</div>
-                                <div class="protection-desc">Balanced for families</div>
+                            <div class="layer-content">
+                                <span class="layer-badge browser">Browser Layer</span>
+                                <div class="layer-name">Kahf Browser</div>
+                                <div class="layer-desc">Privacy-first browser with built-in ad blocking & safe search</div>
                             </div>
-                        </div>
-                        <div class="protection-card">
-                            <div class="protection-icon">🛡️</div>
-                            <div>
-                                <div class="protection-name high">HIGH</div>
-                                <div class="protection-desc">Maximum for children</div>
+                            <span class="layer-arrow">→</span>
+                        </a>
+
+                        <a href="https://kahfguard.com" target="_blank" class="protection-layer" style="text-decoration:none;">
+                            <div class="layer-icon device">
+                                <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard">
                             </div>
-                        </div>
-                    </div>
-                    <div class="features-list">
-                        <span class="feature-tag">Malware Blocked</span>
-                        <span class="feature-tag">SafeSearch</span>
-                        <span class="feature-tag">No Ads</span>
-                        <span class="feature-tag">Halal Content</span>
+                            <div class="layer-content">
+                                <span class="layer-badge device">Device Layer</span>
+                                <div class="layer-name">KahfGuard</div>
+                                <div class="layer-desc">DNS-based filtering app for Android, iOS, Windows & Mac</div>
+                            </div>
+                            <span class="layer-arrow">→</span>
+                        </a>
+
+                        <a href="https://kahfinternet.com" target="_blank" class="protection-layer" style="text-decoration:none;">
+                            <div class="layer-icon network">
+                                <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet">
+                            </div>
+                            <div class="layer-content">
+                                <span class="layer-badge network">Network Layer</span>
+                                <div class="layer-name">Kahf Internet</div>
+                                <div class="layer-desc">ISP-level filtering with no software needed</div>
+                            </div>
+                            <span class="layer-arrow">→</span>
+                        </a>
                     </div>
                 </div>
 
@@ -586,23 +546,16 @@
                         </button>
                     </div>
 
-                    <!-- Ready state with optional email -->
+                    <!-- Ready state -->
                     <div id="connect-section" class="hidden">
-                        <div class="email-section">
-                            <div class="email-title">Want 30 minutes instead of 5?</div>
-                            <div class="email-subtitle">Enter your email for extended access (optional)</div>
-                            <div class="email-input-group">
-                                <input type="email" class="email-input" id="user-email" placeholder="your@email.com">
-                                <button type="button" class="email-btn" onclick="submitWithEmail()">Get 30 min</button>
-                            </div>
-                            <div class="skip-email">or <a href="#" onclick="submitForm(); return false;">skip and connect for 5 min</a></div>
-                        </div>
-
-                        <form id="login-form" method="post" action="" style="display:none;">
+                        <form id="login-form" method="post" action="">
                             <input type="hidden" name="username" value="guest">
                             <input type="hidden" name="password" value="guest">
                             <input type="hidden" name="dst" id="dst" value="">
                             <input type="hidden" name="popup" value="false">
+                            <button type="submit" class="btn btn-primary">
+                                Connect to Free WiFi
+                            </button>
                         </form>
                     </div>
 
@@ -701,20 +654,6 @@
             clearInterval(countdownInterval);
             document.getElementById('waiting-section').classList.add('hidden');
             document.getElementById('connect-section').classList.remove('hidden');
-        }
-
-        function submitForm() {
-            document.getElementById('login-form').submit();
-        }
-
-        function submitWithEmail() {
-            const email = document.getElementById('user-email').value;
-            if (email) {
-                // Log email for analytics (could be sent to your backend)
-                console.log('User email:', email);
-                // You could send this to a backend API here
-            }
-            submitForm();
         }
 
         // Parse MikroTik parameters
