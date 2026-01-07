@@ -131,7 +131,7 @@
             background: var(--border-light);
             border-radius: 3px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-top: 12px;
         }
         .progress-fill {
             height: 100%;
@@ -139,12 +139,7 @@
             width: 0%;
             transition: width 1s linear;
         }
-        .countdown {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-        .countdown strong { color: var(--primary-dark); }
+        #btn-timer strong { color: var(--primary-dark); font-weight: 800; }
         .btn {
             padding: 16px 40px;
             font-size: 15px;
@@ -303,9 +298,10 @@
 
         <div class="connect-box">
             <div id="loading-state">
+                <button class="btn btn-disabled" disabled>
+                    <span id="btn-timer">Connect in <strong id="countdown">15</strong>s</span>
+                </button>
                 <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-                <div class="countdown">Available in <strong id="countdown">15</strong>s</div>
-                <button class="btn btn-disabled" disabled>Connect to Free WiFi</button>
             </div>
             <div id="ready-state" class="hidden">
                 <form id="login-form" method="post" action="">
