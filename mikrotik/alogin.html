@@ -1,20 +1,279 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <title>Success</title>
+    <title>Success - Connected to Kahf WiFi</title>
+    <link rel="icon" href="https://dns.kahfguard.com/assets/images/kahfdns-logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #00c851;
+            --primary-dark: #00a844;
+            --primary-light: #e8f9ee;
+            --bg-white: #ffffff;
+            --bg-light: #f8faf9;
+            --text-dark: #111111;
+            --text-muted: #6b7280;
+            --border-light: #e5e7eb;
+        }
+        body {
+            font-family: 'Manrope', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+            box-shadow: 0 8px 24px rgba(0, 200, 81, 0.3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(0, 200, 81, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 32px rgba(0, 200, 81, 0.5); }
+        }
+        .success-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .success-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .ad-section {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .ad-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+        .ad-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+        }
+        .ad-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .countdown-box {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .progress-bar {
+            height: 6px;
+            background: var(--border-light);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 1s linear;
+        }
+        .countdown-text {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .countdown-text strong {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-family: inherit;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .hidden { display: none !important; }
+        .protected-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        .protected-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+        .logo {
+            margin-top: 24px;
+        }
+        .logo img {
+            height: 24px;
+            opacity: 0.6;
+        }
+        /* iOS CNA keyword - hidden but present */
+        .ios-success { position: absolute; left: -9999px; }
+    </style>
 </head>
 <body>
-Success
-<script>
-    // Close CNA window immediately
-    try { window.close(); } catch(e) {}
-    // Fallback redirect
-    setTimeout(function() {
-        window.location.href = 'https://alamin-mahamud.github.io/captive-portal-poc/connected.html';
-    }, 500);
-</script>
+    <!-- Hidden Success keyword for iOS CNA detection -->
+    <span class="ios-success">Success</span>
+
+    <div class="container">
+        <div class="success-icon">✓</div>
+        <h1 class="success-title">You're Connected!</h1>
+        <p class="success-subtitle">Enjoy safe and halal internet browsing</p>
+
+        <div class="ad-section">
+            <span class="ad-badge">Featured</span>
+            <div class="ad-video">
+                <iframe
+                    id="youtube-player"
+                    src="https://www.youtube.com/embed/LaiN63o_BxA?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="countdown-box" id="countdown-box">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="countdown-text">Close available in <strong id="countdown">15</strong>s</p>
+        </div>
+
+        <div id="waiting-state">
+            <button class="btn btn-disabled" disabled>Please Wait...</button>
+        </div>
+
+        <div id="ready-state" class="hidden">
+            <button class="btn btn-primary" onclick="closePortal()">Continue Browsing</button>
+        </div>
+
+        <div class="protected-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Protected by Kahf DNS
+        </div>
+
+        <div class="logo">
+            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
+        </div>
+    </div>
+
+    <script>
+        const AD_DURATION = 15;
+        let countdown = AD_DURATION;
+
+        function startCountdown() {
+            updateProgress();
+            const interval = setInterval(() => {
+                countdown--;
+                updateProgress();
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    enableClose();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            document.getElementById('progress-fill').style.width = ((AD_DURATION - countdown) / AD_DURATION * 100) + '%';
+            document.getElementById('countdown').textContent = Math.max(0, countdown);
+        }
+
+        function enableClose() {
+            document.getElementById('countdown-box').classList.add('hidden');
+            document.getElementById('waiting-state').classList.add('hidden');
+            document.getElementById('ready-state').classList.remove('hidden');
+        }
+
+        function closePortal() {
+            // Try multiple methods to close
+            try {
+                window.close();
+            } catch(e) {}
+
+            // For Android - try to navigate away
+            try {
+                window.location.href = 'about:blank';
+            } catch(e) {}
+
+            // Fallback - redirect to Google (triggers "back to app")
+            setTimeout(function() {
+                window.location.href = 'https://www.google.com';
+            }, 300);
+        }
+
+        // Start countdown on load
+        window.onload = startCountdown;
+    </script>
 </body>
 </html>
