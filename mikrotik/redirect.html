@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <meta http-equiv="refresh" content="0;url=https://alamin-mahamud.github.io/captive-portal-poc/connected.html">
-    <title>Connected!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <script>
+        // For iOS CNA - it looks for "Success" in the page
+        // For Android - try to close the window
+        window.onload = function() {
+            // Try to close CNA window
+            try {
+                window.close();
+            } catch(e) {}
+
+            // Fallback: redirect to success page after short delay
+            setTimeout(function() {
+                window.location.href = 'https://alamin-mahamud.github.io/captive-portal-poc/connected.html';
+            }, 1000);
+        };
+    </script>
 </head>
-<body style="font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#e8f9ee;">
-    <div style="text-align:center;">
-        <h2 style="color:#00c851;">Connected!</h2>
-        <p>Redirecting...</p>
-    </div>
+<body>
+<p>Success</p>
 </body>
 </html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>Success</title>
+</head>
+<body>
+Success
+<script>
+    // Close CNA window immediately
+    try { window.close(); } catch(e) {}
+    // Fallback redirect
+    setTimeout(function() {
+        window.location.href = 'https://alamin-mahamud.github.io/captive-portal-poc/connected.html';
+    }, 500);
+</script>
+</body>
+</html>
