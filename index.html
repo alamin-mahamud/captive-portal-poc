@@ -1,410 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kahf Safe Internet - Free WiFi</title>
-    <link rel="icon" href="https://dns.kahfguard.com/assets/images/kahfdns-logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>Poptar WiFi - Free Internet</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --primary: #00c851;
-            --primary-dark: #00a844;
-            --primary-light: #e8f9ee;
-            --bg-white: #ffffff;
-            --bg-light: #f8faf9;
-            --bg-dark: #111111;
-            --text-dark: #111111;
-            --text-muted: #6b7280;
-            --border-light: #e5e7eb;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-white: #ffffff;
+            --text-muted: #94a3b8;
         }
+
         body {
-            font-family: 'Manrope', -apple-system, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            color: var(--text-white);
+            overflow-x: hidden;
         }
-        .header {
-            padding: 16px;
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-light);
-            text-align: center;
-        }
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        .logo img { height: 22px; }
-        .logo span { font-size: 18px; font-weight: 700; color: var(--text-dark); }
-        .main {
-            flex: 1;
-            padding: 24px;
-            max-width: 720px;
-            margin: 0 auto;
-            width: 100%;
-            text-align: center;
-        }
-        .wifi-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            padding: 10px 20px;
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .wifi-icon {
-            width: 20px;
-            height: 20px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 11px;
-        }
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .stat { text-align: center; }
-        .stat-value { font-size: 20px; font-weight: 800; color: var(--text-dark); }
-        .stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
-        .ad-section {
-            background: #000;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .ad-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(0,0,0,0.7);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            z-index: 10;
-        }
-        .ad-video {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-        }
-        .ad-video #youtube-player {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .connect-box {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .progress-bar {
-            height: 6px;
-            background: var(--border-light);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 12px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 1s linear;
-        }
-        #btn-timer strong { color: var(--primary-dark); font-weight: 800; }
-        .btn {
-            padding: 16px 40px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            max-width: 300px;
-            font-family: inherit;
-        }
-        .btn-disabled { background: #e5e7eb; color: #9ca3af; cursor: not-allowed; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: #00e676; color: #000; }
-        .terms { font-size: 10px; color: var(--text-muted); margin-top: 16px; }
-        .terms a { color: var(--primary-dark); text-decoration: none; }
-        .hidden { display: none !important; }
 
-        /* Ecosystem Section */
-        .ecosystem { margin-bottom: 20px; }
-        .ecosystem-heading { text-align: center; margin-bottom: 24px; }
-        .ecosystem-label {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        .ecosystem-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-        .ecosystem-title .highlight { color: var(--primary); }
-        .ecosystem-desc { font-size: 13px; color: var(--text-muted); }
-        .ecosystem-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-        .ecosystem-card {
+        .container {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            padding: 20px;
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
             text-align: center;
-            padding: 24px 16px;
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            min-height: 320px;
+            padding: 30px 0 20px;
         }
-        .ecosystem-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(0, 200, 81, 0.15);
-            transform: translateY(-4px);
-            background: var(--primary-light);
-        }
-        .ecosystem-logo {
-            width: 180px;
-            height: 60px;
-            object-fit: contain;
-            margin-bottom: 16px;
-        }
-        .ecosystem-layer {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 8px;
         }
-        .ecosystem-card h4 {
+
+        .tagline {
+            color: var(--text-muted);
             font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 8px;
         }
-        .ecosystem-card:hover h4 { color: var(--primary-dark); }
-        .ecosystem-card p {
-            font-size: 11px;
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .lang-btn {
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--text-muted);
+            background: transparent;
             color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 12px;
-            flex: 1;
-        }
-        .ecosystem-link {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--primary);
-            margin-top: auto;
-            padding: 8px 16px;
-            background: var(--primary-light);
-            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
             transition: all 0.2s;
         }
-        .ecosystem-card:hover .ecosystem-link {
+
+        .lang-btn.active {
             background: var(--primary);
+            border-color: var(--primary);
             color: white;
         }
 
-        .footer {
-            background: var(--bg-dark);
-            padding: 40px 24px;
+        /* Ad Banner */
+        .ad-banner {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .footer-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+
+        .ad-banner img {
+            max-width: 100%;
+            border-radius: 8px;
             margin-bottom: 12px;
         }
-        .footer-logo img { height: 20px; }
-        .footer-logo span { font-size: 16px; font-weight: 700; color: #fff; }
-        .footer-links { margin-bottom: 8px; }
-        .footer-links a { color: #888; font-size: 13px; text-decoration: none; margin: 0 12px; }
-        .footer-links a:hover { color: var(--primary); }
-        .footer-text { font-size: 11px; color: #666; }
 
-        @media (max-width: 600px) {
-            .ecosystem-grid { grid-template-columns: 1fr; gap: 12px; }
-            .ecosystem-card { min-height: auto; padding: 20px 16px; }
-            .ecosystem-logo { width: 150px; height: 50px; }
+        .ad-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .ad-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .ad-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Campaign Message */
+        .campaign-box {
+            background: linear-gradient(135deg, rgba(99,102,241,0.2) 0%, rgba(245,158,11,0.2) 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 15px 0;
+            border: 1px solid rgba(99,102,241,0.3);
+        }
+
+        .campaign-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .campaign-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .campaign-text-bn {
+            display: none;
+        }
+
+        /* Connect Button */
+        .connect-section {
+            margin-top: auto;
+            padding: 20px 0 30px;
+        }
+
+        .connect-btn {
+            width: 100%;
+            padding: 18px 32px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+        }
+
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(99,102,241,0.5);
+        }
+
+        .connect-btn:active {
+            transform: translateY(0);
+        }
+
+        .connect-icon {
+            font-size: 20px;
+        }
+
+        .connect-btn-bn {
+            display: none;
+        }
+
+        /* Terms */
+        .terms {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Animated WiFi Icon */
+        .wifi-animation {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .wifi-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .wifi-wave {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: wifiPulse 2s ease-out infinite;
+        }
+
+        .wifi-wave:nth-child(1) { width: 20px; height: 20px; animation-delay: 0s; }
+        .wifi-wave:nth-child(2) { width: 40px; height: 40px; animation-delay: 0.3s; }
+        .wifi-wave:nth-child(3) { width: 60px; height: 60px; animation-delay: 0.6s; }
+
+        .wifi-dot {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        @keyframes wifiPulse {
+            0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-50%) scale(1.2); }
+        }
+
+        /* Responsive */
+        @media (max-height: 600px) {
+            .header { padding: 15px 0 10px; }
+            .logo { font-size: 26px; }
+            .wifi-animation { margin: 10px 0; }
+            .wifi-icon { width: 60px; height: 60px; }
+            .ad-banner { padding: 15px; margin: 10px 0; }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <a href="https://kahf.com.tr" class="logo" target="_blank">
-            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
-            <span>Kahf</span>
-        </a>
-    </header>
-
-    <main class="main">
-        <div class="wifi-badge">
-            <span class="wifi-icon">✓</span>
-            Free WiFi Available
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">Poptar WiFi</div>
+            <div class="tagline" id="tagline-en">Free High-Speed Internet</div>
+            <div class="tagline" id="tagline-bn" style="display:none;">বিনামূল্যে হাই-স্পিড ইন্টারনেট</div>
         </div>
 
-        <div class="stats">
-            <div class="stat"><div class="stat-value">16B+</div><div class="stat-label">Requests/Month</div></div>
-            <div class="stat"><div class="stat-value">8M+</div><div class="stat-label">Installs</div></div>
-            <div class="stat"><div class="stat-value">2M+</div><div class="stat-label">Users</div></div>
-            <div class="stat"><div class="stat-value">100K+</div><div class="stat-label">Reviews</div></div>
+        <!-- Language Toggle -->
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('bn')">বাংলা</button>
         </div>
 
-        <div class="ad-section">
-            <span class="ad-badge">Sponsor</span>
-            <div class="ad-video"><div id="youtube-player"></div></div>
-        </div>
-
-        <div class="connect-box">
-            <div id="loading-state">
-                <button class="btn btn-disabled" disabled>
-                    <span id="btn-timer">Connect in <strong id="countdown">15</strong>s</span>
-                </button>
-                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-            </div>
-            <div id="ready-state" class="hidden">
-                <form id="login-form" method="post" action="">
-                    <input type="hidden" name="username" value="guest">
-                    <input type="hidden" name="password" value="guest">
-                    <input type="hidden" name="dst" id="dst" value="">
-                    <input type="hidden" name="popup" value="false">
-                    <button type="submit" class="btn btn-primary">Connect to Free WiFi</button>
-                </form>
-            </div>
-            <p class="terms">By connecting, you agree to our <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy Policy</a></p>
-        </div>
-
-        <div class="ecosystem">
-            <div class="ecosystem-heading">
-                <span class="ecosystem-label">Complete Protection</span>
-                <h2 class="ecosystem-title">Protection at <span class="highlight">Every Layer</span></h2>
-                <p class="ecosystem-desc">Three products working together — all powered by Kahf DNS Technology.</p>
-            </div>
-
-            <div class="ecosystem-grid">
-                <a href="https://kahfinternet.com" target="_blank" class="ecosystem-card">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-internet-logo.svg" alt="Kahf Internet" class="ecosystem-logo">
-                    <div class="ecosystem-layer">ISP Layer</div>
-                    <h4>Kahf Internet</h4>
-                    <p>Network-level filtering at ISP. Protection against DNS hijacking, phishing, and malware</p>
-                    <span class="ecosystem-link">kahfinternet.com →</span>
-                </a>
-
-                <a href="https://kahfguard.com" target="_blank" class="ecosystem-card">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-guard-logo.svg" alt="KahfGuard" class="ecosystem-logo">
-                    <div class="ecosystem-layer">Device Layer</div>
-                    <h4>Kahf Guard</h4>
-                    <p>DNS-based content filtering app for Android, iOS, Windows, and Mac</p>
-                    <span class="ecosystem-link">kahfguard.com →</span>
-                </a>
-
-                <a href="https://kahfbrowser.com" target="_blank" class="ecosystem-card">
-                    <img src="https://dns.kahfguard.com/assets/images/kahf-browser-logo.svg" alt="Kahf Browser" class="ecosystem-logo">
-                    <div class="ecosystem-layer">Browser Layer</div>
-                    <h4>Kahf Browser</h4>
-                    <p>Privacy-first browser with built-in ad blocking and safe search enforcement</p>
-                    <span class="ecosystem-link">kahfbrowser.com →</span>
-                </a>
+        <!-- WiFi Animation -->
+        <div class="wifi-animation">
+            <div class="wifi-icon">
+                <div class="wifi-wave"></div>
+                <div class="wifi-wave"></div>
+                <div class="wifi-wave"></div>
+                <div class="wifi-dot"></div>
             </div>
         </div>
-    </main>
 
-    <footer class="footer">
-        <div class="footer-logo">
-            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
-            <span>Kahf Inc.</span>
+        <!-- Ad Banner -->
+        <div class="ad-banner">
+            <div class="ad-label">Sponsored</div>
+            <div class="ad-title" id="ad-title-en">Stay Connected Anywhere</div>
+            <div class="ad-title" id="ad-title-bn" style="display:none;">যেকোনো জায়গায় সংযুক্ত থাকুন</div>
+            <div class="ad-desc" id="ad-desc-en">Poptar WiFi brings you free, fast, and reliable internet access at public locations across Bangladesh.</div>
+            <div class="ad-desc" id="ad-desc-bn" style="display:none;">পপটার ওয়াইফাই বাংলাদেশের পাবলিক লোকেশনগুলোতে বিনামূল্যে, দ্রুত এবং নির্ভরযোগ্য ইন্টারনেট অ্যাক্সেস দেয়।</div>
         </div>
-        <div class="footer-links">
-            <a href="https://kahf.com.tr" target="_blank">Home</a>
-            <a href="https://kahf.com.tr/contact/" target="_blank">Contact</a>
-            <a href="https://kahf.com.tr/privacy-policy/" target="_blank">Privacy</a>
+
+        <!-- Campaign Message -->
+        <div class="campaign-box">
+            <div class="campaign-icon">📢</div>
+            <div class="campaign-text" id="campaign-en">
+                <strong>Digital Bangladesh</strong><br>
+                Connecting communities, empowering futures.
+            </div>
+            <div class="campaign-text" id="campaign-bn" style="display:none;">
+                <strong>ডিজিটাল বাংলাদেশ</strong><br>
+                সম্প্রদায়কে সংযুক্ত করা, ভবিষ্যৎকে শক্তিশালী করা।
+            </div>
         </div>
-        <p class="footer-text">Protected by Kahf Safe Internet</p>
-    </footer>
+
+        <!-- Connect Button -->
+        <div class="connect-section">
+            <button class="connect-btn" onclick="connectToInternet()">
+                <span class="connect-icon">📶</span>
+                <span id="btn-text-en">Connect to Internet</span>
+                <span id="btn-text-bn" style="display:none;">ইন্টারনেটে সংযোগ করুন</span>
+            </button>
+            <div class="terms" id="terms-en">
+                By connecting, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </div>
+            <div class="terms" id="terms-bn" style="display:none;">
+                সংযোগ করে, আপনি আমাদের <a href="#">সেবার শর্তাবলী</a> এবং <a href="#">গোপনীয়তা নীতি</a>তে সম্মত হচ্ছেন
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Powered by Poptar WiFi &copy; 2026
+    </div>
 
     <script>
-        const AD_DURATION = 15;
-        let countdown = AD_DURATION, countdownInterval, player;
+        // Track impression on load
+        window.addEventListener('load', function() {
+            console.log('IMPRESSION_STEP_01: Pre-auth page loaded');
+            // Analytics tracking would go here
+        });
 
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
+        // Language toggle
+        function setLang(lang) {
+            var btns = document.querySelectorAll('.lang-btn');
+            btns.forEach(function(b) { b.classList.remove('active'); });
+            event.target.classList.add('active');
 
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'cO7w1ST8R4c',
-                playerVars: { autoplay:1, mute:1, controls:1, rel:0, modestbranding:1, playsinline:1 },
-                events: { onReady: e => { e.target.playVideo(); startCountdown(); }, onStateChange: e => { if(e.data === YT.PlayerState.ENDED) enableConnect(); } }
-            });
+            var enElements = ['tagline-en', 'ad-title-en', 'ad-desc-en', 'campaign-en', 'btn-text-en', 'terms-en'];
+            var bnElements = ['tagline-bn', 'ad-title-bn', 'ad-desc-bn', 'campaign-bn', 'btn-text-bn', 'terms-bn'];
+
+            if (lang === 'bn') {
+                enElements.forEach(function(id) { document.getElementById(id).style.display = 'none'; });
+                bnElements.forEach(function(id) { document.getElementById(id).style.display = 'block'; });
+            } else {
+                enElements.forEach(function(id) { document.getElementById(id).style.display = 'block'; });
+                bnElements.forEach(function(id) { document.getElementById(id).style.display = 'none'; });
+            }
         }
 
-        function startCountdown() {
-            updateProgress();
-            countdownInterval = setInterval(() => {
-                countdown--;
-                updateProgress();
-                if (countdown <= 0) { clearInterval(countdownInterval); enableConnect(); }
-            }, 1000);
+        // Connect button - authenticates with hotspot
+        function connectToInternet() {
+            console.log('CONNECT_CLICKED');
+
+            // Get MikroTik login URL from query params
+            var urlParams = new URLSearchParams(window.location.search);
+            var linkLogin = urlParams.get('link-login') || '';
+            var linkOrig = urlParams.get('link-orig') || 'http://www.google.com';
+
+            if (linkLogin) {
+                // Construct login URL with guest credentials
+                var loginUrl = linkLogin;
+                if (loginUrl.indexOf('?') === -1) {
+                    loginUrl += '?';
+                } else {
+                    loginUrl += '&';
+                }
+                loginUrl += 'username=guest&password=guest&dst=' + encodeURIComponent(linkOrig);
+
+                // Redirect to MikroTik login
+                window.location.href = loginUrl;
+            } else {
+                // Fallback - try direct login
+                window.location.href = 'http://192.168.0.1/login?username=guest&password=guest';
+            }
         }
-
-        function updateProgress() {
-            document.getElementById('progress-fill').style.width = ((AD_DURATION - countdown) / AD_DURATION * 100) + '%';
-            document.getElementById('countdown').textContent = Math.max(0, countdown);
-        }
-
-        function enableConnect() {
-            clearInterval(countdownInterval);
-            document.getElementById('loading-state').classList.add('hidden');
-            document.getElementById('ready-state').classList.remove('hidden');
-        }
-
-        const params = new URLSearchParams(window.location.search);
-        const form = document.getElementById('login-form');
-        form.action = params.get('link-login') || params.get('link_login') || 'http://192.168.50.1/login';
-        document.getElementById('dst').value = params.get('link-orig') || params.get('link_orig') || 'http://www.google.com/';
-
-        setTimeout(() => { if (!player) startCountdown(); }, 3000);
     </script>
 </body>
 </html>

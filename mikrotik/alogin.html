@@ -2,278 +2,342 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <title>Success - Connected to Kahf WiFi</title>
-    <link rel="icon" href="https://dns.kahfguard.com/assets/images/kahfdns-logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Connected - Poptar WiFi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --primary: #00c851;
-            --primary-dark: #00a844;
-            --primary-light: #e8f9ee;
-            --bg-white: #ffffff;
-            --bg-light: #f8faf9;
-            --text-dark: #111111;
-            --text-muted: #6b7280;
-            --border-light: #e5e7eb;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-white: #ffffff;
+            --text-muted: #94a3b8;
         }
+
         body {
-            font-family: 'Manrope', -apple-system, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-white);
+            overflow: hidden;
+        }
+
+        .ios-success { position: absolute; left: -9999px; }
+
+        .container {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
-        }
-        .container {
-            max-width: 400px;
-            width: 100%;
             text-align: center;
         }
+
+        /* Phase 1: Connected */
+        .connected-phase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .success-icon {
-            width: 72px;
-            height: 72px;
-            background: var(--primary);
+            width: 80px;
+            height: 80px;
+            background: var(--success);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            color: white;
-            box-shadow: 0 8px 24px rgba(0, 200, 81, 0.3);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(0, 200, 81, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 8px 32px rgba(0, 200, 81, 0.5); }
-        }
-        .success-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-        .success-subtitle {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-        .ad-section {
-            background: #000;
-            border-radius: 16px;
-            overflow: hidden;
+            font-size: 40px;
             margin-bottom: 20px;
-            position: relative;
+            animation: scaleIn 0.5s ease-out;
         }
-        .ad-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            z-index: 10;
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
-        .ad-video {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-        }
-        .ad-video iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .countdown-box {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-        .progress-bar {
-            height: 6px;
-            background: var(--border-light);
-            border-radius: 3px;
-            overflow: hidden;
+
+        .connected-title {
+            font-size: 28px;
+            font-weight: 700;
             margin-bottom: 10px;
         }
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 1s linear;
-        }
-        .countdown-text {
-            font-size: 13px;
+
+        .connected-subtitle {
+            font-size: 16px;
             color: var(--text-muted);
+            margin-bottom: 30px;
         }
-        .countdown-text strong {
-            color: var(--primary-dark);
-            font-weight: 700;
-        }
-        .btn {
-            display: inline-block;
-            padding: 16px 40px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-family: inherit;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        .btn-disabled {
-            background: #e5e7eb;
-            color: #9ca3af;
-            cursor: not-allowed;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .hidden { display: none !important; }
-        .protected-badge {
+
+        .brand-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            padding: 8px 16px;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .brand-badge .logo {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* Phase 2: Video Ad */
+        .video-phase {
+            display: none;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .ad-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .countdown-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 14px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
-            margin-top: 16px;
+            z-index: 10;
         }
-        .protected-badge svg {
-            width: 14px;
-            height: 14px;
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-card);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 20px;
         }
-        .logo {
-            margin-top: 24px;
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            width: 0%;
+            transition: width 0.1s linear;
         }
-        .logo img {
-            height: 24px;
-            opacity: 0.6;
+
+        .waiting-btn {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            cursor: not-allowed;
         }
-        /* iOS CNA keyword - hidden but present */
-        .ios-success { position: absolute; left: -9999px; }
+
+        /* Phase 3: Continue */
+        .continue-phase {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .continue-btn {
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(16,185,129,0.4);
+            transition: transform 0.2s;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .skip-notice {
+            margin-top: 15px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
-    <!-- Hidden Success keyword for iOS CNA detection -->
     <span class="ios-success">Success</span>
 
     <div class="container">
-        <div class="success-icon">✓</div>
-        <h1 class="success-title">You're Connected!</h1>
-        <p class="success-subtitle">Enjoy safe and halal internet browsing</p>
+        <!-- Phase 1: Connected Message -->
+        <div class="connected-phase" id="phase-connected">
+            <div class="success-icon">✓</div>
+            <h1 class="connected-title">You're Connected!</h1>
+            <p class="connected-subtitle">Enjoy free internet with Poptar WiFi</p>
+            <div class="brand-badge">
+                Powered by <span class="logo">Poptar WiFi</span>
+            </div>
+        </div>
 
-        <div class="ad-section">
-            <span class="ad-badge">Featured</span>
-            <div class="ad-video">
+        <!-- Phase 2: Video Ad (5 seconds) -->
+        <div class="video-phase" id="phase-video">
+            <div class="ad-label">Advertisement</div>
+
+            <div class="video-container" id="video-container">
                 <iframe
-                    id="youtube-player"
-                    src="https://www.youtube.com/embed/LaiN63o_BxA?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1"
+                    id="yt-player"
+                    src="https://www.youtube.com/embed/cO7w1ST8R4c?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
                     allow="autoplay; encrypted-media"
                     allowfullscreen>
                 </iframe>
-            </div>
-        </div>
 
-        <div class="countdown-box" id="countdown-box">
+                <div class="countdown-overlay" id="countdown">
+                    Ad ends in <span id="countdown-num">5</span>s
+                </div>
+            </div>
+
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
-            <p class="countdown-text">Close available in <strong id="countdown">15</strong>s</p>
+
+            <button class="waiting-btn" id="waiting-btn">
+                Please wait... <span id="wait-seconds">5</span>s
+            </button>
         </div>
 
-        <div id="waiting-state">
-            <button class="btn btn-disabled" disabled>Please Wait...</button>
-        </div>
+        <!-- Phase 3: Continue -->
+        <div class="continue-phase" id="phase-continue">
+            <div class="success-icon">✓</div>
+            <h1 class="connected-title">Ad Complete!</h1>
+            <p class="connected-subtitle">You can now browse freely</p>
 
-        <div id="ready-state" class="hidden">
-            <button class="btn btn-primary" onclick="closePortal()">Continue Browsing</button>
-        </div>
+            <button class="continue-btn" onclick="continueBrowsing()">
+                🌐 Continue Browsing
+            </button>
 
-        <div class="protected-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            Protected by Kahf DNS
-        </div>
-
-        <div class="logo">
-            <img src="https://dns.kahfguard.com/assets/images/kahfdns-logo.png" alt="Kahf">
+            <p class="skip-notice">Auto-redirecting in 3 seconds...</p>
         </div>
     </div>
 
+    <div class="footer">
+        Poptar WiFi &copy; 2026
+    </div>
+
     <script>
-        const AD_DURATION = 15;
-        let countdown = AD_DURATION;
+        var AD_DURATION = 5;
+        var CONNECTED_DISPLAY_TIME = 2000;
+        var countdown = AD_DURATION;
+        var countdownInterval;
+
+        console.log('IMPRESSION_STEP_02A: Post-connect splash');
+
+        window.onload = function() {
+            setTimeout(showVideoPhase, CONNECTED_DISPLAY_TIME);
+        };
+
+        function showVideoPhase() {
+            document.getElementById('phase-connected').style.display = 'none';
+            document.getElementById('phase-video').style.display = 'block';
+            console.log('IMPRESSION_STEP_03: Video ad started');
+            startCountdown();
+        }
 
         function startCountdown() {
             updateProgress();
-            const interval = setInterval(() => {
+            countdownInterval = setInterval(function() {
                 countdown--;
                 updateProgress();
                 if (countdown <= 0) {
-                    clearInterval(interval);
-                    enableClose();
+                    clearInterval(countdownInterval);
+                    showContinuePhase();
                 }
             }, 1000);
         }
 
         function updateProgress() {
-            document.getElementById('progress-fill').style.width = ((AD_DURATION - countdown) / AD_DURATION * 100) + '%';
-            document.getElementById('countdown').textContent = Math.max(0, countdown);
+            var progress = ((AD_DURATION - countdown) / AD_DURATION) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('countdown-num').textContent = countdown;
+            document.getElementById('wait-seconds').textContent = countdown;
         }
 
-        function enableClose() {
-            document.getElementById('countdown-box').classList.add('hidden');
-            document.getElementById('waiting-state').classList.add('hidden');
-            document.getElementById('ready-state').classList.remove('hidden');
+        function showContinuePhase() {
+            document.getElementById('phase-video').style.display = 'none';
+            document.getElementById('phase-continue').style.display = 'flex';
+            console.log('AD_COMPLETE: Video ad finished');
+            setTimeout(continueBrowsing, 3000);
         }
 
-        function closePortal() {
-            // Try multiple methods to close
-            try {
-                window.close();
-            } catch(e) {}
-
-            // For Android - try to navigate away
-            try {
-                window.location.href = 'about:blank';
-            } catch(e) {}
-
-            // Fallback - redirect to Google (triggers "back to app")
-            setTimeout(function() {
-                window.location.href = 'https://www.google.com';
-            }, 300);
+        function continueBrowsing() {
+            try { window.close(); } catch(e) {}
+            var dst = new URLSearchParams(window.location.search).get('dst') || 'https://www.google.com';
+            window.location.href = dst;
         }
 
-        // Start countdown on load
-        window.onload = startCountdown;
+        // Block back button during ad
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
+            if (countdown > 0) history.go(1);
+        };
     </script>
 </body>
 </html>
