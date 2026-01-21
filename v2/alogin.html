@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <link rel="preconnect" href="https://your-ad-proxy.example.com">
+    <title>Connected - Poptar Wifi</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#3B82F6;
+            --white:#fff;
+            --text:#111827;
+            --muted:#6B7280;
+            --border:#E5E7EB
+        }
+        html{height:100%}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--primary);min-height:100vh;display:flex;flex-direction:column;color:var(--white);overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+        /* iOS CNA trigger */
+        .ios-trigger{position:absolute;left:-9999px}
+
+        /* Header */
+        .header{padding:14px 16px;text-align:center}
+        .header h1{font-size:18px;font-weight:700}
+
+        /* Phase 1: Success */
+        .phase{display:none;flex:1;flex-direction:column;padding:0 12px 20px;padding-bottom:env(safe-area-inset-bottom,20px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+        .phase.active{display:flex}
+
+        .success-icon{width:48px;height:48px;margin:20px auto 12px}
+        .success-icon svg{width:100%;height:100%;stroke:var(--white);stroke-width:2;fill:none}
+
+        .success-title{font-size:18px;font-weight:700;text-align:center;margin-bottom:6px}
+        .success-sub{font-size:13px;text-align:center;opacity:0.85;margin-bottom:16px}
+
+        /* Countdown */
+        .countdown{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:18px;font-weight:700}
+
+        /* Ad Card */
+        .ad-container{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:10px;flex-shrink:0}
+        .ad-loading{padding:30px;text-align:center;color:var(--muted);font-size:12px}
+        .ad-card{display:none;text-decoration:none;color:var(--text)}
+        .ad-card.active{display:block}
+        .ad-badge{padding:6px 10px;font-size:9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
+        .ad-image{width:100%;height:130px;object-fit:cover;background:#f0f0f0}
+        .ad-body{padding:10px 12px}
+        .ad-title{font-size:13px;font-weight:600;margin-bottom:3px}
+        .ad-desc{font-size:11px;color:var(--muted);line-height:1.3}
+
+        /* Dots */
+        .dots{display:flex;justify-content:center;gap:5px;margin-bottom:12px}
+        .dot{width:18px;height:3px;border-radius:2px;background:var(--white);opacity:0.3;cursor:pointer}
+        .dot.active{opacity:1}
+
+        /* Button */
+        .btn{width:100%;padding:13px;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;font-family:inherit;border:none;margin-top:12px}
+        .btn-primary{background:var(--white);color:var(--primary)}
+        .btn-outline{background:transparent;border:2px solid var(--white);color:var(--white)}
+        .btn:disabled{opacity:0.5;cursor:not-allowed}
+        .btn:not(:disabled):active{transform:scale(0.98)}
+
+        /* Phase 2: Fullscreen Ad */
+        .fullscreen{position:fixed;inset:0;background:var(--primary);z-index:100;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+        .fs-header{display:flex;justify-content:flex-end;padding:12px;flex-shrink:0}
+        .fs-badge{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+        .fs-body{display:flex;flex-direction:column;padding:0 12px;flex:1}
+        .fs-label{font-size:9px;opacity:0.6;text-transform:uppercase;margin-bottom:10px}
+        .fs-slides{display:flex;flex-direction:column}
+        .fs-slide{display:none;flex-direction:column;text-decoration:none;color:inherit}
+        .fs-slide.active{display:flex}
+        .fs-img-wrap{border-radius:10px;overflow:hidden;margin-bottom:12px;height:45vh;max-height:300px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
+        .fs-img{width:100%;height:100%;object-fit:contain}
+        .fs-info{flex-shrink:0;margin-bottom:16px}
+        .fs-title{font-size:15px;font-weight:700;margin-bottom:4px}
+        .fs-desc{font-size:12px;opacity:0.8}
+        .fs-footer{text-align:center;padding:10px;padding-bottom:env(safe-area-inset-bottom,10px);font-size:10px;opacity:0.6;flex-shrink:0}
+    </style>
+</head>
+<body>
+    <!-- iOS CNA Success Trigger -->
+    <span class="ios-trigger">Success</span>
+
+    <!-- Phase 1: Success + Ad Card -->
+    <div class="phase active" id="phase1">
+        <header class="header"><h1>Poptar Wifi</h1></header>
+
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.5a5 5 0 017 0M5 12.5a10 10 0 0114 0M1.5 8.5a15 15 0 0121 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2 class="success-title">আপনি সফলভাবে যুক্ত হয়েছেন</h2>
+        <p class="success-sub">Poptar WiFi-এ ইন্টারনেট উপভোগ করুন</p>
+
+        <div class="countdown" id="countdown1">5</div>
+
+        <div class="ad-container" id="ad-container1">
+            <div class="ad-loading" id="ad-loading1">লোড হচ্ছে...</div>
+        </div>
+
+        <div class="dots" id="dots1"></div>
+
+        <button class="btn btn-primary" id="btn1" disabled onclick="showPhase2()">আপনার ব্রাউজিং শুরু করুন</button>
+    </div>
+
+    <!-- Phase 2: Fullscreen Ad -->
+    <div class="phase fullscreen" id="phase2">
+        <div class="fs-header">
+            <div class="fs-badge" id="countdown2">5</div>
+        </div>
+        <div class="fs-body">
+            <div class="fs-label">Sponsored</div>
+            <div class="fs-slides" id="fs-slides">
+                <!-- Populated by JS -->
+            </div>
+            <button class="btn btn-outline" id="btn2" style="display:none" onclick="continueBrowsing()">ব্রাউজিং শুরু করুন ➜</button>
+        </div>
+        <footer class="fs-footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেট</footer>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        var CONFIG = {
+            adEndpoint: 'https://ad.kahfads.com/ads-api-native?key=df3b7c12283207cb8bcd05587504f431&native_bs=1',
+            adTimeout: 4000,
+            beaconTimeout: 2000,
+            phase1Duration: 5,
+            phase2Duration: 5,
+            rotationInterval: 2500,
+            maxAds: 3,
+            fallbackAd: {
+                id: 'fallback',
+                title: 'Poptar WiFi',
+                description: 'দ্রুত ও নিরাপদ ইন্টারনেট',
+                imageUrl: '',
+                clickUrl: '#',
+                ctaText: ''
+            }
+        };
+
+        // ============================================
+        // STATE
+        // ============================================
+        var state = {
+            ads: [],
+            currentIndex: 0,
+            impressionsFired: {},
+            phase1Timer: null,
+            phase2Timer: null,
+            rotationTimer: null,
+            phase1Count: CONFIG.phase1Duration,
+            phase2Count: CONFIG.phase2Duration
+        };
+
+        // ============================================
+        // UTILITY
+        // ============================================
+        function fireBeacon(url) {
+            if (!url) return;
+            var img = new Image();
+            img.src = url + (url.indexOf('?') > -1 ? '&' : '?') + '_t=' + Date.now();
+        }
+
+        /**
+         * Transform KahfAds response to standard format
+         */
+        function transformKahfAd(data) {
+            if (!data || !data.title) return null;
+
+            var impressionUrl = '';
+            if (data.beacons && data.beacons.length > 0) {
+                for (var i = 0; i < data.beacons.length; i++) {
+                    if (data.beacons[i].type === 'impression') {
+                        impressionUrl = data.beacons[i].url;
+                        break;
+                    }
+                }
+            }
+
+            return {
+                id: String(data.bannerId || Date.now()),
+                title: data.title || '',
+                description: data.description || '',
+                imageUrl: (data.images && data.images[0]) ? data.images[0].url : '',
+                iconUrl: (data.icons && data.icons[0]) ? data.icons[0].url : '',
+                clickUrl: data.clickUrl || '#',
+                impressionUrl: impressionUrl,
+                ctaText: data.ctaText || 'Learn More'
+            };
+        }
+
+        function fetchSingleAd(index) {
+            return new Promise(function(resolve) {
+                var xhr = new XMLHttpRequest();
+                var done = false;
+
+                // Add cache buster with unique index to get different ads
+                var url = CONFIG.adEndpoint + '&_cb=' + Date.now() + '_' + index + '_' + Math.random().toString(36).substr(2, 9);
+
+                xhr.open('GET', url, true);
+                xhr.timeout = CONFIG.adTimeout;
+
+                xhr.onload = function() {
+                    if (done) return;
+                    done = true;
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        resolve(transformKahfAd(data));
+                    } catch (e) {
+                        resolve(null);
+                    }
+                };
+
+                xhr.onerror = xhr.ontimeout = function() {
+                    if (done) return;
+                    done = true;
+                    resolve(null);
+                };
+
+                xhr.send();
+            });
+        }
+
+        function fetchAds() {
+            var promises = [];
+            for (var i = 0; i < CONFIG.maxAds; i++) {
+                // Stagger requests slightly and pass index for unique cache busters
+                promises.push(fetchSingleAd(i));
+            }
+
+            return Promise.all(promises).then(function(results) {
+                var ads = [];
+                var seenIds = {};
+                results.forEach(function(ad) {
+                    // Accept all ads even with same ID (API might rotate content)
+                    if (ad) {
+                        // Use unique ID if same ID seen
+                        if (seenIds[ad.id]) {
+                            ad.id = ad.id + '_' + ads.length;
+                        }
+                        seenIds[ad.id] = true;
+                        ads.push(ad);
+                    }
+                });
+                return ads;
+            });
+        }
+
+        function escapeHtml(s) {
+            if (!s) return '';
+            var d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        // ============================================
+        // RENDERING
+        // ============================================
+        function renderAds(container, ads, type) {
+            if (!ads.length) {
+                container.innerHTML = '<div class="ad-card active" style="display:block;padding:20px;text-align:center;color:#6B7280;font-size:12px;">Poptar WiFi</div>';
+                return;
+            }
+
+            var html = '';
+            ads.forEach(function(ad, i) {
+                var cls = i === 0 ? ' active' : '';
+                if (type === 'card') {
+                    html += '<a href="' + escapeHtml(ad.clickUrl) + '" target="_blank" class="ad-card' + cls + '" data-id="' + escapeHtml(ad.id) + '" data-idx="' + i + '">';
+                    html += '<div class="ad-badge">Sponsored</div>';
+                    if (ad.imageUrl) html += '<img class="ad-image" src="' + escapeHtml(ad.imageUrl) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+                    html += '<div class="ad-body"><div class="ad-title">' + escapeHtml(ad.title) + '</div>';
+                    html += '<div class="ad-desc">' + escapeHtml(ad.description) + '</div></div></a>';
+                } else {
+                    html += '<a href="' + escapeHtml(ad.clickUrl) + '" target="_blank" class="fs-slide' + cls + '" data-id="' + escapeHtml(ad.id) + '" data-idx="' + i + '">';
+                    html += '<div class="fs-img-wrap">';
+                    if (ad.imageUrl) html += '<img class="fs-img" src="' + escapeHtml(ad.imageUrl) + '" alt="" loading="lazy" onerror="this.parentElement.style.background=\'rgba(255,255,255,0.1)\'">';
+                    html += '</div>';
+                    html += '<div class="fs-info"><div class="fs-title">' + escapeHtml(ad.title) + '</div>';
+                    html += '<div class="fs-desc">' + escapeHtml(ad.description) + '</div></div></a>';
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function renderDots(container, count) {
+            if (count <= 1) { container.style.display = 'none'; return; }
+            var html = '';
+            for (var i = 0; i < count; i++) html += '<span class="dot' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"></span>';
+            container.innerHTML = html;
+            container.style.display = 'flex';
+        }
+
+        function showAd(index) {
+            state.currentIndex = index;
+
+            // Update cards
+            ['#ad-container1 .ad-card', '#fs-slides .fs-slide'].forEach(function(sel) {
+                var cards = document.querySelectorAll(sel);
+                cards.forEach(function(c, i) {
+                    c.classList.toggle('active', i === index);
+                    c.style.display = i === index ? (sel.includes('fs-slide') ? 'flex' : 'block') : 'none';
+                });
+            });
+
+            // Update dots
+            document.querySelectorAll('#dots1 .dot').forEach(function(d, i) {
+                d.classList.toggle('active', i === index);
+            });
+
+            // Fire impression
+            var ad = state.ads[index];
+            if (ad && !state.impressionsFired[ad.id]) {
+                state.impressionsFired[ad.id] = true;
+                if (ad.impressionUrl) fireBeacon(ad.impressionUrl);
+            }
+        }
+
+        function rotateAd() {
+            showAd((state.currentIndex + 1) % state.ads.length);
+        }
+
+        // ============================================
+        // PHASES
+        // ============================================
+        function startPhase1() {
+            state.phase1Timer = setInterval(function() {
+                state.phase1Count--;
+                document.getElementById('countdown1').textContent = state.phase1Count;
+                if (state.phase1Count <= 0) {
+                    clearInterval(state.phase1Timer);
+                    document.getElementById('countdown1').textContent = '✓';
+                    document.getElementById('btn1').disabled = false;
+                }
+            }, 1000);
+        }
+
+        window.showPhase2 = function() {
+            clearInterval(state.rotationTimer);
+            document.getElementById('phase1').classList.remove('active');
+            document.getElementById('phase2').classList.add('active');
+            startPhase2();
+        };
+
+        function startPhase2() {
+            // Restart rotation for fullscreen
+            state.rotationTimer = setInterval(rotateAd, CONFIG.rotationInterval);
+
+            state.phase2Timer = setInterval(function() {
+                state.phase2Count--;
+                document.getElementById('countdown2').textContent = state.phase2Count;
+                if (state.phase2Count <= 0) {
+                    clearInterval(state.phase2Timer);
+                    document.getElementById('countdown2').textContent = '✓';
+                    document.getElementById('btn2').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        window.continueBrowsing = function() {
+            var dst = '$(link-orig-esc)';
+            if (!dst || dst === '$(link-orig-esc)' || dst === '') {
+                dst = 'https://www.google.com';
+            }
+
+            // Detect iOS CNA
+            var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            var isCNA = /CaptiveNetworkSupport/i.test(navigator.userAgent);
+
+            if (isIOS) {
+                // For iOS: First try to close, then redirect
+                // The "Success" text in the page should trigger CNA to close
+                try {
+                    window.close();
+                } catch(e) {}
+
+                // If still here after 200ms, redirect
+                setTimeout(function() {
+                    // Use location.href for iOS (replace doesn't always work in CNA)
+                    window.location.href = dst;
+                }, 200);
+            } else {
+                // For other browsers
+                try { window.close(); } catch(e) {}
+                setTimeout(function() {
+                    window.location.replace(dst);
+                }, 100);
+            }
+        };
+
+        // Block back button
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() { history.pushState(null, null, location.href); };
+
+        // ============================================
+        // INIT
+        // ============================================
+        function init() {
+            fetchAds().then(function(ads) {
+                document.getElementById('ad-loading1').style.display = 'none';
+
+                if (ads.length === 0) ads = [CONFIG.fallbackAd];
+                state.ads = ads;
+
+                renderAds(document.getElementById('ad-container1'), ads, 'card');
+                renderAds(document.getElementById('fs-slides'), ads, 'fullscreen');
+                renderDots(document.getElementById('dots1'), ads.length);
+
+                // Dot clicks
+                document.querySelectorAll('#dots1 .dot').forEach(function(d) {
+                    d.onclick = function() { showAd(parseInt(this.dataset.idx, 10)); };
+                });
+
+                // Fire first impression
+                if (ads[0] && ads[0].impressionUrl && !state.impressionsFired[ads[0].id]) {
+                    state.impressionsFired[ads[0].id] = true;
+                    fireBeacon(ads[0].impressionUrl);
+                }
+
+                // Start timers
+                startPhase1();
+                state.rotationTimer = setInterval(rotateAd, CONFIG.rotationInterval);
+            });
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>

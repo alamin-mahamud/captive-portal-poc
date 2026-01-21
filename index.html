@@ -1,387 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <title>Poptar WiFi - Free Internet</title>
+    <title>Poptar Wifi - Free Internet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f59e0b;
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-white: #ffffff;
-            --text-muted: #94a3b8;
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --white: #ffffff;
+            --bg-gray: #F3F4F6;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --text-light: #9CA3AF;
+            --border: #E5E7EB;
+            --success: #10B981;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-dark);
+            font-family: 'Noto Sans Bengali', -apple-system, sans-serif;
+            background: var(--bg-gray);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            color: var(--text-white);
-            overflow-x: hidden;
-        }
-
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            max-width: 480px;
-            margin: 0 auto;
-            width: 100%;
         }
 
         /* Header */
         .header {
-            text-align: center;
-            padding: 30px 0 20px;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-
-        .tagline {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 15px 0;
-        }
-
-        .lang-btn {
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid var(--text-muted);
-            background: transparent;
-            color: var(--text-muted);
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .lang-btn.active {
             background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-
-        /* Ad Banner */
-        .ad-banner {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 16px 20px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .ad-banner img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 12px;
-        }
-
-        .ad-label {
-            font-size: 10px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .ad-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .ad-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Campaign Message */
-        .campaign-box {
-            background: linear-gradient(135deg, rgba(99,102,241,0.2) 0%, rgba(245,158,11,0.2) 100%);
-            border-radius: 12px;
-            padding: 16px;
-            margin: 15px 0;
-            border: 1px solid rgba(99,102,241,0.3);
-        }
-
-        .campaign-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .campaign-text {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .campaign-text-bn {
-            display: none;
-        }
-
-        /* Connect Button */
-        .connect-section {
-            margin-top: auto;
-            padding: 20px 0 30px;
-        }
-
-        .connect-btn {
-            width: 100%;
-            padding: 18px 32px;
-            font-size: 18px;
+        .header h1 {
+            color: var(--white);
+            font-size: 20px;
             font-weight: 700;
-            color: white;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary);
+            padding: 24px 20px 32px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .hero-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            padding: 0 16px 24px;
+            margin-top: -16px;
+        }
+
+        /* Ad Carousel */
+        .ad-carousel {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .ad-slides {
+            position: relative;
+            overflow: hidden;
             border-radius: 12px;
-            cursor: pointer;
+        }
+
+        .ad-card {
+            display: none;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .ad-card.active {
+            display: block;
+        }
+
+        .ad-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ad-content {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ad-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ad-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
         }
 
-        .connect-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(99,102,241,0.5);
+        .ad-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
         }
 
-        .connect-btn:active {
-            transform: translateY(0);
-        }
-
-        .connect-icon {
-            font-size: 20px;
-        }
-
-        .connect-btn-bn {
-            display: none;
-        }
-
-        /* Terms */
-        .terms {
-            text-align: center;
+        .ad-info p {
             font-size: 11px;
             color: var(--text-muted);
-            margin-top: 12px;
-            line-height: 1.5;
         }
 
-        .terms a {
+        .ad-cta {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 24px;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--primary);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Checkbox */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-wrapper input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--success);
+            margin-top: 2px;
+        }
+
+        .checkbox-wrapper label {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .checkbox-wrapper a {
             color: var(--primary);
             text-decoration: none;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 11px;
-            color: var(--text-muted);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Animated WiFi Icon */
-        .wifi-animation {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .wifi-icon {
-            width: 80px;
-            height: 80px;
-            position: relative;
-        }
-
-        .wifi-wave {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 4px solid var(--primary);
-            border-radius: 50%;
-            opacity: 0;
-            animation: wifiPulse 2s ease-out infinite;
-        }
-
-        .wifi-wave:nth-child(1) { width: 20px; height: 20px; animation-delay: 0s; }
-        .wifi-wave:nth-child(2) { width: 40px; height: 40px; animation-delay: 0.3s; }
-        .wifi-wave:nth-child(3) { width: 60px; height: 60px; animation-delay: 0.6s; }
-
-        .wifi-dot {
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 12px;
+        /* Connect Button */
+        .connect-btn {
+            width: 100%;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
             background: var(--primary);
-            border-radius: 50%;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
         }
 
-        @keyframes wifiPulse {
-            0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(-50%) scale(1.2); }
+        .connect-btn:hover {
+            background: var(--primary-dark);
         }
 
-        /* Responsive */
-        @media (max-height: 600px) {
-            .header { padding: 15px 0 10px; }
-            .logo { font-size: 26px; }
-            .wifi-animation { margin: 10px 0; }
-            .wifi-icon { width: 60px; height: 60px; }
-            .ad-banner { padding: 15px; margin: 10px 0; }
+        .connect-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer Note */
+        .footer-note {
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 380px) {
+            .hero-title { font-size: 18px; }
+            .ad-image { height: 160px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">Poptar WiFi</div>
-            <div class="tagline" id="tagline-en">Free High-Speed Internet</div>
-            <div class="tagline" id="tagline-bn" style="display:none;">বিনামূল্যে হাই-স্পিড ইন্টারনেট</div>
-        </div>
+    <header class="header">
+        <h1>Poptar Wifi</h1>
+    </header>
 
-        <!-- Language Toggle -->
-        <div class="lang-toggle">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('bn')">বাংলা</button>
-        </div>
+    <section class="hero">
+        <h2 class="hero-title">ফ্রি ওয়াইফাই ব্যবহার শুরু করুন</h2>
+        <p class="hero-subtitle">এই স্থানে Poptar WiFi-এর মাধ্যমে আপনি পাবেন নিরাপদ ও ফ্রি ইন্টারনেট সংযোগ।</p>
+    </section>
 
-        <!-- WiFi Animation -->
-        <div class="wifi-animation">
-            <div class="wifi-icon">
-                <div class="wifi-wave"></div>
-                <div class="wifi-wave"></div>
-                <div class="wifi-wave"></div>
-                <div class="wifi-dot"></div>
+    <main class="main">
+        <!-- Ad Carousel -->
+        <div class="ad-carousel">
+            <div class="ad-slides">
+                <!-- Ad 1: StyleVibe -->
+                <a href="https://example.com/stylevibe" target="_blank" class="ad-card active" data-index="0">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=360&fit=crop" alt="StyleVibe" class="ad-image">
+                    <div class="ad-content">
+                        <div class="ad-brand">
+                            <div class="ad-logo" style="background: #FF6B6B;">SV</div>
+                            <div class="ad-info">
+                                <h4>StyleVibe</h4>
+                                <p>Sponsored | Fashion</p>
+                            </div>
+                        </div>
+                        <span class="ad-cta">Learn More</span>
+                    </div>
+                </a>
+
+                <!-- Ad 2: CaféBlend -->
+                <a href="https://example.com/cafeblend" target="_blank" class="ad-card" data-index="1">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=360&fit=crop" alt="CaféBlend" class="ad-image">
+                    <div class="ad-content">
+                        <div class="ad-brand">
+                            <div class="ad-logo" style="background: #8B5A2B;">CB</div>
+                            <div class="ad-info">
+                                <h4>CaféBlend</h4>
+                                <p>Sponsored | Coffee</p>
+                            </div>
+                        </div>
+                        <span class="ad-cta">Order Now</span>
+                    </div>
+                </a>
+
+                <!-- Ad 3: TechHub -->
+                <a href="https://example.com/techhub" target="_blank" class="ad-card" data-index="2">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=360&fit=crop" alt="TechHub" class="ad-image">
+                    <div class="ad-content">
+                        <div class="ad-brand">
+                            <div class="ad-logo" style="background: #6366F1;">TH</div>
+                            <div class="ad-info">
+                                <h4>TechHub</h4>
+                                <p>Sponsored | Electronics</p>
+                            </div>
+                        </div>
+                        <span class="ad-cta">Shop Now</span>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <!-- Ad Banner -->
-        <div class="ad-banner">
-            <div class="ad-label">Sponsored</div>
-            <div class="ad-title" id="ad-title-en">Stay Connected Anywhere</div>
-            <div class="ad-title" id="ad-title-bn" style="display:none;">যেকোনো জায়গায় সংযুক্ত থাকুন</div>
-            <div class="ad-desc" id="ad-desc-en">Poptar WiFi brings you free, fast, and reliable internet access at public locations across Bangladesh.</div>
-            <div class="ad-desc" id="ad-desc-bn" style="display:none;">পপটার ওয়াইফাই বাংলাদেশের পাবলিক লোকেশনগুলোতে বিনামূল্যে, দ্রুত এবং নির্ভরযোগ্য ইন্টারনেট অ্যাক্সেস দেয়।</div>
+        <!-- Carousel Dots -->
+        <div class="carousel-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
         </div>
 
-        <!-- Campaign Message -->
-        <div class="campaign-box">
-            <div class="campaign-icon">📢</div>
-            <div class="campaign-text" id="campaign-en">
-                <strong>Digital Bangladesh</strong><br>
-                Connecting communities, empowering futures.
+        <!-- Form Card -->
+        <div class="form-card">
+            <!-- Terms Checkbox -->
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="terms" checked>
+                <label for="terms">আমাদের <a href="#">শর্ত</a> এবং <a href="#">গোপনীয়তা নীতি</a> মেনে নিচ্ছি</label>
             </div>
-            <div class="campaign-text" id="campaign-bn" style="display:none;">
-                <strong>ডিজিটাল বাংলাদেশ</strong><br>
-                সম্প্রদায়কে সংযুক্ত করা, ভবিষ্যৎকে শক্তিশালী করা।
-            </div>
-        </div>
 
-        <!-- Connect Button -->
-        <div class="connect-section">
-            <button class="connect-btn" onclick="connectToInternet()">
-                <span class="connect-icon">📶</span>
-                <span id="btn-text-en">Connect to Internet</span>
-                <span id="btn-text-bn" style="display:none;">ইন্টারনেটে সংযোগ করুন</span>
-            </button>
-            <div class="terms" id="terms-en">
-                By connecting, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-            </div>
-            <div class="terms" id="terms-bn" style="display:none;">
-                সংযোগ করে, আপনি আমাদের <a href="#">সেবার শর্তাবলী</a> এবং <a href="#">গোপনীয়তা নীতি</a>তে সম্মত হচ্ছেন
-            </div>
+            <!-- Connect Form -->
+            <form name="login" action="$(link-login-only)" method="post">
+                <input type="hidden" name="username" value="guest">
+                <input type="hidden" name="password" value="guest">
+                <input type="hidden" name="dst" value="$(link-orig)">
+                <button type="submit" class="connect-btn">ইন্টারনেটে যুক্ত হোন</button>
+            </form>
         </div>
-    </div>
+    </main>
 
-    <!-- Footer -->
-    <div class="footer">
-        Powered by Poptar WiFi &copy; 2026
-    </div>
+    <footer class="footer-note">
+        ইন্টারনেট সংযোগ করতে আমাদের স্পন্সরদের বিজ্ঞাপন দেখুন।
+    </footer>
 
     <script>
-        // Track impression on load
-        window.addEventListener('load', function() {
-            console.log('IMPRESSION_STEP_01: Pre-auth page loaded');
-            // Analytics tracking would go here
+        console.log('IMPRESSION_STEP_01: Pre-auth page loaded');
+
+        // Auto-rotate carousel
+        var currentSlide = 0;
+        var totalSlides = 3;
+        var autoRotateInterval = 3000; // 3 seconds
+
+        function showSlide(index) {
+            var cards = document.querySelectorAll('.ad-card');
+            var dots = document.querySelectorAll('.dot');
+
+            cards.forEach(function(card, i) {
+                card.classList.remove('active');
+                if (i === index) card.classList.add('active');
+            });
+
+            dots.forEach(function(dot, i) {
+                dot.classList.remove('active');
+                if (i === index) dot.classList.add('active');
+            });
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            var next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        // Auto-rotate
+        setInterval(nextSlide, autoRotateInterval);
+
+        // Click on dots
+        document.querySelectorAll('.dot').forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                showSlide(parseInt(this.dataset.index));
+            });
         });
-
-        // Language toggle
-        function setLang(lang) {
-            var btns = document.querySelectorAll('.lang-btn');
-            btns.forEach(function(b) { b.classList.remove('active'); });
-            event.target.classList.add('active');
-
-            var enElements = ['tagline-en', 'ad-title-en', 'ad-desc-en', 'campaign-en', 'btn-text-en', 'terms-en'];
-            var bnElements = ['tagline-bn', 'ad-title-bn', 'ad-desc-bn', 'campaign-bn', 'btn-text-bn', 'terms-bn'];
-
-            if (lang === 'bn') {
-                enElements.forEach(function(id) { document.getElementById(id).style.display = 'none'; });
-                bnElements.forEach(function(id) { document.getElementById(id).style.display = 'block'; });
-            } else {
-                enElements.forEach(function(id) { document.getElementById(id).style.display = 'block'; });
-                bnElements.forEach(function(id) { document.getElementById(id).style.display = 'none'; });
-            }
-        }
-
-        // Connect button - authenticates with hotspot
-        function connectToInternet() {
-            console.log('CONNECT_CLICKED');
-
-            // Get MikroTik login URL from query params
-            var urlParams = new URLSearchParams(window.location.search);
-            var linkLogin = urlParams.get('link-login') || '';
-            var linkOrig = urlParams.get('link-orig') || 'http://www.google.com';
-
-            if (linkLogin) {
-                // Construct login URL with guest credentials
-                var loginUrl = linkLogin;
-                if (loginUrl.indexOf('?') === -1) {
-                    loginUrl += '?';
-                } else {
-                    loginUrl += '&';
-                }
-                loginUrl += 'username=guest&password=guest&dst=' + encodeURIComponent(linkOrig);
-
-                // Redirect to MikroTik login
-                window.location.href = loginUrl;
-            } else {
-                // Fallback - try direct login
-                window.location.href = 'http://192.168.0.1/login?username=guest&password=guest';
-            }
-        }
     </script>
 </body>
 </html>

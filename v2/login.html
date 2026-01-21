@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <!-- Preconnect to ad resources for faster loading -->
+    <link rel="preconnect" href="https://your-ad-proxy.example.com">
+    <link rel="dns-prefetch" href="https://your-ad-proxy.example.com">
+    <title>Poptar Wifi - Free Internet</title>
+    <style>
+        /* ============================================
+           CRITICAL CSS - INLINE FOR FAST FIRST PAINT
+           ============================================ */
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#3B82F6;
+            --primary-dark:#2563EB;
+            --white:#fff;
+            --bg:#F3F4F6;
+            --text:#111827;
+            --muted:#6B7280;
+            --border:#E5E7EB;
+            --success:#10B981;
+            --error:#EF4444
+        }
+        html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+        body{background:var(--bg);display:flex;flex-direction:column;min-height:100vh;color:var(--text)}
+
+        /* Header */
+        .header{background:var(--primary);padding:14px 16px;text-align:center}
+        .header h1{color:var(--white);font-size:18px;font-weight:700}
+
+        /* Hero */
+        .hero{background:var(--primary);padding:20px 16px 28px;text-align:center;color:var(--white)}
+        .hero-title{font-size:18px;font-weight:700;margin-bottom:6px;line-height:1.4}
+        .hero-sub{font-size:13px;opacity:0.9}
+
+        /* Main */
+        .main{flex:1;padding:0 12px 20px;margin-top:-12px}
+
+        /* Ad Container */
+        .ad-container{background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px}
+        .ad-loading{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px}
+        .ad-loading::after{content:'';display:block;width:24px;height:24px;margin:12px auto 0;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Ad Card */
+        .ad-card{display:block;text-decoration:none;color:inherit}
+        .ad-badge{padding:6px 10px;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
+        .ad-image{width:100%;height:160px;object-fit:cover;background:var(--bg)}
+        .ad-body{padding:12px 14px}
+        .ad-title{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.3}
+        .ad-desc{font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:10px}
+        .ad-cta{display:inline-block;background:var(--primary);color:var(--white);padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600}
+
+        /* Fallback Ad */
+        .ad-fallback{padding:20px;text-align:center}
+        .ad-fallback-icon{font-size:32px;margin-bottom:8px}
+        .ad-fallback-title{font-size:14px;font-weight:600;margin-bottom:4px}
+        .ad-fallback-desc{font-size:12px;color:var(--muted)}
+
+        /* Carousel Dots */
+        .dots{display:flex;justify-content:center;gap:5px;margin-bottom:14px}
+        .dot{width:20px;height:3px;border-radius:2px;background:var(--primary);opacity:0.3}
+        .dot.active{opacity:1}
+
+        /* Form */
+        .form-card{background:var(--white);border-radius:10px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+        .checkbox{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
+        .checkbox input{width:16px;height:16px;accent-color:var(--success);margin-top:2px;flex-shrink:0}
+        .checkbox label{font-size:12px;color:var(--muted);line-height:1.4}
+        .checkbox a{color:var(--primary);text-decoration:none}
+        .btn{width:100%;padding:13px 20px;font-size:15px;font-weight:600;color:var(--white);background:var(--primary);border:none;border-radius:8px;cursor:pointer;font-family:inherit}
+        .btn:active{transform:scale(0.98)}
+
+        /* Footer */
+        .footer{text-align:center;padding:12px;font-size:11px;color:var(--muted)}
+
+        /* Error State */
+        .ad-error{padding:20px;text-align:center;color:var(--error);font-size:12px}
+
+        /* Responsive */
+        @media(max-width:360px){.hero-title{font-size:16px}.ad-image{height:140px}}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Poptar Wifi</h1>
+    </header>
+
+    <section class="hero">
+        <h2 class="hero-title">ফ্রি ওয়াইফাই ব্যবহার শুরু করুন</h2>
+        <p class="hero-sub">নিরাপদ ও দ্রুত ইন্টারনেট সংযোগ</p>
+    </section>
+
+    <main class="main">
+        <!-- Ad Container - Populated by JS -->
+        <div class="ad-container" id="ad-container">
+            <div class="ad-loading" id="ad-loading">বিজ্ঞাপন লোড হচ্ছে...</div>
+        </div>
+
+        <!-- Carousel Dots -->
+        <div class="dots" id="dots"></div>
+
+        <!-- Connect Form -->
+        <div class="form-card">
+            <div class="checkbox">
+                <input type="checkbox" id="terms" checked>
+                <label for="terms">আমাদের <a href="#">শর্ত</a> ও <a href="#">গোপনীয়তা নীতি</a> মেনে নিচ্ছি</label>
+            </div>
+            <form name="login" action="$(link-login-only)" method="post">
+                <input type="hidden" name="username" value="guest">
+                <input type="hidden" name="password" value="guest">
+                <input type="hidden" name="dst" value="$(link-orig)">
+                <button type="submit" class="btn">ইন্টারনেটে যুক্ত হোন</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        Poptar WiFi © 2026
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        var CONFIG = {
+            // KahfAds Native API
+            adEndpoint: 'https://ad.kahfads.com/ads-api-native?key=df3b7c12283207cb8bcd05587504f431&native_bs=1',
+
+            // Timeouts (aggressive for captive portals)
+            adTimeout: 4000,
+            beaconTimeout: 2000,
+
+            // Retry
+            maxRetries: 1,
+
+            // Number of ads to fetch (multiple requests)
+            maxAds: 3,
+
+            // Carousel rotation interval
+            rotationInterval: 4000,
+
+            // Fallback ad
+            fallbackAd: {
+                title: 'Poptar WiFi',
+                description: 'দ্রুত ও নিরাপদ ইন্টারনেট সার্ভিস',
+                icon: '📶'
+            }
+        };
+
+        // ============================================
+        // STATE
+        // ============================================
+        var state = {
+            ads: [],
+            currentIndex: 0,
+            impressionsFired: {},  // Track fired impressions by ad ID
+            rotationTimer: null
+        };
+
+        // ============================================
+        // DOM REFERENCES
+        // ============================================
+        var $adContainer = document.getElementById('ad-container');
+        var $adLoading = document.getElementById('ad-loading');
+        var $dots = document.getElementById('dots');
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        /**
+         * Safe JSON parse
+         */
+        function safeJsonParse(str) {
+            try {
+                return JSON.parse(str);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        /**
+         * Fire beacon via Image (most reliable in captive portals)
+         * Returns a promise that resolves when beacon is sent
+         */
+        function fireBeacon(url, timeout) {
+            if (!url) return Promise.resolve();
+
+            timeout = timeout || CONFIG.beaconTimeout;
+
+            return new Promise(function(resolve) {
+                var img = new Image();
+                var resolved = false;
+
+                function done() {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve();
+                    }
+                }
+
+                img.onload = done;
+                img.onerror = done;  // Fire even on error (beacon sent)
+
+                // Timeout fallback
+                setTimeout(done, timeout);
+
+                // Add cache buster
+                var separator = url.indexOf('?') > -1 ? '&' : '?';
+                img.src = url + separator + '_cb=' + Date.now();
+            });
+        }
+
+        /**
+         * Fetch with timeout (XMLHttpRequest for wider compatibility)
+         */
+        function fetchWithTimeout(url, options, timeout) {
+            timeout = timeout || CONFIG.adTimeout;
+            options = options || {};
+
+            return new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                var timeoutId;
+
+                xhr.open(options.method || 'GET', url, true);
+
+                // Set headers
+                if (options.headers) {
+                    Object.keys(options.headers).forEach(function(key) {
+                        xhr.setRequestHeader(key, options.headers[key]);
+                    });
+                }
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        clearTimeout(timeoutId);
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            resolve({
+                                ok: true,
+                                status: xhr.status,
+                                json: function() {
+                                    return Promise.resolve(safeJsonParse(xhr.responseText));
+                                },
+                                text: function() {
+                                    return Promise.resolve(xhr.responseText);
+                                }
+                            });
+                        } else {
+                            reject(new Error('HTTP ' + xhr.status));
+                        }
+                    }
+                };
+
+                xhr.onerror = function() {
+                    clearTimeout(timeoutId);
+                    reject(new Error('Network error'));
+                };
+
+                timeoutId = setTimeout(function() {
+                    xhr.abort();
+                    reject(new Error('Timeout'));
+                }, timeout);
+
+                xhr.send(options.body || null);
+            });
+        }
+
+        /**
+         * Escape HTML to prevent XSS
+         */
+        function escapeHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // AD FETCHING
+        // ============================================
+
+        /**
+         * Transform KahfAds response to standard format
+         */
+        function transformKahfAd(data) {
+            if (!data || !data.title) return null;
+
+            var impressionUrl = '';
+            if (data.beacons && data.beacons.length > 0) {
+                for (var i = 0; i < data.beacons.length; i++) {
+                    if (data.beacons[i].type === 'impression') {
+                        impressionUrl = data.beacons[i].url;
+                        break;
+                    }
+                }
+            }
+
+            return {
+                id: String(data.bannerId || Date.now()),
+                title: data.title || '',
+                description: data.description || '',
+                imageUrl: (data.images && data.images[0]) ? data.images[0].url : '',
+                iconUrl: (data.icons && data.icons[0]) ? data.icons[0].url : '',
+                clickUrl: data.clickUrl || '#',
+                impressionUrl: impressionUrl,
+                ctaText: data.ctaText || 'Learn More',
+                advertiser: data.advertiser || ''
+            };
+        }
+
+        /**
+         * Fetch single ad from KahfAds API
+         */
+        function fetchSingleAd() {
+            return fetchWithTimeout(CONFIG.adEndpoint, {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            }, CONFIG.adTimeout)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                return transformKahfAd(data);
+            })
+            .catch(function(error) {
+                console.warn('[AdFetch] Error:', error.message);
+                return null;
+            });
+        }
+
+        /**
+         * Fetch multiple ads (makes multiple API calls)
+         */
+        function fetchAds() {
+            var promises = [];
+            for (var i = 0; i < CONFIG.maxAds; i++) {
+                promises.push(fetchSingleAd());
+            }
+
+            return Promise.all(promises).then(function(results) {
+                // Filter out nulls and duplicates
+                var ads = [];
+                var seenIds = {};
+                results.forEach(function(ad) {
+                    if (ad && !seenIds[ad.id]) {
+                        seenIds[ad.id] = true;
+                        ads.push(ad);
+                    }
+                });
+                return ads;
+            });
+        }
+
+        // ============================================
+        // AD RENDERING
+        // ============================================
+
+        /**
+         * Render a single ad card
+         */
+        function renderAdCard(ad, index) {
+            var isActive = index === 0 ? ' active' : '';
+            var html = '';
+
+            html += '<a href="' + escapeHtml(ad.clickUrl) + '" ';
+            html += 'target="_blank" rel="noopener" ';
+            html += 'class="ad-card' + isActive + '" ';
+            html += 'data-ad-id="' + escapeHtml(ad.id) + '" ';
+            html += 'data-index="' + index + '" ';
+            html += 'onclick="return handleAdClick(this, event)">';
+
+            html += '<div class="ad-badge">Sponsored</div>';
+
+            // Image with lazy loading
+            html += '<img class="ad-image" ';
+            html += 'src="' + escapeHtml(ad.imageUrl) + '" ';
+            html += 'alt="' + escapeHtml(ad.title) + '" ';
+            html += 'loading="lazy" ';
+            html += 'onerror="this.style.display=\'none\'">';
+
+            html += '<div class="ad-body">';
+            html += '<div class="ad-title">' + escapeHtml(ad.title) + '</div>';
+            html += '<div class="ad-desc">' + escapeHtml(ad.description) + '</div>';
+            html += '<span class="ad-cta">' + escapeHtml(ad.ctaText || 'Learn More') + '</span>';
+            html += '</div>';
+
+            html += '</a>';
+
+            return html;
+        }
+
+        /**
+         * Render fallback ad (house ad)
+         */
+        function renderFallbackAd() {
+            var html = '<div class="ad-fallback">';
+            html += '<div class="ad-fallback-icon">' + CONFIG.fallbackAd.icon + '</div>';
+            html += '<div class="ad-fallback-title">' + escapeHtml(CONFIG.fallbackAd.title) + '</div>';
+            html += '<div class="ad-fallback-desc">' + escapeHtml(CONFIG.fallbackAd.description) + '</div>';
+            html += '</div>';
+            return html;
+        }
+
+        /**
+         * Render carousel dots
+         */
+        function renderDots(count) {
+            if (count <= 1) {
+                $dots.style.display = 'none';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < count; i++) {
+                html += '<span class="dot' + (i === 0 ? ' active' : '') + '" data-index="' + i + '"></span>';
+            }
+            $dots.innerHTML = html;
+            $dots.style.display = 'flex';
+
+            // Add click handlers to dots
+            var dots = $dots.querySelectorAll('.dot');
+            for (var j = 0; j < dots.length; j++) {
+                dots[j].addEventListener('click', function() {
+                    showAd(parseInt(this.getAttribute('data-index'), 10));
+                });
+            }
+        }
+
+        /**
+         * Show specific ad by index
+         */
+        function showAd(index) {
+            if (state.ads.length === 0) return;
+
+            state.currentIndex = index;
+
+            // Update ad cards
+            var cards = $adContainer.querySelectorAll('.ad-card');
+            for (var i = 0; i < cards.length; i++) {
+                if (i === index) {
+                    cards[i].classList.add('active');
+                    cards[i].style.display = 'block';
+                } else {
+                    cards[i].classList.remove('active');
+                    cards[i].style.display = 'none';
+                }
+            }
+
+            // Update dots
+            var dots = $dots.querySelectorAll('.dot');
+            for (var j = 0; j < dots.length; j++) {
+                if (j === index) {
+                    dots[j].classList.add('active');
+                } else {
+                    dots[j].classList.remove('active');
+                }
+            }
+
+            // Fire impression for this ad
+            fireImpressionBeacon(state.ads[index]);
+        }
+
+        /**
+         * Rotate to next ad
+         */
+        function rotateAd() {
+            var nextIndex = (state.currentIndex + 1) % state.ads.length;
+            showAd(nextIndex);
+        }
+
+        /**
+         * Start auto-rotation
+         */
+        function startRotation() {
+            if (state.ads.length <= 1) return;
+
+            state.rotationTimer = setInterval(rotateAd, CONFIG.rotationInterval);
+        }
+
+        /**
+         * Stop auto-rotation
+         */
+        function stopRotation() {
+            if (state.rotationTimer) {
+                clearInterval(state.rotationTimer);
+                state.rotationTimer = null;
+            }
+        }
+
+        // ============================================
+        // IMPRESSION TRACKING
+        // ============================================
+
+        /**
+         * Fire impression beacon (once per ad per page load)
+         */
+        function fireImpressionBeacon(ad) {
+            if (!ad || !ad.id) return;
+
+            // Check if already fired
+            if (state.impressionsFired[ad.id]) {
+                return;
+            }
+
+            // Mark as fired immediately (before async operation)
+            state.impressionsFired[ad.id] = true;
+
+            // Fire beacon
+            if (ad.impressionUrl) {
+                fireBeacon(ad.impressionUrl).then(function() {
+                    console.log('[Impression] Fired for ad:', ad.id);
+                });
+            }
+        }
+
+        // ============================================
+        // CLICK HANDLING
+        // ============================================
+
+        /**
+         * Handle ad click - exposed globally for onclick
+         */
+        window.handleAdClick = function(element, event) {
+            var adId = element.getAttribute('data-ad-id');
+            var clickUrl = element.getAttribute('href');
+
+            console.log('[Click] Ad clicked:', adId);
+
+            // Let the browser handle the navigation
+            // The href already points to the tracking clickUrl
+            // which will redirect to the final destination
+
+            // For captive portals that don't support target="_blank"
+            // we still return true to allow navigation
+            return true;
+        };
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        function init() {
+            console.log('[CaptivePortal] Initializing...');
+
+            // Fetch ads
+            fetchAds()
+                .then(function(ads) {
+                    // Hide loading
+                    $adLoading.style.display = 'none';
+
+                    if (ads.length === 0) {
+                        // Show fallback
+                        $adContainer.innerHTML = renderFallbackAd();
+                        $dots.style.display = 'none';
+                        console.log('[CaptivePortal] Showing fallback ad');
+                        return;
+                    }
+
+                    // Store ads
+                    state.ads = ads;
+
+                    // Render ad cards
+                    var html = '';
+                    for (var i = 0; i < ads.length; i++) {
+                        html += renderAdCard(ads[i], i);
+                    }
+                    $adContainer.innerHTML = html;
+
+                    // Render dots
+                    renderDots(ads.length);
+
+                    // Fire first impression
+                    fireImpressionBeacon(ads[0]);
+
+                    // Start rotation
+                    startRotation();
+
+                    console.log('[CaptivePortal] Loaded', ads.length, 'ads');
+                })
+                .catch(function(error) {
+                    console.error('[CaptivePortal] Fatal error:', error);
+                    $adLoading.style.display = 'none';
+                    $adContainer.innerHTML = renderFallbackAd();
+                });
+        }
+
+        // ============================================
+        // CAPTIVE PORTAL QUIRKS HANDLING
+        // ============================================
+
+        // iOS CNA: Detect if we're in the captive network assistant
+        var isIOSCNA = /CaptiveNetworkSupport|wifiportal/i.test(navigator.userAgent);
+
+        // Android: Detect captive portal browser
+        var isAndroidCaptive = /Android.*wv/i.test(navigator.userAgent);
+
+        // Adjust behavior for captive browsers
+        if (isIOSCNA || isAndroidCaptive) {
+            // Reduce timeout for faster feedback
+            CONFIG.adTimeout = 2000;
+            CONFIG.beaconTimeout = 1500;
+
+            // Simpler animation
+            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+        }
+
+        // ============================================
+        // START
+        // ============================================
+
+        // Start immediately (don't wait for DOMContentLoaded - already at bottom)
+        init();
+
+    })();
+    </script>
+</body>
+</html>
