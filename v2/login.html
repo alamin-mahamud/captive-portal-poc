@@ -156,12 +156,33 @@
             // Carousel rotation interval
             rotationInterval: 4000,
 
-            // Fallback ad
-            fallbackAd: {
-                title: 'Poptar WiFi',
-                description: 'দ্রুত ও নিরাপদ ইন্টারনেট সার্ভিস',
-                icon: '📶'
-            }
+            // Static fallback ads (shown when API fails)
+            staticAds: [
+                {
+                    id: 'static-1',
+                    title: 'Poptar WiFi',
+                    description: 'দ্রুত ও নিরাপদ ইন্টারনেট সার্ভিস। যেকোনো সময়, যেকোনো জায়গায়।',
+                    imageUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect fill="%233B82F6" width="400" height="200"/%3E%3Ctext x="200" y="90" text-anchor="middle" fill="white" font-size="48" font-family="sans-serif"%3E📶%3C/text%3E%3Ctext x="200" y="130" text-anchor="middle" fill="white" font-size="20" font-family="sans-serif"%3EPoptar WiFi%3C/text%3E%3C/svg%3E',
+                    clickUrl: '#',
+                    ctaText: 'সংযুক্ত হোন'
+                },
+                {
+                    id: 'static-2',
+                    title: 'বিনামূল্যে ইন্টারনেট',
+                    description: 'Poptar WiFi-এ যুক্ত হয়ে উপভোগ করুন দ্রুতগতির ইন্টারনেট।',
+                    imageUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect fill="%2310B981" width="400" height="200"/%3E%3Ctext x="200" y="90" text-anchor="middle" fill="white" font-size="48" font-family="sans-serif"%3E🌐%3C/text%3E%3Ctext x="200" y="130" text-anchor="middle" fill="white" font-size="18" font-family="sans-serif"%3EFree Internet%3C/text%3E%3C/svg%3E',
+                    clickUrl: '#',
+                    ctaText: 'শুরু করুন'
+                },
+                {
+                    id: 'static-3',
+                    title: 'নিরাপদ সংযোগ',
+                    description: 'আপনার তথ্য সুরক্ষিত। নিশ্চিন্তে ব্রাউজ করুন।',
+                    imageUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect fill="%238B5CF6" width="400" height="200"/%3E%3Ctext x="200" y="90" text-anchor="middle" fill="white" font-size="48" font-family="sans-serif"%3E🔒%3C/text%3E%3Ctext x="200" y="130" text-anchor="middle" fill="white" font-size="18" font-family="sans-serif"%3ESecure Connection%3C/text%3E%3C/svg%3E',
+                    clickUrl: '#',
+                    ctaText: 'আরও জানুন'
+                }
+            ]
         };
 
         // ============================================
@@ -407,15 +428,25 @@
         }
 
         /**
-         * Render fallback ad (house ad)
+         * Use static ads as fallback
          */
-        function renderFallbackAd() {
-            var html = '<div class="ad-fallback">';
-            html += '<div class="ad-fallback-icon">' + CONFIG.fallbackAd.icon + '</div>';
-            html += '<div class="ad-fallback-title">' + escapeHtml(CONFIG.fallbackAd.title) + '</div>';
-            html += '<div class="ad-fallback-desc">' + escapeHtml(CONFIG.fallbackAd.description) + '</div>';
-            html += '</div>';
-            return html;
+        function useStaticAds() {
+            state.ads = CONFIG.staticAds;
+
+            // Render static ad cards
+            var html = '';
+            for (var i = 0; i < CONFIG.staticAds.length; i++) {
+                html += renderAdCard(CONFIG.staticAds[i], i);
+            }
+            $adContainer.innerHTML = html;
+
+            // Render dots
+            renderDots(CONFIG.staticAds.length);
+
+            // Start rotation
+            startRotation();
+
+            console.log('[CaptivePortal] Using static ads:', CONFIG.staticAds.length);
         }
 
         /**
@@ -566,10 +597,8 @@
                     $adLoading.style.display = 'none';
 
                     if (ads.length === 0) {
-                        // Show fallback
-                        $adContainer.innerHTML = renderFallbackAd();
-                        $dots.style.display = 'none';
-                        console.log('[CaptivePortal] Showing fallback ad');
+                        // Use static ads as fallback
+                        useStaticAds();
                         return;
                     }
 
@@ -597,7 +626,7 @@
                 .catch(function(error) {
                     console.error('[CaptivePortal] Fatal error:', error);
                     $adLoading.style.display = 'none';
-                    $adContainer.innerHTML = renderFallbackAd();
+                    useStaticAds();
                 });
         }
 

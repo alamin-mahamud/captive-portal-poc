@@ -116,7 +116,25 @@
             adEndpoint: 'https://ad.kahfads.com/ads-api-native?key=df3b7c12283207cb8bcd05587504f431&native_bs=1',
             adTimeout: 4000,
             phase1Duration: 5,
-            phase2Duration: 5
+            phase2Duration: 5,
+            // Static fallback ads (shown when API fails)
+            staticAds: [
+                {
+                    title: 'Poptar WiFi',
+                    description: 'দ্রুত ও নিরাপদ ইন্টারনেট সার্ভিস। যেকোনো সময়, যেকোনো জায়গায়।',
+                    imageUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect fill="%233B82F6" width="400" height="200"/%3E%3Ctext x="200" y="90" text-anchor="middle" fill="white" font-size="48" font-family="sans-serif"%3E📶%3C/text%3E%3Ctext x="200" y="130" text-anchor="middle" fill="white" font-size="20" font-family="sans-serif"%3EPoptar WiFi%3C/text%3E%3C/svg%3E'
+                },
+                {
+                    title: 'বিনামূল্যে ইন্টারনেট',
+                    description: 'Poptar WiFi-এ যুক্ত হয়ে উপভোগ করুন দ্রুতগতির ইন্টারনেট।',
+                    imageUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect fill="%2310B981" width="400" height="200"/%3E%3Ctext x="200" y="90" text-anchor="middle" fill="white" font-size="48" font-family="sans-serif"%3E🌐%3C/text%3E%3Ctext x="200" y="130" text-anchor="middle" fill="white" font-size="18" font-family="sans-serif"%3EFree Internet%3C/text%3E%3C/svg%3E'
+                },
+                {
+                    title: 'নিরাপদ সংযোগ',
+                    description: 'আপনার তথ্য সুরক্ষিত। নিশ্চিন্তে ব্রাউজ করুন।',
+                    imageUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect fill="%238B5CF6" width="400" height="200"/%3E%3Ctext x="200" y="90" text-anchor="middle" fill="white" font-size="48" font-family="sans-serif"%3E🔒%3C/text%3E%3Ctext x="200" y="130" text-anchor="middle" fill="white" font-size="18" font-family="sans-serif"%3ESecure Connection%3C/text%3E%3C/svg%3E'
+                }
+            ]
         };
 
         var destination = '$(link-orig-esc)';
@@ -232,8 +250,18 @@
         }
 
         function showFallback() {
-            adData = { title: 'Poptar WiFi', description: 'দ্রুত ও নিরাপদ ইন্টারনেট', imageUrl: '' };
-            document.getElementById('ad-loading').innerHTML = '<div style="font-size:24px;margin-bottom:8px">📶</div>Poptar WiFi<br><small style="opacity:0.7">দ্রুত ও নিরাপদ ইন্টারনেট</small>';
+            // Pick a random static ad
+            var staticAd = CONFIG.staticAds[Math.floor(Math.random() * CONFIG.staticAds.length)];
+            adData = staticAd;
+
+            document.getElementById('ad-loading').style.display = 'none';
+            document.getElementById('ad-link').style.display = 'block';
+            document.getElementById('ad-link').href = '#';
+            document.getElementById('ad-title').textContent = staticAd.title;
+            document.getElementById('ad-desc').textContent = staticAd.description;
+            if (staticAd.imageUrl) {
+                document.getElementById('ad-image').src = staticAd.imageUrl;
+            }
         }
 
         fetchAd();
