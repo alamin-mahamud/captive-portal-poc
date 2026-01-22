@@ -2,30 +2,168 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
     <title>Connected - Poptar Wifi</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,sans-serif;background:#3B82F6;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px}
-        .icon{width:64px;height:64px;margin-bottom:16px}
-        .icon svg{width:100%;height:100%;stroke:#fff;stroke-width:2;fill:none}
-        h1{font-size:20px;margin-bottom:8px}
-        p{font-size:14px;opacity:0.9;margin-bottom:20px}
-        .btn{padding:12px 28px;font-size:14px;font-weight:600;color:#3B82F6;background:#fff;border:none;border-radius:8px;cursor:pointer}
+        :root{--primary:#3B82F6;--white:#fff;--text:#111827;--muted:#6B7280;--border:#E5E7EB}
+        html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+        body{background:var(--primary);display:flex;flex-direction:column;min-height:100vh;color:var(--white)}
+
         .ios-trigger{position:absolute;left:-9999px}
+
+        .header{padding:14px 16px;text-align:center}
+        .header h1{font-size:18px;font-weight:700}
+
+        .main{flex:1;display:flex;flex-direction:column;padding:0 12px 20px}
+
+        .success-section{text-align:center;padding:16px 0}
+        .success-icon{width:48px;height:48px;margin:0 auto 10px}
+        .success-icon svg{width:100%;height:100%;stroke:var(--white);stroke-width:2;fill:none}
+        .success-title{font-size:18px;font-weight:700;margin-bottom:4px}
+        .success-sub{font-size:13px;opacity:0.85}
+
+        .countdown{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:12px auto;font-size:16px;font-weight:700}
+
+        .ad-section{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:12px;flex:1;display:flex;flex-direction:column}
+        .ad-badge{padding:6px 10px;font-size:9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
+        .ad-image{width:100%;flex:1;min-height:150px;object-fit:cover;background:#f0f0f0}
+        .ad-body{padding:12px;color:var(--text)}
+        .ad-title{font-size:14px;font-weight:600;margin-bottom:4px}
+        .ad-desc{font-size:12px;color:var(--muted)}
+        .ad-loading{padding:40px;text-align:center;color:var(--muted);font-size:13px}
+
+        .btn{width:100%;padding:13px;font-size:14px;font-weight:600;border-radius:8px;border:none;cursor:pointer;font-family:inherit}
+        .btn-primary{background:var(--white);color:var(--primary)}
+        .btn:disabled{opacity:0.5;cursor:not-allowed}
+        .btn:not(:disabled):active{transform:scale(0.98)}
+
+        .footer{text-align:center;padding:10px;font-size:10px;opacity:0.6}
     </style>
 </head>
 <body>
     <span class="ios-trigger">Success</span>
-    <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <h1>সফলভাবে সংযুক্ত!</h1>
-    <p>Poptar WiFi-এ স্বাগতম</p>
-    <button class="btn" onclick="go()">ব্রাউজিং শুরু করুন</button>
+
+    <header class="header"><h1>Poptar Wifi</h1></header>
+
+    <main class="main">
+        <div class="success-section">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.5a5 5 0 017 0M5 12.5a10 10 0 0114 0M1.5 8.5a15 15 0 0121 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h2 class="success-title">আপনি সফলভাবে যুক্ত হয়েছেন</h2>
+            <p class="success-sub">Poptar WiFi-এ স্বাগতম</p>
+        </div>
+
+        <div class="countdown" id="countdown">5</div>
+
+        <div class="ad-section" id="ad-section">
+            <div class="ad-badge">Sponsored</div>
+            <div class="ad-loading" id="ad-loading">বিজ্ঞাপন লোড হচ্ছে...</div>
+            <a href="#" id="ad-link" style="display:none;text-decoration:none;color:inherit;flex:1;display:flex;flex-direction:column" target="_blank">
+                <img class="ad-image" id="ad-image" src="" alt="">
+                <div class="ad-body">
+                    <div class="ad-title" id="ad-title"></div>
+                    <div class="ad-desc" id="ad-desc"></div>
+                </div>
+            </a>
+        </div>
+
+        <button class="btn btn-primary" id="btn" disabled>আপনার ব্রাউজিং শুরু করুন</button>
+    </main>
+
+    <footer class="footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেট</footer>
+
     <script>
-    var dst='$(link-orig-esc)';if(!dst||dst==='$(link-orig-esc)')dst='https://www.google.com';
-    function go(){try{window.close()}catch(e){}setTimeout(function(){location.href=dst},200)}
-    setTimeout(function(){try{window.close()}catch(e){}},1500);
-    setTimeout(function(){location.href=dst},3000);
+    (function() {
+        'use strict';
+
+        var CONFIG = {
+            adEndpoint: 'https://ad.kahfads.com/ads-api-native?key=df3b7c12283207cb8bcd05587504f431&native_bs=1',
+            adTimeout: 4000,
+            countdownDuration: 5
+        };
+
+        var destination = '$(link-orig-esc)';
+        if (!destination || destination === '$(link-orig-esc)' || destination === '') {
+            destination = 'https://www.google.com';
+        }
+
+        var countdown = CONFIG.countdownDuration;
+        var countdownEl = document.getElementById('countdown');
+        var btnEl = document.getElementById('btn');
+
+        // Countdown timer
+        var timer = setInterval(function() {
+            countdown--;
+            countdownEl.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(timer);
+                countdownEl.textContent = '✓';
+                btnEl.disabled = false;
+            }
+        }, 1000);
+
+        // Button click
+        btnEl.onclick = function() {
+            try { window.close(); } catch(e) {}
+            setTimeout(function() {
+                window.location.href = destination;
+            }, 300);
+        };
+
+        // Auto-close after countdown + 3 seconds
+        setTimeout(function() {
+            try { window.close(); } catch(e) {}
+            setTimeout(function() {
+                window.location.href = destination;
+            }, 500);
+        }, (CONFIG.countdownDuration + 3) * 1000);
+
+        // Fetch and display ad
+        function fetchAd() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', CONFIG.adEndpoint, true);
+            xhr.timeout = CONFIG.adTimeout;
+
+            xhr.onload = function() {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    if (data && data.title) {
+                        document.getElementById('ad-loading').style.display = 'none';
+                        document.getElementById('ad-link').style.display = 'flex';
+                        document.getElementById('ad-title').textContent = data.title;
+                        document.getElementById('ad-desc').textContent = data.description || '';
+                        document.getElementById('ad-link').href = data.clickUrl || '#';
+                        if (data.images && data.images[0]) {
+                            document.getElementById('ad-image').src = data.images[0].url;
+                        }
+                        // Fire impression beacon
+                        if (data.beacons) {
+                            for (var i = 0; i < data.beacons.length; i++) {
+                                if (data.beacons[i].type === 'impression') {
+                                    new Image().src = data.beacons[i].url;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch(e) {
+                    document.getElementById('ad-loading').textContent = 'Poptar WiFi';
+                }
+            };
+
+            xhr.onerror = xhr.ontimeout = function() {
+                document.getElementById('ad-loading').textContent = 'Poptar WiFi';
+            };
+
+            xhr.send();
+        }
+
+        fetchAd();
+    })();
     </script>
 </body>
 </html>

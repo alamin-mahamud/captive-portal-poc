@@ -66,6 +66,10 @@
         .dot{width:20px;height:3px;border-radius:2px;background:var(--primary);opacity:0.3}
         .dot.active{opacity:1}
 
+        /* Security Notice */
+        .security-notice{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;color:var(--muted);font-size:12px}
+        .shield-icon{width:18px;height:18px;color:var(--success)}
+
         /* Form */
         .form-card{background:var(--white);border-radius:10px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
         .checkbox{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
@@ -92,7 +96,7 @@
 
     <section class="hero">
         <h2 class="hero-title">ফ্রি ওয়াইফাই ব্যবহার শুরু করুন</h2>
-        <p class="hero-sub">নিরাপদ ও দ্রুত ইন্টারনেট সংযোগ</p>
+        <p class="hero-sub">এই স্থানে Poptar Wifi-এর মাধ্যমে আপনি পাচ্ছেন নিরাপদ ও দ্রুত ইন্টারনেট সংযোগ</p>
     </section>
 
     <main class="main">
@@ -104,14 +108,18 @@
         <!-- Carousel Dots -->
         <div class="dots" id="dots"></div>
 
+        <!-- Security Notice -->
+        <div class="security-notice">
+            <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+            </svg>
+            <span>আপনার দেওয়া তথ্য সম্পূর্ণ নিরাপদ</span>
+        </div>
+
         <!-- Connect Form -->
         <div class="form-card">
-            <div class="checkbox">
-                <input type="checkbox" id="terms" checked>
-                <label for="terms">আমাদের <a href="#">শর্ত</a> ও <a href="#">গোপনীয়তা নীতি</a> মেনে নিচ্ছি</label>
-            </div>
-            <div class="error-msg" id="terms-error" style="display:none;color:#EF4444;font-size:12px;margin-bottom:10px;">শর্তাবলী মেনে নিতে হবে</div>
-            <form name="login" id="login-form" action="$(link-login-only)" method="post" onsubmit="return validateForm()">
+            <form name="login" id="login-form" action="$(link-login-only)" method="post">
                 <input type="hidden" name="username" value="guest">
                 <input type="hidden" name="password" value="guest">
                 <input type="hidden" name="dst" value="$(link-orig)">
@@ -612,31 +620,6 @@
             // Simpler animation
             document.documentElement.style.setProperty('--animation-duration', '0.3s');
         }
-
-        // ============================================
-        // FORM VALIDATION
-        // ============================================
-
-        window.validateForm = function() {
-            var termsCheckbox = document.getElementById('terms');
-            var errorMsg = document.getElementById('terms-error');
-
-            if (!termsCheckbox.checked) {
-                errorMsg.style.display = 'block';
-                termsCheckbox.focus();
-                return false;
-            }
-
-            errorMsg.style.display = 'none';
-            return true;
-        };
-
-        // Hide error when checkbox is checked
-        document.getElementById('terms').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('terms-error').style.display = 'none';
-            }
-        });
 
         // ============================================
         // START
