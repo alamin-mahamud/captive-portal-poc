@@ -10,14 +10,16 @@
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--primary:#3B82F6;--white:#fff;--text:#111827;--muted:#6B7280;--border:#E5E7EB}
         html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-        body{background:var(--primary);display:flex;flex-direction:column;min-height:100vh;color:var(--white)}
+        body{background:var(--primary);min-height:100vh;color:var(--white)}
 
         .ios-trigger{position:absolute;left:-9999px}
 
+        /* Phase 1 */
+        .phase1{display:flex;flex-direction:column;min-height:100vh;padding:0 12px 20px}
+        .phase1.hidden{display:none}
+
         .header{padding:14px 16px;text-align:center}
         .header h1{font-size:18px;font-weight:700}
-
-        .main{flex:1;display:flex;flex-direction:column;padding:0 12px 20px}
 
         .success-section{text-align:center;padding:16px 0}
         .success-icon{width:48px;height:48px;margin:0 auto 10px}
@@ -27,28 +29,42 @@
 
         .countdown{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:12px auto;font-size:16px;font-weight:700}
 
-        .ad-section{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:12px;flex:1;display:flex;flex-direction:column}
+        .ad-card{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:12px;flex:1}
         .ad-badge{padding:6px 10px;font-size:9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
-        .ad-image{width:100%;flex:1;min-height:150px;object-fit:cover;background:#f0f0f0}
+        .ad-image{width:100%;height:180px;object-fit:cover;background:#f0f0f0}
         .ad-body{padding:12px;color:var(--text)}
         .ad-title{font-size:14px;font-weight:600;margin-bottom:4px}
         .ad-desc{font-size:12px;color:var(--muted)}
-        .ad-loading{padding:40px;text-align:center;color:var(--muted);font-size:13px}
+        .ad-loading{padding:60px 20px;text-align:center;color:var(--muted);font-size:13px}
 
-        .btn{width:100%;padding:13px;font-size:14px;font-weight:600;border-radius:8px;border:none;cursor:pointer;font-family:inherit}
-        .btn-primary{background:var(--white);color:var(--primary)}
+        .btn{width:100%;padding:13px;font-size:14px;font-weight:600;border-radius:8px;border:none;cursor:pointer;font-family:inherit;background:var(--white);color:var(--primary)}
         .btn:disabled{opacity:0.5;cursor:not-allowed}
-        .btn:not(:disabled):active{transform:scale(0.98)}
 
-        .footer{text-align:center;padding:10px;font-size:10px;opacity:0.6}
+        /* Phase 2 - Full Page Ad */
+        .phase2{display:none;position:fixed;inset:0;background:var(--primary);flex-direction:column;z-index:100}
+        .phase2.active{display:flex}
+
+        .phase2-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}
+        .phase2-badge{font-size:10px;opacity:0.7;text-transform:uppercase}
+        .phase2-timer{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+
+        .phase2-content{flex:1;display:flex;flex-direction:column;padding:0 12px 20px}
+        .phase2-image{flex:1;border-radius:10px;overflow:hidden;margin-bottom:12px;background:rgba(255,255,255,0.1)}
+        .phase2-image img{width:100%;height:100%;object-fit:contain}
+        .phase2-info{text-align:center}
+        .phase2-title{font-size:18px;font-weight:700;margin-bottom:6px}
+        .phase2-desc{font-size:13px;opacity:0.85}
+
+        .phase2-footer{text-align:center;padding:12px;font-size:10px;opacity:0.5}
     </style>
 </head>
 <body>
     <span class="ios-trigger">Success</span>
 
-    <header class="header"><h1>Poptar Wifi</h1></header>
+    <!-- Phase 1: Success + Ad Card + Button -->
+    <div class="phase1" id="phase1">
+        <header class="header"><h1>Poptar Wifi</h1></header>
 
-    <main class="main">
         <div class="success-section">
             <div class="success-icon">
                 <svg viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.5a5 5 0 017 0M5 12.5a10 10 0 0114 0M1.5 8.5a15 15 0 0121 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -57,12 +73,12 @@
             <p class="success-sub">Poptar WiFi-এ স্বাগতম</p>
         </div>
 
-        <div class="countdown" id="countdown">5</div>
+        <div class="countdown" id="countdown1">5</div>
 
-        <div class="ad-section" id="ad-section">
+        <div class="ad-card" id="ad-card">
             <div class="ad-badge">Sponsored</div>
             <div class="ad-loading" id="ad-loading">বিজ্ঞাপন লোড হচ্ছে...</div>
-            <a href="#" id="ad-link" style="display:none;text-decoration:none;color:inherit;flex:1;display:flex;flex-direction:column" target="_blank">
+            <a href="#" id="ad-link" target="_blank" style="display:none;text-decoration:none;color:inherit">
                 <img class="ad-image" id="ad-image" src="" alt="">
                 <div class="ad-body">
                     <div class="ad-title" id="ad-title"></div>
@@ -71,10 +87,26 @@
             </a>
         </div>
 
-        <button class="btn btn-primary" id="btn" disabled>আপনার ব্রাউজিং শুরু করুন</button>
-    </main>
+        <button class="btn" id="btn1" disabled>আপনার ব্রাউজিং শুরু করুন</button>
+    </div>
 
-    <footer class="footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেট</footer>
+    <!-- Phase 2: Full Page Ad -->
+    <div class="phase2" id="phase2">
+        <div class="phase2-header">
+            <span class="phase2-badge">Sponsored</span>
+            <div class="phase2-timer" id="countdown2">5</div>
+        </div>
+        <div class="phase2-content">
+            <div class="phase2-image" id="phase2-image">
+                <img id="phase2-img" src="" alt="">
+            </div>
+            <div class="phase2-info">
+                <div class="phase2-title" id="phase2-title"></div>
+                <div class="phase2-desc" id="phase2-desc"></div>
+            </div>
+        </div>
+        <div class="phase2-footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেট</div>
+    </div>
 
     <script>
     (function() {
@@ -83,7 +115,8 @@
         var CONFIG = {
             adEndpoint: 'https://ad.kahfads.com/ads-api-native?key=df3b7c12283207cb8bcd05587504f431&native_bs=1',
             adTimeout: 4000,
-            countdownDuration: 5
+            phase1Duration: 5,
+            phase2Duration: 5
         };
 
         var destination = '$(link-orig-esc)';
@@ -91,38 +124,56 @@
             destination = 'https://www.google.com';
         }
 
-        var countdown = CONFIG.countdownDuration;
-        var countdownEl = document.getElementById('countdown');
-        var btnEl = document.getElementById('btn');
+        var adData = null;
 
-        // Countdown timer
-        var timer = setInterval(function() {
-            countdown--;
-            countdownEl.textContent = countdown;
-            if (countdown <= 0) {
-                clearInterval(timer);
-                countdownEl.textContent = '✓';
-                btnEl.disabled = false;
+        // Phase 1 countdown
+        var count1 = CONFIG.phase1Duration;
+        var timer1 = setInterval(function() {
+            count1--;
+            document.getElementById('countdown1').textContent = count1;
+            if (count1 <= 0) {
+                clearInterval(timer1);
+                document.getElementById('countdown1').textContent = '✓';
+                document.getElementById('btn1').disabled = false;
             }
         }, 1000);
 
-        // Button click
-        btnEl.onclick = function() {
-            try { window.close(); } catch(e) {}
-            setTimeout(function() {
-                window.location.href = destination;
-            }, 300);
+        // Button click - go to phase 2
+        document.getElementById('btn1').onclick = function() {
+            document.getElementById('phase1').classList.add('hidden');
+            document.getElementById('phase2').classList.add('active');
+
+            // Set phase 2 content
+            if (adData) {
+                document.getElementById('phase2-title').textContent = adData.title || 'Poptar WiFi';
+                document.getElementById('phase2-desc').textContent = adData.description || '';
+                if (adData.imageUrl) {
+                    document.getElementById('phase2-img').src = adData.imageUrl;
+                }
+            }
+
+            // Start phase 2 countdown
+            var count2 = CONFIG.phase2Duration;
+            var timer2 = setInterval(function() {
+                count2--;
+                document.getElementById('countdown2').textContent = count2;
+                if (count2 <= 0) {
+                    clearInterval(timer2);
+                    document.getElementById('countdown2').textContent = '✓';
+                    // Auto close/redirect
+                    setTimeout(closePage, 500);
+                }
+            }, 1000);
         };
 
-        // Auto-close after countdown + 3 seconds
-        setTimeout(function() {
+        function closePage() {
             try { window.close(); } catch(e) {}
             setTimeout(function() {
-                window.location.href = destination;
-            }, 500);
-        }, (CONFIG.countdownDuration + 3) * 1000);
+                window.location.replace(destination);
+            }, 300);
+        }
 
-        // Fetch and display ad
+        // Fetch ad
         function fetchAd() {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', CONFIG.adEndpoint, true);
@@ -132,15 +183,23 @@
                 try {
                     var data = JSON.parse(xhr.responseText);
                     if (data && data.title) {
+                        adData = {
+                            title: data.title,
+                            description: data.description || '',
+                            imageUrl: (data.images && data.images[0]) ? data.images[0].url : '',
+                            clickUrl: data.clickUrl || '#'
+                        };
+
                         document.getElementById('ad-loading').style.display = 'none';
-                        document.getElementById('ad-link').style.display = 'flex';
-                        document.getElementById('ad-title').textContent = data.title;
-                        document.getElementById('ad-desc').textContent = data.description || '';
-                        document.getElementById('ad-link').href = data.clickUrl || '#';
-                        if (data.images && data.images[0]) {
-                            document.getElementById('ad-image').src = data.images[0].url;
+                        document.getElementById('ad-link').style.display = 'block';
+                        document.getElementById('ad-title').textContent = adData.title;
+                        document.getElementById('ad-desc').textContent = adData.description;
+                        document.getElementById('ad-link').href = adData.clickUrl;
+                        if (adData.imageUrl) {
+                            document.getElementById('ad-image').src = adData.imageUrl;
                         }
-                        // Fire impression beacon
+
+                        // Fire impression
                         if (data.beacons) {
                             for (var i = 0; i < data.beacons.length; i++) {
                                 if (data.beacons[i].type === 'impression') {
@@ -149,17 +208,24 @@
                                 }
                             }
                         }
+                    } else {
+                        showFallback();
                     }
                 } catch(e) {
-                    document.getElementById('ad-loading').textContent = 'Poptar WiFi';
+                    showFallback();
                 }
             };
 
             xhr.onerror = xhr.ontimeout = function() {
-                document.getElementById('ad-loading').textContent = 'Poptar WiFi';
+                showFallback();
             };
 
             xhr.send();
+        }
+
+        function showFallback() {
+            adData = { title: 'Poptar WiFi', description: 'দ্রুত ও নিরাপদ ইন্টারনেট', imageUrl: '' };
+            document.getElementById('ad-loading').innerHTML = '<div style="font-size:24px;margin-bottom:8px">📶</div>Poptar WiFi<br><small style="opacity:0.7">দ্রুত ও নিরাপদ ইন্টারনেট</small>';
         }
 
         fetchAd();
