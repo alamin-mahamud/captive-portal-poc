@@ -267,7 +267,7 @@
             <div class="phase2-info">
                 <div class="phase2-title" id="phase2-title"></div>
                 <div class="phase2-desc" id="phase2-desc"></div>
-                <a class="phase2-cta" id="phase2-cta" href="#" target="_blank" rel="noopener">আরও জানুন</a>
+                <a class="phase2-cta" id="phase2-cta" href="#" target="_blank">আরও জানুন</a>
             </div>
         </div>
         <div class="phase2-footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেটে সবার জন্য</div>
@@ -499,9 +499,11 @@
             var isActive = index === 0 ? ' active' : '';
             var html = '';
 
-            html += '<div class="ad-card' + isActive + '" ';
+            html += '<a href="' + escapeHtml(ad.clickUrl) + '" target="_blank" ';
+            html += 'class="ad-card' + isActive + '" ';
             html += 'data-ad-id="' + escapeHtml(ad.id) + '" ';
-            html += 'data-index="' + index + '">';
+            html += 'data-index="' + index + '" ';
+            html += 'style="text-decoration:none;color:inherit;display:block;">';
 
             html += '<div style="position:relative;">';
             html += '<img class="ad-image" ';
@@ -526,7 +528,7 @@
             html += '</div>';
 
             html += '<a href="' + escapeHtml(ad.clickUrl) + '" ';
-            html += 'target="_blank" rel="noopener" ';
+            html += 'target="_blank" ';
             html += 'class="ad-cta" ';
             html += 'onclick="return handleAdClick(this, event, \'' + escapeHtml(ad.id) + '\')">';
             html += escapeHtml(ad.ctaText || 'Learn More');
@@ -534,7 +536,7 @@
 
             html += '</div>';
             html += '</div>';
-            html += '</div>';
+            html += '</a>';
 
             return html;
         }
@@ -543,8 +545,9 @@
             // Randomly select a static ad
             var randomIndex = Math.floor(Math.random() * CONFIG.staticAds.length);
             var staticAd = CONFIG.staticAds[randomIndex];
-            
-            var html = '<div class="ad-card active">';
+
+            var clickUrl = staticAd.clickUrl || '#';
+            var html = '<a href="' + escapeHtml(clickUrl) + '" target="_blank" class="ad-card active" style="text-decoration:none;color:inherit;display:block;">';
             if (staticAd.imageUrl) {
                 html += '<div class="ad-image-wrapper">';
                 html += '<img src="' + escapeHtml(staticAd.imageUrl) + '" alt="' + escapeHtml(staticAd.title) + '" class="ad-image" onerror="this.style.display=\'none\'">';
@@ -553,14 +556,9 @@
             html += '<div class="ad-content">';
             html += '<h3 class="ad-title">' + escapeHtml(staticAd.title) + '</h3>';
             html += '<p class="ad-description">' + escapeHtml(staticAd.description) + '</p>';
-        if (staticAd.clickUrl) {
-            html += '<a href="' + escapeHtml(staticAd.clickUrl) + '" ';
-            html += 'target="_blank" rel="noopener" class="ad-cta">';
-            html += escapeHtml(staticAd.ctaText || 'Learn More');
+            html += '<span class="ad-cta">' + escapeHtml(staticAd.ctaText || 'Learn More') + '</span>';
+            html += '</div>';
             html += '</a>';
-        }
-            html += '</div>';
-            html += '</div>';
             return html;
         }
 

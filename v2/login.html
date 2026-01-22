@@ -505,9 +505,11 @@
             var isActive = index === 0 ? ' active' : '';
             var html = '';
 
-            html += '<div class="ad-card' + isActive + '" ';
+            html += '<a href="' + escapeHtml(ad.clickUrl) + '" target="_blank" ';
+            html += 'class="ad-card' + isActive + '" ';
             html += 'data-ad-id="' + escapeHtml(ad.id) + '" ';
-            html += 'data-index="' + index + '">';
+            html += 'data-index="' + index + '" ';
+            html += 'style="text-decoration:none;color:inherit;display:block;">';
 
             // Main ad image with badge
             html += '<div style="position:relative;">';
@@ -537,7 +539,7 @@
 
             // CTA Button inline with header
             html += '<a href="' + escapeHtml(ad.clickUrl) + '" ';
-            html += 'target="_blank" rel="noopener" ';
+            html += 'target="_blank" ';
             html += 'class="ad-cta" ';
             html += 'onclick="return handleAdClick(this, event, \'' + escapeHtml(ad.id) + '\')">';
             html += escapeHtml(ad.ctaText || 'Learn More');
@@ -545,7 +547,7 @@
 
             html += '</div>'; // close ad-header
             html += '</div>'; // close ad-body
-            html += '</div>'; // close ad-card
+            html += '</a>'; // close ad-card
 
             return html;
         }
