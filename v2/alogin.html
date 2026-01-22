@@ -112,21 +112,23 @@
         .btn:active:not(:disabled){transform:scale(0.98)}
 
         /* Phase 2 - Full Page Ad */
-        .phase2{display:none;position:fixed;inset:0;background:var(--gradient);flex-direction:column;z-index:100}
+        .phase2{display:none;position:fixed;inset:0;background:var(--gradient);flex-direction:column;align-items:center;justify-content:center;z-index:100;padding:var(--space-xl)}
         .phase2.active{display:flex}
 
-        .phase2-header{display:flex;justify-content:space-between;align-items:center;padding:var(--space-lg) var(--space-xl)}
-        .phase2-badge{font-size:11px;opacity:0.8;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
-        .phase2-timer{width:40px;height:40px;border-radius:var(--radius-full);background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;box-shadow:var(--shadow-md)}
+        .phase2-timer{width:70px;height:70px;border-radius:var(--radius-full);background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,0.15);margin-bottom:var(--space-xl);color:white}
 
-        .phase2-content{flex:1;display:flex;flex-direction:column;padding:0 var(--space-lg) var(--space-2xl)}
-        .phase2-image{flex:1;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:var(--space-xl);background:rgba(255,255,255,0.1);box-shadow:var(--shadow-lg)}
+        .phase2-card{background:white;border-radius:20px;overflow:hidden;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);display:flex;flex-direction:column;max-height:85vh}
+
+        .phase2-badge{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1px;font-weight:600;padding:var(--space-lg) var(--space-lg) var(--space-sm);text-align:left}
+
+        .phase2-image{width:100%;min-height:300px;max-height:500px;flex:1;background:#f5f5f5;display:flex;align-items:center;justify-content:center;overflow:hidden}
         .phase2-image img{width:100%;height:100%;object-fit:contain}
-        .phase2-info{text-align:center}
-        .phase2-title{font-size:22px;font-weight:700;margin-bottom:var(--space-md);line-height:1.3}
-        .phase2-desc{font-size:15px;opacity:0.9;line-height:1.5}
 
-        .phase2-footer{text-align:center;padding:var(--space-lg);font-size:11px;opacity:0.6}
+        .phase2-info{padding:var(--space-lg) var(--space-lg) var(--space-xl);text-align:left}
+        .phase2-title{font-size:18px;font-weight:700;margin-bottom:var(--space-sm);line-height:1.3;color:#1a1a1a}
+        .phase2-desc{font-size:14px;color:#666;line-height:1.5}
+
+        .phase2-footer{text-align:center;padding:var(--space-lg);font-size:12px;color:rgba(255,255,255,0.9);margin-top:var(--space-lg)}
 
         /* Transitions & Animations */
         @keyframes fadeInSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
@@ -138,7 +140,7 @@
         @media(pointer:coarse){
             .btn{min-height:48px;padding:var(--space-lg) var(--space-xl)}
             .countdown{width:52px;height:52px;font-size:22px}
-            .phase2-timer{width:44px;height:44px;font-size:18px}
+            .phase2-timer{width:76px;height:76px;font-size:30px}
             .dot{width:32px;height:10px;min-width:32px}
         }
 
@@ -159,8 +161,10 @@
             .ad-sponsor{font-size:10px}
             .ad-cta{font-size:11px;padding:6px 12px}
             .btn{font-size:13px;margin-top:var(--space-md)}
-            .phase2-title{font-size:20px}
-            .phase2-desc{font-size:14px}
+            .phase2-card{margin:0 var(--space-sm)}
+            .phase2-timer{width:60px;height:60px;font-size:24px}
+            .phase2-title{font-size:16px}
+            .phase2-desc{font-size:13px}
         }
         @media(min-width:361px) and (max-width:480px){
             .ad-image{height:180px}
@@ -170,7 +174,7 @@
             .ad-cta{font-size:12px;padding:7px 14px}
         }
         @media(min-width:481px){
-            .phase1,.phase2-content{max-width:440px;margin-left:auto;margin-right:auto}
+            .phase1{max-width:440px;margin-left:auto;margin-right:auto}
             .ad-image{height:220px}
         }
 
@@ -183,6 +187,9 @@
             .ad-container{max-height:280px}
             .ad-image{height:160px}
             .btn{margin-top:var(--space-md)}
+            .phase2-card{max-height:75vh}
+            .phase2-image{min-height:250px;max-height:400px}
+            .phase2-timer{width:60px;height:60px;font-size:24px;margin-bottom:var(--space-lg)}
         }
 
         @media(max-height:600px){
@@ -194,13 +201,17 @@
             .ad-container{max-height:220px}
             .ad-image{height:140px}
             .dots{padding:var(--space-sm) 0}
+            .phase2-card{max-height:70vh}
+            .phase2-image{min-height:200px;max-height:300px}
+            .phase2-timer{width:52px;height:52px;font-size:20px;margin-bottom:var(--space-md)}
+            .phase2-info{padding:var(--space-md) var(--space-lg) var(--space-lg)}
         }
 
         /* Safe area insets for notched devices */
         @supports(padding:env(safe-area-inset-bottom)){
             body{padding-bottom:env(safe-area-inset-bottom)}
             .phase1{padding-bottom:calc(var(--space-xl) + env(safe-area-inset-bottom))}
-            .phase2-content{padding-bottom:calc(var(--space-2xl) + env(safe-area-inset-bottom))}
+            .phase2{padding-bottom:calc(var(--space-xl) + env(safe-area-inset-bottom))}
         }
     </style>
 </head>
@@ -244,11 +255,9 @@
 
     <!-- Phase 2: Full Page Ad -->
     <div class="phase2" id="phase2">
-        <div class="phase2-header">
-            <span class="phase2-badge">Sponsored</span>
-            <div class="phase2-timer" id="countdown2">5</div>
-        </div>
-        <div class="phase2-content">
+        <div class="phase2-timer" id="countdown2">5</div>
+        <div class="phase2-card">
+            <div class="phase2-badge">SPONSORED</div>
             <div class="phase2-image" id="phase2-image">
                 <img id="phase2-img" src="" alt="">
             </div>
@@ -257,7 +266,7 @@
                 <div class="phase2-desc" id="phase2-desc"></div>
             </div>
         </div>
-        <div class="phase2-footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেট</div>
+        <div class="phase2-footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেটে সবার জন্য</div>
     </div>
 
     <script>
@@ -733,7 +742,7 @@
 
             // Show close message as fallback
             setTimeout(function() {
-                document.body.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:20px;background:#3B82F6;color:white;font-family:sans-serif"><div style="font-size:48px;margin-bottom:16px">✓</div><h2 style="margin-bottom:8px">সংযুক্ত হয়েছে</h2><p style="opacity:0.8;font-size:14px">আপনি এই উইন্ডো বন্ধ করতে পারেন</p></div>';
+                document.body.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:20px;background:#0B39CF;color:white;font-family:sans-serif"><div style="font-size:48px;margin-bottom:16px">✓</div><h2 style="margin-bottom:8px">সংযুক্ত হয়েছে</h2><p style="opacity:0.8;font-size:14px">আপনি এই উইন্ডো বন্ধ করতে পারেন</p></div>';
                 // Try closing again after showing message
                 setTimeout(function() {
                     try { window.close(); } catch(e) {}
