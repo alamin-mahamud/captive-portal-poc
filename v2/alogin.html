@@ -5,57 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
+    <!-- Google Fonts - Noto Sans Bengali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Connected - Poptar Wifi</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--primary:#3B82F6;--white:#fff;--text:#111827;--muted:#6B7280;--border:#E5E7EB}
-        html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-        body{background:var(--primary);min-height:100vh;color:var(--white)}
+        :root{
+            /* Brand Colors */
+            --primary:#2858F5;
+            --primary-dark:#0B39CF;
+            --accent:#FFD700;
+            --white:#FFFFFF;
+            --bg:#F5F5F5;
+            --gradient:linear-gradient(180deg, #2858F5 0%, #0B39CF 100%);
+
+            /* Text Colors */
+            --text-dark:#1F2937;
+            --text-body:#374151;
+            --text-muted:#6B7280;
+            --text-light:#9CA3AF;
+
+            /* UI Colors */
+            --border:#E5E7EB;
+            --success:#10B981;
+            --error:#EF4444;
+            --button-primary:#8B93A8;
+            --button-hover:#7A8296;
+
+            /* Spacing Scale */
+            --space-xs:4px;
+            --space-sm:8px;
+            --space-md:12px;
+            --space-lg:16px;
+            --space-xl:20px;
+            --space-2xl:24px;
+            --space-3xl:32px;
+
+            /* Border Radius */
+            --radius-sm:6px;
+            --radius-md:10px;
+            --radius-lg:12px;
+            --radius-xl:16px;
+            --radius-full:9999px;
+
+            /* Shadows */
+            --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md:0 2px 8px rgba(0,0,0,0.08);
+            --shadow-lg:0 4px 12px rgba(0,0,0,0.1)
+        }
+        html,body{height:100%;font-family:'Noto Sans Bengali',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+        body{background:var(--gradient);min-height:100vh;color:var(--white)}
 
         .ios-trigger{position:absolute;left:-9999px}
 
         /* Phase 1 */
-        .phase1{display:flex;flex-direction:column;min-height:100vh;padding:0 12px 20px}
+        .phase1{display:flex;flex-direction:column;min-height:100vh;max-height:100vh;padding:0 var(--space-lg) var(--space-xl);overflow:hidden}
         .phase1.hidden{display:none}
 
-        .header{padding:14px 16px;text-align:center}
-        .header h1{font-size:18px;font-weight:700}
+        .header{padding:var(--space-2xl) var(--space-lg);text-align:center;flex-shrink:0}
+        .header h1{font-size:28px;font-weight:800;line-height:32px;letter-spacing:0.0703125px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+        .header h1 .wifi-text{color:var(--accent)}
 
-        .success-section{text-align:center;padding:16px 0}
-        .success-icon{width:48px;height:48px;margin:0 auto 10px}
-        .success-icon svg{width:100%;height:100%;stroke:var(--white);stroke-width:2;fill:none}
-        .success-title{font-size:18px;font-weight:700;margin-bottom:4px}
-        .success-sub{font-size:13px;opacity:0.85}
+        .success-section{text-align:center;padding:var(--space-2xl) 0;flex-shrink:0}
+        .success-icon{width:64px;height:64px;margin:0 auto var(--space-md)}
+        .success-title{font-size:24px;font-weight:500;margin-bottom:var(--space-sm);line-height:1.3}
+        .success-sub{font-size:15px;opacity:0.9;line-height:1.5}
 
-        .countdown{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:12px auto;font-size:16px;font-weight:700}
+        .countdown{width:48px;height:48px;border-radius:var(--radius-full);background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;margin:var(--space-lg) auto;font-size:20px;font-weight:700;box-shadow:var(--shadow-md);flex-shrink:0}
 
-        .ad-card{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:12px;flex:1}
-        .ad-badge{padding:6px 10px;font-size:9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
-        .ad-image{width:100%;height:180px;object-fit:cover;background:#f0f0f0}
-        .ad-body{padding:12px;color:var(--text)}
-        .ad-title{font-size:14px;font-weight:600;margin-bottom:4px}
-        .ad-desc{font-size:12px;color:var(--muted)}
-        .ad-loading{padding:60px 20px;text-align:center;color:var(--muted);font-size:13px}
+        /* Ad Container - Carousel */
+        .ad-container{position:relative;background:var(--white);overflow:hidden;box-shadow:var(--shadow-lg);margin:var(--space-lg) 0;border-radius:var(--radius-lg);max-width:440px;min-height:0;max-height:400px}
+        .ad-loading{padding:var(--space-2xl) var(--space-lg);text-align:center;color:var(--text-muted);font-size:13px;font-family:'Noto Sans Bengali',sans-serif}
+        .ad-loading::after{content:'';display:block;width:24px;height:24px;margin:var(--space-md) auto 0;border:2px solid var(--border);border-top-color:var(--primary);border-radius:var(--radius-full);animation:spin 0.7s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
 
-        .btn{width:100%;padding:13px;font-size:14px;font-weight:600;border-radius:8px;border:none;cursor:pointer;font-family:inherit;background:var(--white);color:var(--primary)}
-        .btn:disabled{opacity:0.5;cursor:not-allowed}
+        /* Ad Card */
+        .ad-card{opacity:0;position:absolute;top:0;left:0;width:100%;text-decoration:none;color:inherit;border-radius:var(--radius-lg);pointer-events:none;transition:opacity 0.4s ease-in-out}
+        .ad-card.active{opacity:1;position:relative;pointer-events:auto;animation:fadeInSlide 0.4s ease-out}
+        .ad-badge{position:absolute;top:var(--space-sm);right:var(--space-sm);background:rgba(0,0,0,0.6);color:var(--white);padding:4px 8px;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;border-radius:3px;font-weight:600;z-index:1}
+        .ad-image{width:100%;height:200px;object-fit:cover;background:var(--bg);display:block;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+        .ad-body{padding:var(--space-md) var(--space-lg);background:var(--white);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+        .ad-header{display:flex;align-items:center;gap:var(--space-sm)}
+        .ad-logo{width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--bg);flex-shrink:0}
+        .ad-brand{flex:1;min-width:0}
+        .ad-title{font-size:15px;font-weight:700;line-height:1.3;color:var(--text-dark);margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .ad-sponsor{font-size:11px;color:var(--text-muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .ad-desc{display:none}
+        .ad-cta{display:inline-flex;align-items:center;justify-content:center;background:var(--primary);color:var(--white);padding:8px 18px;border-radius:var(--radius-md);font-size:13px;font-weight:600;text-align:center;transition:background 0.2s;text-decoration:none;flex-shrink:0;white-space:nowrap}
+        .ad-cta:active{background:var(--primary-dark);transform:scale(0.97)}
+
+        /* Fallback Ad */
+        .ad-fallback{padding:var(--space-2xl) var(--space-lg);text-align:center}
+        .ad-fallback-icon{font-size:36px;margin-bottom:var(--space-sm)}
+        .ad-fallback-title{font-size:15px;font-weight:600;margin-bottom:var(--space-xs);color:var(--text-dark)}
+        .ad-fallback-desc{font-size:12px;color:var(--text-muted)}
+
+        /* Carousel Dots */
+        .dots{display:flex;justify-content:center;gap:var(--space-sm);padding:var(--space-lg) 0;flex-shrink:0}
+        .dot{width:28px;height:4px;border-radius:var(--radius-sm);background:var(--white);opacity:0.4;cursor:pointer;transition:all 0.3s}
+        .dot.active{opacity:1;width:32px}
+
+        .btn{width:100%;margin-top:var(--space-lg);padding:var(--space-lg) var(--space-xl);font-size:14px;font-weight:500;line-height:20px;letter-spacing:-0.265174px;border-radius:var(--radius-md);border:none;cursor:pointer;font-family:'Noto Sans Bengali',sans-serif;background:var(--white);color:var(--primary);transition:all 0.2s;min-height:52px;box-shadow:var(--shadow-md);flex-shrink:0}
+        .btn:disabled{opacity:0.6;cursor:not-allowed}
+        .btn:active:not(:disabled){transform:scale(0.98)}
 
         /* Phase 2 - Full Page Ad */
-        .phase2{display:none;position:fixed;inset:0;background:var(--primary);flex-direction:column;z-index:100}
+        .phase2{display:none;position:fixed;inset:0;background:var(--gradient);flex-direction:column;z-index:100}
         .phase2.active{display:flex}
 
-        .phase2-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}
-        .phase2-badge{font-size:10px;opacity:0.7;text-transform:uppercase}
-        .phase2-timer{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+        .phase2-header{display:flex;justify-content:space-between;align-items:center;padding:var(--space-lg) var(--space-xl)}
+        .phase2-badge{font-size:11px;opacity:0.8;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+        .phase2-timer{width:40px;height:40px;border-radius:var(--radius-full);background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;box-shadow:var(--shadow-md)}
 
-        .phase2-content{flex:1;display:flex;flex-direction:column;padding:0 12px 20px}
-        .phase2-image{flex:1;border-radius:10px;overflow:hidden;margin-bottom:12px;background:rgba(255,255,255,0.1)}
+        .phase2-content{flex:1;display:flex;flex-direction:column;padding:0 var(--space-lg) var(--space-2xl)}
+        .phase2-image{flex:1;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:var(--space-xl);background:rgba(255,255,255,0.1);box-shadow:var(--shadow-lg)}
         .phase2-image img{width:100%;height:100%;object-fit:contain}
         .phase2-info{text-align:center}
-        .phase2-title{font-size:18px;font-weight:700;margin-bottom:6px}
-        .phase2-desc{font-size:13px;opacity:0.85}
+        .phase2-title{font-size:22px;font-weight:700;margin-bottom:var(--space-md);line-height:1.3}
+        .phase2-desc{font-size:15px;opacity:0.9;line-height:1.5}
 
-        .phase2-footer{text-align:center;padding:12px;font-size:10px;opacity:0.5}
+        .phase2-footer{text-align:center;padding:var(--space-lg);font-size:11px;opacity:0.6}
+
+        /* Transitions & Animations */
+        @keyframes fadeInSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+        .btn,.ad-cta,.dot{transition:all 0.2s ease}
+        .ad-cta:hover{transform:translateY(-1px)}
+        .dot{transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+
+        /* Touch targets - ensure minimum 44x44px */
+        @media(pointer:coarse){
+            .btn{min-height:48px;padding:var(--space-lg) var(--space-xl)}
+            .countdown{width:52px;height:52px;font-size:22px}
+            .phase2-timer{width:44px;height:44px;font-size:18px}
+            .dot{width:32px;height:10px;min-width:32px}
+        }
+
+        /* Responsive */
+        @media(max-width:360px){
+            .phase1{padding:0 var(--space-md) var(--space-lg)}
+            .header{padding:var(--space-lg) var(--space-md)}
+            .header h1{font-size:24px;line-height:28px}
+            .success-section{padding:var(--space-lg) 0}
+            .success-title{font-size:20px}
+            .success-sub{font-size:14px}
+            .success-icon{width:56px;height:56px}
+            .ad-image{height:160px}
+            .ad-container{width:100%;max-height:300px}
+            .ad-body{padding:10px 12px}
+            .ad-logo{width:28px;height:28px}
+            .ad-title{font-size:13px}
+            .ad-sponsor{font-size:10px}
+            .ad-cta{font-size:11px;padding:6px 12px}
+            .btn{font-size:13px;margin-top:var(--space-md)}
+            .phase2-title{font-size:20px}
+            .phase2-desc{font-size:14px}
+        }
+        @media(min-width:361px) and (max-width:480px){
+            .ad-image{height:180px}
+            .ad-body{padding:12px 14px}
+            .ad-logo{width:32px;height:32px}
+            .ad-title{font-size:14px}
+            .ad-cta{font-size:12px;padding:7px 14px}
+        }
+        @media(min-width:481px){
+            .phase1,.phase2-content{max-width:440px;margin-left:auto;margin-right:auto}
+            .ad-image{height:220px}
+        }
+
+        /* Short viewport height - ensure button visibility */
+        @media(max-height:700px){
+            .header{padding:var(--space-lg) var(--space-lg)}
+            .success-section{padding:var(--space-lg) 0}
+            .success-icon{width:56px;height:56px}
+            .countdown{width:44px;height:44px;font-size:18px;margin:var(--space-md) auto}
+            .ad-container{max-height:280px}
+            .ad-image{height:160px}
+            .btn{margin-top:var(--space-md)}
+        }
+
+        @media(max-height:600px){
+            .header{padding:var(--space-md) var(--space-lg)}
+            .success-section{padding:var(--space-md) 0}
+            .success-icon{width:48px;height:48px}
+            .success-title{font-size:20px}
+            .countdown{width:40px;height:40px;font-size:16px}
+            .ad-container{max-height:220px}
+            .ad-image{height:140px}
+            .dots{padding:var(--space-sm) 0}
+        }
+
+        /* Safe area insets for notched devices */
+        @supports(padding:env(safe-area-inset-bottom)){
+            body{padding-bottom:env(safe-area-inset-bottom)}
+            .phase1{padding-bottom:calc(var(--space-xl) + env(safe-area-inset-bottom))}
+            .phase2-content{padding-bottom:calc(var(--space-2xl) + env(safe-area-inset-bottom))}
+        }
     </style>
 </head>
 <body>
@@ -63,29 +209,35 @@
 
     <!-- Phase 1: Success + Ad Card + Button -->
     <div class="phase1" id="phase1">
-        <header class="header"><h1>Poptar Wifi</h1></header>
+        <header class="header"><h1>Poptar <span class="wifi-text">Wifi</span></h1></header>
 
         <div class="success-section">
             <div class="success-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.5a5 5 0 017 0M5 12.5a10 10 0 0114 0M1.5 8.5a15 15 0 0121 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M35.4153 13.838C34.9767 13.6447 34.4801 13.6298 34.0307 13.7964C33.5813 13.9631 33.2145 14.2982 33.008 14.7307C32.8015 15.1633 32.7715 15.6592 32.9245 16.1135C33.0774 16.5677 33.4012 16.9445 33.8273 17.1641L35.4153 13.838ZM37.3525 18.2335L35.7644 19.1676C35.9339 19.456 36.1786 19.6928 36.4723 19.8527C36.7661 20.0127 37.0978 20.0897 37.432 20.0755C37.7661 20.0614 38.0901 19.9566 38.3693 19.7724C38.6485 19.5883 38.8723 19.3316 39.0168 19.03L37.3525 18.2335ZM43.6901 13.0267C44.1004 12.7847 44.4011 12.3932 44.5292 11.9343C44.6573 11.4755 44.6028 10.9848 44.3771 10.5653C44.1514 10.1457 43.7721 9.82978 43.3187 9.68371C42.8652 9.53764 42.3728 9.57276 41.9447 9.78171L43.6901 13.0267ZM49.1673 14.1354C49.1673 16.9064 48.0665 19.5638 46.1071 21.5232C44.1478 23.4826 41.4903 24.5833 38.7193 24.5833V28.2708C42.4683 28.2708 46.0637 26.7816 48.7146 24.1307C51.3655 21.4798 52.8548 17.8844 52.8548 14.1354H49.1673ZM38.7193 24.5833C35.9484 24.5833 33.2909 23.4826 31.3315 21.5232C29.3722 19.5638 28.2714 16.9064 28.2714 14.1354H24.5839C24.5839 17.8844 26.0732 21.4798 28.7241 24.1307C31.375 26.7816 34.9704 28.2708 38.7193 28.2708V24.5833ZM28.2714 14.1354C28.2714 11.3645 29.3722 8.70699 31.3315 6.74762C33.2909 4.78826 35.9484 3.6875 38.7193 3.6875V0C34.9704 0 31.375 1.48926 28.7241 4.14017C26.0732 6.79107 24.5839 10.3865 24.5839 14.1354H28.2714ZM38.7193 3.6875C41.4903 3.6875 44.1478 4.78826 46.1071 6.74762C48.0665 8.70699 49.1673 11.3645 49.1673 14.1354H52.8548C52.8548 10.3865 51.3655 6.79107 48.7146 4.14017C46.0637 1.48926 42.4683 0 38.7193 0V3.6875ZM34.6213 15.5023L33.8273 17.1641H33.8223L33.8199 17.1616L33.8125 17.1567H33.8076L33.8174 17.1592L33.9207 17.2206C34.0239 17.2845 34.1911 17.3927 34.3878 17.555C34.786 17.877 35.3121 18.3982 35.7644 19.1676L38.9431 17.2968C38.361 16.3009 37.604 15.4181 36.7084 14.691C36.3232 14.3785 35.9101 14.102 35.4743 13.865L35.4252 13.8404H35.4203L35.4153 13.838L34.6213 15.5023ZM37.3525 18.2335L39.0168 19.03L39.0193 19.0226L39.0365 18.9882L39.1102 18.8407C39.1791 18.7046 39.279 18.5153 39.4101 18.2728C39.6732 17.7885 40.0542 17.1321 40.5164 16.429C41.4948 14.9467 42.6502 13.5872 43.6901 13.0267L41.9447 9.78171C40.0296 10.8093 38.4538 12.8645 37.4386 14.3985C36.8115 15.3512 36.2402 16.3394 35.7276 17.3583L35.703 17.4124L35.6956 17.4271L35.6931 17.432V17.4345L37.3525 18.2335ZM52.8548 30.0998C52.8548 29.6108 52.6605 29.1419 52.3147 28.7961C51.969 28.4503 51.5 28.2561 51.011 28.2561C50.522 28.2561 50.0531 28.4503 49.7073 28.7961C49.3615 29.1419 49.1673 29.6108 49.1673 30.0998H52.8548ZM28.8663 49.1667C28.3773 49.1667 27.9084 49.3609 27.5626 49.7067C27.2168 50.0525 27.0226 50.5214 27.0226 51.0104C27.0226 51.4994 27.2168 51.9684 27.5626 52.3141C27.9084 52.6599 28.3773 52.8542 28.8663 52.8542V49.1667ZM31.3247 51.0006L31.3124 49.1568H31.2976L31.3247 51.0006ZM0.000591581 23.9024C-0.00554225 24.1445 0.036074 24.3855 0.123064 24.6115C0.210054 24.8375 0.340715 25.0442 0.507586 25.2198C0.844597 25.5743 1.30864 25.7804 1.79763 25.7928C2.28663 25.8052 2.76051 25.6229 3.11504 25.2858C3.29059 25.119 3.43155 24.9192 3.52987 24.6978C3.62819 24.4765 3.68196 24.2379 3.68809 23.9958L0.000591581 23.9024ZM19.6918 11.0625C19.934 11.0588 20.173 11.0074 20.3953 10.9113C20.6175 10.8152 20.8187 10.6763 20.9873 10.5025C21.1559 10.3287 21.2886 10.1233 21.3778 9.8982C21.467 9.67309 21.511 9.4326 21.5073 9.19048C21.5036 8.94836 21.4522 8.70933 21.3562 8.48706C21.2601 8.26479 21.1211 8.06361 20.9473 7.89503C20.7735 7.72645 20.5681 7.59376 20.343 7.50453C20.1179 7.4153 19.8774 7.37129 19.6353 7.375L19.6918 11.0625ZM49.1673 30.0998C49.1673 35.0903 49.1623 38.613 48.7395 41.2853C48.3314 43.8665 47.5669 45.3907 46.2148 46.5436L48.5994 49.3535C50.8512 47.4409 51.8886 44.9728 52.3828 41.8605C52.8597 38.8368 52.8548 34.9673 52.8548 30.0998H49.1673ZM28.8663 52.8542L31.2116 52.8443H31.3542L31.3271 51.0006L31.2976 49.1568H31.1698L30.747 49.1618L28.8663 49.1667V52.8542ZM31.3394 52.8419C35.5333 52.8124 38.9234 52.6993 41.6743 52.242C44.4546 51.7799 46.7335 50.9391 48.6018 49.3535L46.2148 46.5436C45.0299 47.5515 43.4639 48.2055 41.0695 48.6062C38.6407 49.0093 35.5186 49.1249 31.3124 49.1568L31.3394 52.8419ZM3.68809 23.9983C3.84051 18.0491 4.52393 15.4187 6.5963 13.6585L4.2068 10.8462C0.760217 13.774 0.148092 18.027 0.000591581 23.9024L3.68809 23.9983ZM19.6353 7.37992C12.4914 7.48808 7.61405 7.95271 4.2068 10.8462L6.5963 13.6585C8.8383 11.7508 12.3119 11.1756 19.6918 11.0625L19.6353 7.37992Z"
+                        fill="white" />
+                    <path d="M4.25781 48.552H4.28323" stroke="white" stroke-width="4.91667" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M1.84375 39.2965C7.97237 39.2965 13.57 44.8646 13.57 51.0104M21.5104 51.0104C21.5104 39.9479 11.6648 31.3438 1.95438 31.3438"
+                        stroke="white" stroke-width="3.6875" stroke-linecap="round" />
+                </svg>
+
             </div>
             <h2 class="success-title">আপনি সফলভাবে যুক্ত হয়েছেন</h2>
-            <p class="success-sub">Poptar WiFi-এ স্বাগতম</p>
+            <p class="success-sub" id="success-sub">Poptar WiFi–এ ইন্টারনেট চালু হচ্ছে…</p>
         </div>
 
         <div class="countdown" id="countdown1">5</div>
 
-        <div class="ad-card" id="ad-card">
-            <div class="ad-badge">Sponsored</div>
+        <!-- Ad Carousel - Same as login.html -->
+        <div class="ad-container" id="ad-container">
             <div class="ad-loading" id="ad-loading">বিজ্ঞাপন লোড হচ্ছে...</div>
-            <a href="#" id="ad-link" target="_blank" style="display:none;text-decoration:none;color:inherit">
-                <img class="ad-image" id="ad-image" src="" alt="">
-                <div class="ad-body">
-                    <div class="ad-title" id="ad-title"></div>
-                    <div class="ad-desc" id="ad-desc"></div>
-                </div>
-            </a>
         </div>
+
+        <!-- Carousel Dots -->
+        <div class="dots" id="dots"></div>
 
         <button class="btn" id="btn1" disabled>আপনার ব্রাউজিং শুরু করুন</button>
     </div>
@@ -112,19 +264,412 @@
     (function() {
         'use strict';
 
+        // ============================================
+        // CONFIGURATION
+        // ============================================
         var CONFIG = {
+            // KahfAds Native API
             adEndpoint: 'https://ad.kahfads.com/ads-api-native?key=df3b7c12283207cb8bcd05587504f431&native_bs=1',
+
+            // Timeouts
             adTimeout: 4000,
+            beaconTimeout: 2000,
+
+            // Number of ads to fetch
+            maxAds: 3,
+
+            // Carousel rotation interval (3 seconds)
+            rotationInterval: 3000,
+
+            // Phase durations
             phase1Duration: 5,
-            phase2Duration: 5
+            phase2Duration: 5,
+
+            // Fallback ad
+            fallbackAd: {
+                title: 'Poptar WiFi',
+                description: 'দ্রুত ও নিরাপদ ইন্টারনেট সার্ভিস',
+                icon: '📶'
+            }
         };
 
+        // ============================================
+        // STATE
+        // ============================================
+        var state = {
+            ads: [],
+            currentIndex: 0,
+            impressionsFired: {},
+            rotationTimer: null
+        };
+
+        // Destination URL
         var destination = '$(link-orig-esc)';
         if (!destination || destination === '$(link-orig-esc)' || destination === '') {
             destination = 'https://www.google.com';
         }
 
-        var adData = null;
+        // ============================================
+        // DOM REFERENCES
+        // ============================================
+        var $adContainer = document.getElementById('ad-container');
+        var $adLoading = document.getElementById('ad-loading');
+        var $dots = document.getElementById('dots');
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        function safeJsonParse(str) {
+            try {
+                return JSON.parse(str);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function fireBeacon(url, timeout) {
+            if (!url) return Promise.resolve();
+            timeout = timeout || CONFIG.beaconTimeout;
+
+            return new Promise(function(resolve) {
+                var img = new Image();
+                var resolved = false;
+
+                function done() {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve();
+                    }
+                }
+
+                img.onload = done;
+                img.onerror = done;
+                setTimeout(done, timeout);
+
+                var separator = url.indexOf('?') > -1 ? '&' : '?';
+                img.src = url + separator + '_cb=' + Date.now();
+            });
+        }
+
+        function fetchWithTimeout(url, options, timeout) {
+            timeout = timeout || CONFIG.adTimeout;
+            options = options || {};
+
+            return new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                var timeoutId;
+
+                xhr.open(options.method || 'GET', url, true);
+
+                if (options.headers) {
+                    Object.keys(options.headers).forEach(function(key) {
+                        xhr.setRequestHeader(key, options.headers[key]);
+                    });
+                }
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        clearTimeout(timeoutId);
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            resolve({
+                                ok: true,
+                                status: xhr.status,
+                                json: function() {
+                                    return Promise.resolve(safeJsonParse(xhr.responseText));
+                                },
+                                text: function() {
+                                    return Promise.resolve(xhr.responseText);
+                                }
+                            });
+                        } else {
+                            reject(new Error('HTTP ' + xhr.status));
+                        }
+                    }
+                };
+
+                xhr.onerror = function() {
+                    clearTimeout(timeoutId);
+                    reject(new Error('Network error'));
+                };
+
+                timeoutId = setTimeout(function() {
+                    xhr.abort();
+                    reject(new Error('Timeout'));
+                }, timeout);
+
+                xhr.send(options.body || null);
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // AD FETCHING
+        // ============================================
+
+        function transformKahfAd(data) {
+            if (!data || !data.title) return null;
+
+            var impressionUrl = '';
+            if (data.beacons && data.beacons.length > 0) {
+                for (var i = 0; i < data.beacons.length; i++) {
+                    if (data.beacons[i].type === 'impression') {
+                        impressionUrl = data.beacons[i].url;
+                        break;
+                    }
+                }
+            }
+
+            return {
+                id: String(data.bannerId || Date.now()),
+                title: data.title || '',
+                description: data.description || '',
+                imageUrl: (data.images && data.images[0]) ? data.images[0].url : '',
+                iconUrl: (data.icons && data.icons[0]) ? data.icons[0].url : '',
+                clickUrl: data.clickUrl || '#',
+                impressionUrl: impressionUrl,
+                ctaText: data.ctaText || 'Learn More',
+                advertiser: data.advertiser || ''
+            };
+        }
+
+        function fetchSingleAd() {
+            return fetchWithTimeout(CONFIG.adEndpoint, {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            }, CONFIG.adTimeout)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                return transformKahfAd(data);
+            })
+            .catch(function(error) {
+                console.warn('[AdFetch] Error:', error.message);
+                return null;
+            });
+        }
+
+        function fetchAds() {
+            var promises = [];
+            for (var i = 0; i < CONFIG.maxAds; i++) {
+                promises.push(fetchSingleAd());
+            }
+
+            return Promise.all(promises).then(function(results) {
+                var ads = [];
+                var seenIds = {};
+                results.forEach(function(ad) {
+                    if (ad && !seenIds[ad.id]) {
+                        seenIds[ad.id] = true;
+                        ads.push(ad);
+                    }
+                });
+                return ads;
+            });
+        }
+
+        // ============================================
+        // AD RENDERING
+        // ============================================
+
+        function renderAdCard(ad, index) {
+            var isActive = index === 0 ? ' active' : '';
+            var html = '';
+
+            html += '<div class="ad-card' + isActive + '" ';
+            html += 'data-ad-id="' + escapeHtml(ad.id) + '" ';
+            html += 'data-index="' + index + '">';
+
+            html += '<div style="position:relative;">';
+            html += '<img class="ad-image" ';
+            html += 'src="' + escapeHtml(ad.imageUrl) + '" ';
+            html += 'alt="' + escapeHtml(ad.title) + '" ';
+            html += 'loading="lazy" ';
+            html += 'onerror="this.style.display=\'none\'">';
+            html += '<div class="ad-badge">AD</div>';
+            html += '</div>';
+
+            html += '<div class="ad-body">';
+            html += '<div class="ad-header">';
+            if (ad.iconUrl) {
+                html += '<img class="ad-logo" ';
+                html += 'src="' + escapeHtml(ad.iconUrl) + '" ';
+                html += 'alt="' + escapeHtml(ad.title) + ' logo" ';
+                html += 'onerror="this.style.display=\'none\'">';
+            }
+            html += '<div class="ad-brand">';
+            html += '<div class="ad-title">' + escapeHtml(ad.title) + '</div>';
+            html += '<div class="ad-sponsor">Sponsored | ' + escapeHtml(ad.advertiser || ad.title) + '</div>';
+            html += '</div>';
+
+            html += '<a href="' + escapeHtml(ad.clickUrl) + '" ';
+            html += 'target="_blank" rel="noopener" ';
+            html += 'class="ad-cta" ';
+            html += 'onclick="return handleAdClick(this, event, \'' + escapeHtml(ad.id) + '\')">';
+            html += escapeHtml(ad.ctaText || 'Learn More');
+            html += '</a>';
+
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            return html;
+        }
+
+        function renderFallbackAd() {
+            var html = '<div class="ad-fallback">';
+            html += '<div class="ad-fallback-icon">' + CONFIG.fallbackAd.icon + '</div>';
+            html += '<div class="ad-fallback-title">' + escapeHtml(CONFIG.fallbackAd.title) + '</div>';
+            html += '<div class="ad-fallback-desc">' + escapeHtml(CONFIG.fallbackAd.description) + '</div>';
+            html += '</div>';
+            return html;
+        }
+
+        function renderDots(count) {
+            if (count <= 1) {
+                $dots.style.display = 'none';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < count; i++) {
+                html += '<span class="dot' + (i === 0 ? ' active' : '') + '" data-index="' + i + '"></span>';
+            }
+            $dots.innerHTML = html;
+            $dots.style.display = 'flex';
+
+            var dots = $dots.querySelectorAll('.dot');
+            for (var j = 0; j < dots.length; j++) {
+                dots[j].addEventListener('click', function() {
+                    showAd(parseInt(this.getAttribute('data-index'), 10));
+                });
+            }
+        }
+
+        function showAd(index) {
+            if (state.ads.length === 0) return;
+
+            state.currentIndex = index;
+
+            var cards = $adContainer.querySelectorAll('.ad-card');
+            for (var i = 0; i < cards.length; i++) {
+                if (i === index) {
+                    cards[i].classList.add('active');
+                } else {
+                    cards[i].classList.remove('active');
+                }
+            }
+
+            var dots = $dots.querySelectorAll('.dot');
+            for (var j = 0; j < dots.length; j++) {
+                if (j === index) {
+                    dots[j].classList.add('active');
+                } else {
+                    dots[j].classList.remove('active');
+                }
+            }
+
+            fireImpressionBeacon(state.ads[index]);
+        }
+
+        function rotateAd() {
+            var nextIndex = (state.currentIndex + 1) % state.ads.length;
+            showAd(nextIndex);
+        }
+
+        function startRotation() {
+            if (state.ads.length <= 1) return;
+            state.rotationTimer = setInterval(rotateAd, CONFIG.rotationInterval);
+        }
+
+        function stopRotation() {
+            if (state.rotationTimer) {
+                clearInterval(state.rotationTimer);
+                state.rotationTimer = null;
+            }
+        }
+
+        // ============================================
+        // IMPRESSION TRACKING
+        // ============================================
+
+        function fireImpressionBeacon(ad) {
+            if (!ad || !ad.id) return;
+
+            if (state.impressionsFired[ad.id]) {
+                return;
+            }
+
+            state.impressionsFired[ad.id] = true;
+
+            if (ad.impressionUrl) {
+                fireBeacon(ad.impressionUrl).then(function() {
+                    console.log('[Impression] Fired for ad:', ad.id);
+                });
+            }
+        }
+
+        // ============================================
+        // CLICK HANDLING
+        // ============================================
+
+        window.handleAdClick = function(element, event, adId) {
+            var id = adId || element.getAttribute('data-ad-id');
+            console.log('[Click] Ad clicked:', id);
+            return true;
+        };
+
+        // ============================================
+        // CAROUSEL INITIALIZATION
+        // ============================================
+
+        function initCarousel() {
+            console.log('[Carousel] Initializing...');
+
+            fetchAds()
+                .then(function(ads) {
+                    $adLoading.style.display = 'none';
+
+                    if (ads.length === 0) {
+                        $adContainer.innerHTML = renderFallbackAd();
+                        $dots.style.display = 'none';
+                        console.log('[Carousel] Showing fallback ad');
+                        return;
+                    }
+
+                    state.ads = ads;
+
+                    var html = '';
+                    for (var i = 0; i < ads.length; i++) {
+                        html += renderAdCard(ads[i], i);
+                    }
+                    $adContainer.innerHTML = html;
+
+                    renderDots(ads.length);
+
+                    fireImpressionBeacon(ads[0]);
+
+                    startRotation();
+
+                    console.log('[Carousel] Loaded', ads.length, 'ads');
+                })
+                .catch(function(error) {
+                    console.error('[Carousel] Fatal error:', error);
+                    $adLoading.style.display = 'none';
+                    $adContainer.innerHTML = renderFallbackAd();
+                });
+        }
+
+        // ============================================
+        // PHASE 1 & 2 LOGIC
+        // ============================================
 
         // Phase 1 countdown
         var count1 = CONFIG.phase1Duration;
@@ -134,6 +679,7 @@
             if (count1 <= 0) {
                 clearInterval(timer1);
                 document.getElementById('countdown1').textContent = '✓';
+                document.getElementById('success-sub').textContent = 'Poptar WiFi-এ স্বাগতম';
                 document.getElementById('btn1').disabled = false;
             }
         }, 1000);
@@ -143,12 +689,16 @@
             document.getElementById('phase1').classList.add('hidden');
             document.getElementById('phase2').classList.add('active');
 
-            // Set phase 2 content
-            if (adData) {
-                document.getElementById('phase2-title').textContent = adData.title || 'Poptar WiFi';
-                document.getElementById('phase2-desc').textContent = adData.description || '';
-                if (adData.imageUrl) {
-                    document.getElementById('phase2-img').src = adData.imageUrl;
+            // Stop carousel rotation
+            stopRotation();
+
+            // Set phase 2 content (use current ad from carousel)
+            if (state.ads.length > 0) {
+                var currentAd = state.ads[state.currentIndex];
+                document.getElementById('phase2-title').textContent = currentAd.title || 'Poptar WiFi';
+                document.getElementById('phase2-desc').textContent = currentAd.description || '';
+                if (currentAd.imageUrl) {
+                    document.getElementById('phase2-img').src = currentAd.imageUrl;
                 }
             }
 
@@ -160,7 +710,6 @@
                 if (count2 <= 0) {
                     clearInterval(timer2);
                     document.getElementById('countdown2').textContent = '✓';
-                    // Auto close/redirect
                     setTimeout(closePage, 500);
                 }
             }, 1000);
@@ -173,62 +722,12 @@
             }, 300);
         }
 
-        // Fetch ad
-        function fetchAd() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', CONFIG.adEndpoint, true);
-            xhr.timeout = CONFIG.adTimeout;
+        // ============================================
+        // START
+        // ============================================
 
-            xhr.onload = function() {
-                try {
-                    var data = JSON.parse(xhr.responseText);
-                    if (data && data.title) {
-                        adData = {
-                            title: data.title,
-                            description: data.description || '',
-                            imageUrl: (data.images && data.images[0]) ? data.images[0].url : '',
-                            clickUrl: data.clickUrl || '#'
-                        };
+        initCarousel();
 
-                        document.getElementById('ad-loading').style.display = 'none';
-                        document.getElementById('ad-link').style.display = 'block';
-                        document.getElementById('ad-title').textContent = adData.title;
-                        document.getElementById('ad-desc').textContent = adData.description;
-                        document.getElementById('ad-link').href = adData.clickUrl;
-                        if (adData.imageUrl) {
-                            document.getElementById('ad-image').src = adData.imageUrl;
-                        }
-
-                        // Fire impression
-                        if (data.beacons) {
-                            for (var i = 0; i < data.beacons.length; i++) {
-                                if (data.beacons[i].type === 'impression') {
-                                    new Image().src = data.beacons[i].url;
-                                    break;
-                                }
-                            }
-                        }
-                    } else {
-                        showFallback();
-                    }
-                } catch(e) {
-                    showFallback();
-                }
-            };
-
-            xhr.onerror = xhr.ontimeout = function() {
-                showFallback();
-            };
-
-            xhr.send();
-        }
-
-        function showFallback() {
-            adData = { title: 'Poptar WiFi', description: 'দ্রুত ও নিরাপদ ইন্টারনেট', imageUrl: '' };
-            document.getElementById('ad-loading').innerHTML = '<div style="font-size:24px;margin-bottom:8px">📶</div>Poptar WiFi<br><small style="opacity:0.7">দ্রুত ও নিরাপদ ইন্টারনেট</small>';
-        }
-
-        fetchAd();
     })();
     </script>
 </body>
