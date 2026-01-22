@@ -8,6 +8,10 @@
     <!-- Preconnect to ad resources for faster loading -->
     <link rel="preconnect" href="https://your-ad-proxy.example.com">
     <link rel="dns-prefetch" href="https://your-ad-proxy.example.com">
+    <!-- Google Fonts - Noto Sans Bengali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Poptar Wifi - Free Internet</title>
     <style>
         /* ============================================
@@ -15,45 +19,84 @@
            ============================================ */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
-            --primary:#3B82F6;
-            --primary-dark:#2563EB;
-            --white:#fff;
-            --bg:#F3F4F6;
-            --text:#111827;
-            --muted:#6B7280;
+            /* Brand Colors */
+            --primary:#2858F5;
+            --primary-dark:#0B39CF;
+            --accent:#FFD700;
+            --white:#FFFFFF;
+            --bg:#F5F5F5;
+            --gradient:linear-gradient(180deg, #2858F5 0%, #0B39CF 100%);
+
+            /* Text Colors */
+            --text-dark:#1F2937;
+            --text-body:#374151;
+            --text-muted:#6B7280;
+            --text-light:#9CA3AF;
+
+            /* UI Colors */
             --border:#E5E7EB;
             --success:#10B981;
-            --error:#EF4444
-        }
-        html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-        body{background:var(--bg);display:flex;flex-direction:column;min-height:100vh;color:var(--text)}
+            --error:#EF4444;
+            --button-primary:#8B93A8;
+            --button-hover:#7A8296;
 
+            /* Spacing Scale */
+            --space-xs:4px;
+            --space-sm:8px;
+            --space-md:12px;
+            --space-lg:16px;
+            --space-xl:20px;
+            --space-2xl:24px;
+            --space-3xl:32px;
+
+            /* Border Radius */
+            --radius-sm:6px;
+            --radius-md:10px;
+            --radius-lg:12px;
+            --radius-xl:16px;
+            --radius-full:9999px;
+
+            /* Shadows */
+            --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md:0 2px 8px rgba(0,0,0,0.08);
+            --shadow-lg:0 4px 12px rgba(0,0,0,0.1)
+        }
+        html,body{height:100%;font-family:'Noto Sans Bengali',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+        body{background:var(--bg);display:flex;flex-direction:column;min-height:100vh;color:var(--text-body)}
+        .top-section{background:var(--primary);padding-bottom: 5rem;}
         /* Header */
-        .header{background:var(--primary);padding:14px 16px;text-align:center}
-        .header h1{color:var(--white);font-size:18px;font-weight:700}
+        .header{background:var(--primary);padding:var(--space-2xl) var(--space-lg);text-align:center}
+        .header h1{color:var(--white);font-size:28px;font-weight:800;line-height:32px;letter-spacing:0.0703125px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+        .header h1 .wifi-text{color:var(--accent)}
 
         /* Hero */
-        .hero{background:var(--primary);padding:20px 16px 28px;text-align:center;color:var(--white)}
-        .hero-title{font-size:18px;font-weight:700;margin-bottom:6px;line-height:1.4}
-        .hero-sub{font-size:13px;opacity:0.9}
+        .hero{background:var(--primary);padding:var(--space-2xl) var(--space-lg) var(--space-3xl);text-align:center;color:var(--white)}
+        .hero-title{font-size:28px;font-weight:500;margin-bottom:var(--space-md);line-height:32px;letter-spacing:0.0703125px;font-family:'Noto Sans Bengali',sans-serif}
+        .hero-sub{font-size:16px;font-weight:400;line-height:24px;letter-spacing:-0.3125px;color:#DBEAFE;max-width:393px;margin:0 auto;font-family:'Noto Sans Bengali',sans-serif}
 
         /* Main */
-        .main{flex:1;padding:0 12px 20px;margin-top:-12px}
+        .main{flex:1;}
 
         /* Ad Container */
-        .ad-container{background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px}
-        .ad-loading{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px}
-        .ad-loading::after{content:'';display:block;width:24px;height:24px;margin:12px auto 0;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite}
+        .ad-container{background:var(--white);overflow:hidden;box-shadow:var(--shadow-md);margin-bottom:var(--space-md)}
+        .ad-loading{padding:var(--space-3xl) var(--space-xl);text-align:center;color:var(--text-muted);font-size:14px;font-family:'Noto Sans Bengali',sans-serif}
+        .ad-loading::after{content:'';display:block;width:28px;height:28px;margin:var(--space-md) auto 0;border:3px solid var(--border);border-top-color:var(--primary);border-radius:var(--radius-full);animation:spin 0.8s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
 
         /* Ad Card */
-        .ad-card{display:block;text-decoration:none;color:inherit}
-        .ad-badge{padding:6px 10px;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
-        .ad-image{width:100%;height:160px;object-fit:cover;background:var(--bg)}
-        .ad-body{padding:12px 14px}
-        .ad-title{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.3}
-        .ad-desc{font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:10px}
-        .ad-cta{display:inline-block;background:var(--primary);color:var(--white);padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600}
+        .ad-card{display:none;text-decoration:none;color:inherit;position:relative}
+        .ad-card.active{display:block}
+        .ad-badge{position:absolute;top:var(--space-sm);right:var(--space-sm);background:rgba(255,255,255,0.95);padding:var(--space-xs) var(--space-sm);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;border-radius:var(--radius-sm);backdrop-filter:blur(4px);font-weight:500;z-index:1}
+        .ad-image{width:100%;height:220px;object-fit:cover;background:var(--bg);display:block}
+        .ad-body{padding:var(--space-lg);background:var(--white)}
+        .ad-header{display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md)}
+        .ad-logo{width:40px;height:40px;border-radius:var(--radius-sm);object-fit:cover;background:var(--bg);flex-shrink:0}
+        .ad-brand{flex:1}
+        .ad-title{font-size:16px;font-weight:700;margin-bottom:2px;line-height:1.3;color:var(--text-dark)}
+        .ad-sponsor{font-size:12px;color:var(--text-muted)}
+        .ad-desc{font-size:13px;color:var(--text-body);line-height:1.5;margin-bottom:var(--space-lg)}
+        .ad-cta{display:block;width:100%;background:var(--primary);color:var(--white);padding:var(--space-md) var(--space-xl);border-radius:var(--radius-md);font-size:14px;font-weight:600;text-align:center;transition:background 0.2s}
+        .ad-cta:active{background:var(--primary-dark)}
 
         /* Fallback Ad */
         .ad-fallback{padding:20px;text-align:center}
@@ -62,74 +105,144 @@
         .ad-fallback-desc{font-size:12px;color:var(--muted)}
 
         /* Carousel Dots */
-        .dots{display:flex;justify-content:center;gap:5px;margin-bottom:14px}
-        .dot{width:20px;height:3px;border-radius:2px;background:var(--primary);opacity:0.3}
-        .dot.active{opacity:1}
+        .dots{display:flex;justify-content:center;gap:var(--space-sm);margin-bottom:var(--space-lg);padding:var(--space-md) 0}
+        .dot{width:28px;height:4px;border-radius:var(--radius-sm);background:var(--primary);opacity:0.25;cursor:pointer;transition:all 0.3s}
+        .dot.active{opacity:1;width:32px}
 
         /* Security Notice */
-        .security-notice{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;color:var(--muted);font-size:12px}
-        .shield-icon{width:18px;height:18px;color:var(--success)}
+        .security-notice{display:flex;align-items:center;justify-content:center;gap:var(--space-sm);padding:var(--space-lg) var(--space-md);color:var(--text-muted);font-size:13px;line-height:1.4}
+        .shield-icon{width:20px;height:20px;color:var(--success);flex-shrink:0}
 
         /* Form */
-        .form-card{background:var(--white);border-radius:10px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
-        .checkbox{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
-        .checkbox input{width:16px;height:16px;accent-color:var(--success);margin-top:2px;flex-shrink:0}
-        .checkbox label{font-size:12px;color:var(--muted);line-height:1.4}
-        .checkbox a{color:var(--primary);text-decoration:none}
-        .btn{width:100%;padding:13px 20px;font-size:15px;font-weight:600;color:var(--white);background:var(--primary);border:none;border-radius:8px;cursor:pointer;font-family:inherit}
-        .btn:active{transform:scale(0.98)}
+        .form-card{background:var(--white);width:90%;max-width:416px;margin:0 auto;transform:translateY(-3.5rem);border-radius:var(--radius-xl);padding:var(--space-2xl) var(--space-lg);box-shadow:var(--shadow-md)}
+        .form-label{display:block;font-size:14px;font-weight:500;color:var(--text-dark);margin-bottom:var(--space-md);font-family:'Noto Sans Bengali',sans-serif;line-height:20px}
+        .phone-input-wrapper{display:flex;gap:var(--space-md);margin-bottom:var(--space-lg)}
+        .country-select{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-md) var(--space-lg);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);font-size:16px;color:var(--text-dark);cursor:pointer;min-width:90px}
+        .country-flag{font-size:24px;line-height:1}
+        .phone-input{flex:1;padding:var(--space-md) var(--space-lg);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);font-size:16px;color:var(--text-dark);font-family:inherit}
+        .phone-input:focus{outline:none;border-color:var(--primary);background:var(--white)}
+        .security-badge{display:flex;align-items:center;justify-content:center;gap:var(--space-sm);padding:var(--space-md)}
+        .security-badge-icon{color:var(--success);flex-shrink:0}
+        .security-badge-text{font-size:12px;color:var(--text-body);line-height:1.4;font-family:'Noto Sans Bengali',sans-serif}
+        .btn{width:100%;padding:var(--space-lg) var(--space-xl);font-size:14px;font-weight:500;line-height:20px;letter-spacing:-0.265174px;color:var(--white);background:var(--button-primary);border:none;border-radius:var(--radius-md);cursor:pointer;font-family:'Noto Sans Bengali',sans-serif;transition:background 0.2s;min-height:52px}
+        .btn:active{background:var(--button-hover);transform:scale(0.98)}
 
         /* Footer */
-        .footer{text-align:center;padding:12px;font-size:11px;color:var(--muted)}
+        .footer{text-align:center;padding:var(--space-xl) var(--space-md);font-size:12px;color:var(--text-muted);font-family:'Noto Sans Bengali',sans-serif;line-height:18px}
 
         /* Error State */
-        .ad-error{padding:20px;text-align:center;color:var(--error);font-size:12px}
+        .ad-error{padding:var(--space-xl);text-align:center;color:var(--error);font-size:13px}
+
+        /* Transitions & Animations */
+        .ad-card{transition:opacity 0.3s ease-in-out}
+        .ad-card.active{opacity:1;animation:fadeIn 0.3s ease-in-out}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+        .btn,.ad-cta,.dot{transition:all 0.2s ease}
+        .btn:hover,.ad-cta:hover{transform:translateY(-1px)}
+
+        /* Touch targets - ensure minimum 44x44px */
+        @media(pointer:coarse){
+            .btn,.ad-cta{min-height:48px;padding:var(--space-lg) var(--space-xl)}
+            .dot{width:32px;height:6px;min-width:32px;min-height:32px;padding:var(--space-md) 0}
+            .country-select,.phone-input{min-height:48px}
+        }
 
         /* Responsive */
-        @media(max-width:360px){.hero-title{font-size:16px}.ad-image{height:140px}}
+        @media(max-width:360px){
+            .hero-title{font-size:24px;line-height:28px}
+            .hero-sub{font-size:14px;line-height:20px}
+            .ad-image{height:180px}
+            .header h1{font-size:24px;line-height:28px}
+            .phone-input-wrapper{flex-direction:column}
+            .country-select{width:100%}
+            .ad-body{padding:var(--space-md)}
+            .form-card{padding:var(--space-lg)}
+        }
+        @media(min-width:361px) and (max-width:480px){
+            .ad-image{height:200px}
+        }
+        @media(min-width:481px){
+            .main{max-width:440px;margin-left:auto;margin-right:auto}
+            .ad-image{height:240px}
+        }
+
+        /* Improve focus states for accessibility */
+        .phone-input:focus,.country-select:focus,.btn:focus,.ad-cta:focus{
+            outline:2px solid var(--primary);
+            outline-offset:2px
+        }
+
+        /* Smooth scrolling */
+        html{scroll-behavior:smooth}
+
+        /* Safe area insets for notched devices */
+        @supports(padding:env(safe-area-inset-bottom)){
+            body{padding-bottom:env(safe-area-inset-bottom)}
+        }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>Poptar Wifi</h1>
-    </header>
-
-    <section class="hero">
-        <h2 class="hero-title">ফ্রি ওয়াইফাই ব্যবহার শুরু করুন</h2>
-        <p class="hero-sub">এই স্থানে Poptar Wifi-এর মাধ্যমে আপনি পাচ্ছেন নিরাপদ ও দ্রুত ইন্টারনেট সংযোগ</p>
-    </section>
-
+    
     <main class="main">
-        <!-- Ad Container - Populated by JS -->
-        <div class="ad-container" id="ad-container">
-            <div class="ad-loading" id="ad-loading">বিজ্ঞাপন লোড হচ্ছে...</div>
-        </div>
+        <section class="top-section">
+            <header class="header">
+                <h1>Poptar <span class="wifi-text">Wifi</span></h1>
+            </header>
+        
+            <section class="hero">
+                <h2 class="hero-title">ফ্রি ওয়াইফাই ব্যবহার শুরু করুন</h2>
+                <p class="hero-sub">এই স্থানে Poptar Wifi-এর মাধ্যমে আপনি পাচ্ছেন নিরাপদ ও দ্রুত ইন্টারনেট সংযোগ</p>
+            </section>
+            <!-- Ad Container - Populated by JS -->
+            <div class="ad-container" id="ad-container">
+                <div class="ad-loading" id="ad-loading">বিজ্ঞাপন লোড হচ্ছে...</div>
+            </div>
 
-        <!-- Carousel Dots -->
-        <div class="dots" id="dots"></div>
+            <!-- Carousel Dots -->
+            <div class="dots" id="dots"></div>
 
-        <!-- Security Notice -->
-        <div class="security-notice">
-            <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="M9 12l2 2 4-4"/>
-            </svg>
-            <span>আপনার দেওয়া তথ্য সম্পূর্ণ নিরাপদ</span>
-        </div>
-
+        </section>
         <!-- Connect Form -->
         <div class="form-card">
             <form name="login" id="login-form" action="$(link-login-only)" method="post">
                 <input type="hidden" name="username" value="guest">
                 <input type="hidden" name="password" value="guest">
                 <input type="hidden" name="dst" value="$(link-orig)">
+
+                <label class="form-label">আপনার মোবাইল নম্বর</label>
+                <div class="phone-input-wrapper">
+                    <div class="country-select">
+                        <span class="country-flag">🇧🇩</span>
+                        <span>+1</span>
+                    </div>
+                    <input type="tel" class="phone-input" placeholder="" inputmode="numeric">
+                </div>
+
+                <div class="security-badge">
+                    
+                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_22_1743)">
+                            <path
+                                d="M8.48828 0.934082C8.69066 0.934082 8.88513 1.01373 9.02832 1.15674V1.15771C10.5735 2.70577 12.2836 3.05419 14.2139 3.0542C14.6348 3.0542 14.9783 3.3964 14.9785 3.81787V7.63916C14.9785 9.70959 14.4501 11.4579 13.3994 12.8618C12.3491 14.2652 10.7841 15.3135 8.72852 15.9985C8.57164 16.0508 8.40198 16.0519 8.24512 15.9995C6.19019 15.314 4.62563 14.2649 3.5752 12.8618C2.52439 11.4581 1.99613 9.70961 1.99609 7.63916V3.81787C1.9962 3.61547 2.0766 3.42096 2.21973 3.27783C2.36291 3.13483 2.55739 3.0542 2.75977 3.0542C4.68791 3.05416 6.39879 2.70516 7.94824 1.15674C8.09143 1.01372 8.2859 0.934084 8.48828 0.934082ZM8.48633 2.44971C6.77322 3.95967 4.94298 4.30562 3.30957 4.35986V7.63818C3.30962 9.41805 3.73839 10.8784 4.59863 12.0444C5.45243 13.2016 6.74049 14.0793 8.48535 14.689C10.231 14.0793 11.52 13.2019 12.374 12.0444C13.2342 10.8785 13.6621 9.41797 13.6621 7.63818V4.35986C12.0286 4.30457 10.1966 3.9592 8.48633 2.44971ZM11.1367 6.23682C11.2232 6.23682 11.3088 6.25451 11.3887 6.2876C11.4685 6.32068 11.5414 6.36906 11.6025 6.43018C11.6635 6.49118 11.7121 6.56342 11.7451 6.64307C11.7782 6.72283 11.7949 6.80869 11.7949 6.89502C11.7949 6.98136 11.7781 7.06719 11.7451 7.14697C11.7121 7.2268 11.6636 7.29973 11.6025 7.36084L8.41992 10.5425C8.35887 10.6037 8.28686 10.6529 8.20703 10.686C8.12723 10.7191 8.04147 10.7358 7.95508 10.7358C7.86873 10.7358 7.7829 10.7191 7.70312 10.686C7.66311 10.6694 7.62468 10.6485 7.58887 10.6245L7.48926 10.5425L5.89844 8.95166C5.77509 8.8283 5.70518 8.66126 5.70508 8.48682C5.70508 8.31222 5.77498 8.14445 5.89844 8.021C6.02178 7.89769 6.18888 7.82775 6.36328 7.82764C6.53787 7.82764 6.70565 7.89755 6.8291 8.021L7.9541 9.146L10.6709 6.43018C10.732 6.36912 10.805 6.32068 10.8848 6.2876C10.9646 6.25453 11.0503 6.23683 11.1367 6.23682Z"
+                                fill="#1BA575" stroke="#1BA575" stroke-width="0.254567" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_22_1743">
+                                <rect width="16.9712" height="16.9712" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <span class="security-badge-text">আপনার দেওয়া তথ্য সম্পূর্ণ নিরাপদ</span>
+                </div>
+
                 <button type="submit" class="btn" id="connect-btn">ইন্টারনেটে যুক্ত হোন</button>
             </form>
         </div>
     </main>
 
     <footer class="footer">
-        Poptar WiFi © 2026
+        ইন্টারনেট ব্যবহারের মাধ্যমে আপনি শর্তাবলীতে সম্মতি দিচ্ছেন।
     </footer>
 
     <script>
@@ -379,29 +492,52 @@
             var isActive = index === 0 ? ' active' : '';
             var html = '';
 
-            html += '<a href="' + escapeHtml(ad.clickUrl) + '" ';
-            html += 'target="_blank" rel="noopener" ';
-            html += 'class="ad-card' + isActive + '" ';
+            html += '<div class="ad-card' + isActive + '" ';
             html += 'data-ad-id="' + escapeHtml(ad.id) + '" ';
-            html += 'data-index="' + index + '" ';
-            html += 'onclick="return handleAdClick(this, event)">';
+            html += 'data-index="' + index + '">';
 
-            html += '<div class="ad-badge">Sponsored</div>';
-
-            // Image with lazy loading
+            // Main ad image with badge
+            html += '<div style="position:relative;">';
             html += '<img class="ad-image" ';
             html += 'src="' + escapeHtml(ad.imageUrl) + '" ';
             html += 'alt="' + escapeHtml(ad.title) + '" ';
             html += 'loading="lazy" ';
             html += 'onerror="this.style.display=\'none\'">';
-
-            html += '<div class="ad-body">';
-            html += '<div class="ad-title">' + escapeHtml(ad.title) + '</div>';
-            html += '<div class="ad-desc">' + escapeHtml(ad.description) + '</div>';
-            html += '<span class="ad-cta">' + escapeHtml(ad.ctaText || 'Learn More') + '</span>';
+            html += '<div class="ad-badge">AD</div>';
             html += '</div>';
 
+            // Ad body
+            html += '<div class="ad-body">';
+
+            // Header with logo and brand
+            html += '<div class="ad-header">';
+            if (ad.iconUrl) {
+                html += '<img class="ad-logo" ';
+                html += 'src="' + escapeHtml(ad.iconUrl) + '" ';
+                html += 'alt="' + escapeHtml(ad.title) + ' logo" ';
+                html += 'onerror="this.style.display=\'none\'">';
+            }
+            html += '<div class="ad-brand">';
+            html += '<div class="ad-title">' + escapeHtml(ad.title) + '</div>';
+            html += '<div class="ad-sponsor">Sponsored | ' + escapeHtml(ad.advertiser || ad.title) + '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // Description
+            if (ad.description) {
+                html += '<div class="ad-desc">' + escapeHtml(ad.description) + '</div>';
+            }
+
+            // CTA Button as link
+            html += '<a href="' + escapeHtml(ad.clickUrl) + '" ';
+            html += 'target="_blank" rel="noopener" ';
+            html += 'class="ad-cta" ';
+            html += 'onclick="return handleAdClick(this, event, \'' + escapeHtml(ad.id) + '\')">';
+            html += escapeHtml(ad.ctaText || 'Learn More');
             html += '</a>';
+
+            html += '</div>';
+            html += '</div>';
 
             return html;
         }
@@ -537,11 +673,12 @@
         /**
          * Handle ad click - exposed globally for onclick
          */
-        window.handleAdClick = function(element, event) {
-            var adId = element.getAttribute('data-ad-id');
+        window.handleAdClick = function(element, event, adId) {
+            // Get ad ID from parameter or element data attribute
+            var id = adId || element.getAttribute('data-ad-id');
             var clickUrl = element.getAttribute('href');
 
-            console.log('[Click] Ad clicked:', adId);
+            console.log('[Click] Ad clicked:', id);
 
             // Let the browser handle the navigation
             // The href already points to the tracking clickUrl
