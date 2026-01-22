@@ -110,11 +110,12 @@
                 <input type="checkbox" id="terms" checked>
                 <label for="terms">আমাদের <a href="#">শর্ত</a> ও <a href="#">গোপনীয়তা নীতি</a> মেনে নিচ্ছি</label>
             </div>
-            <form name="login" action="$(link-login-only)" method="post">
+            <div class="error-msg" id="terms-error" style="display:none;color:#EF4444;font-size:12px;margin-bottom:10px;">শর্তাবলী মেনে নিতে হবে</div>
+            <form name="login" id="login-form" action="$(link-login-only)" method="post" onsubmit="return validateForm()">
                 <input type="hidden" name="username" value="guest">
                 <input type="hidden" name="password" value="guest">
                 <input type="hidden" name="dst" value="$(link-orig)">
-                <button type="submit" class="btn">ইন্টারনেটে যুক্ত হোন</button>
+                <button type="submit" class="btn" id="connect-btn">ইন্টারনেটে যুক্ত হোন</button>
             </form>
         </div>
     </main>
@@ -611,6 +612,31 @@
             // Simpler animation
             document.documentElement.style.setProperty('--animation-duration', '0.3s');
         }
+
+        // ============================================
+        // FORM VALIDATION
+        // ============================================
+
+        window.validateForm = function() {
+            var termsCheckbox = document.getElementById('terms');
+            var errorMsg = document.getElementById('terms-error');
+
+            if (!termsCheckbox.checked) {
+                errorMsg.style.display = 'block';
+                termsCheckbox.focus();
+                return false;
+            }
+
+            errorMsg.style.display = 'none';
+            return true;
+        };
+
+        // Hide error when checkbox is checked
+        document.getElementById('terms').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('terms-error').style.display = 'none';
+            }
+        });
 
         // ============================================
         // START
