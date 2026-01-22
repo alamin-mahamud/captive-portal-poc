@@ -121,12 +121,15 @@
 
         .phase2-badge{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1px;font-weight:600;padding:var(--space-lg) var(--space-lg) var(--space-sm);text-align:left}
 
-        .phase2-image{width:100%;min-height:300px;max-height:500px;flex:1;background:#f5f5f5;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        .phase2-image img{width:100%;height:100%;object-fit:contain}
+        .phase2-image{width:100%;background:#f5f5f5;display:block;overflow:hidden;line-height:0}
+        .phase2-image img{width:100%;height:auto;display:block;object-fit:contain;max-height:65vh}
 
         .phase2-info{padding:var(--space-lg) var(--space-lg) var(--space-xl);text-align:left}
         .phase2-title{font-size:18px;font-weight:700;margin-bottom:var(--space-sm);line-height:1.3;color:#1a1a1a}
-        .phase2-desc{font-size:14px;color:#666;line-height:1.5}
+        .phase2-desc{font-size:14px;color:#666;line-height:1.5;margin-bottom:var(--space-lg)}
+
+        .phase2-cta{display:inline-block;padding:10px 24px;background:#007AFF;color:white;text-decoration:none;border-radius:8px;font-size:14px;font-weight:600;transition:all 0.2s;border:none;cursor:pointer;font-family:'Noto Sans Bengali',sans-serif}
+        .phase2-cta:active{transform:scale(0.96);background:#0051D5}
 
         .phase2-footer{text-align:center;padding:var(--space-lg);font-size:12px;color:rgba(255,255,255,0.9);margin-top:var(--space-lg)}
 
@@ -188,7 +191,7 @@
             .ad-image{height:160px}
             .btn{margin-top:var(--space-md)}
             .phase2-card{max-height:75vh}
-            .phase2-image{min-height:250px;max-height:400px}
+            .phase2-image img{max-height:55vh}
             .phase2-timer{width:60px;height:60px;font-size:24px;margin-bottom:var(--space-lg)}
         }
 
@@ -202,7 +205,7 @@
             .ad-image{height:140px}
             .dots{padding:var(--space-sm) 0}
             .phase2-card{max-height:70vh}
-            .phase2-image{min-height:200px;max-height:300px}
+            .phase2-image img{max-height:50vh}
             .phase2-timer{width:52px;height:52px;font-size:20px;margin-bottom:var(--space-md)}
             .phase2-info{padding:var(--space-md) var(--space-lg) var(--space-lg)}
         }
@@ -264,6 +267,7 @@
             <div class="phase2-info">
                 <div class="phase2-title" id="phase2-title"></div>
                 <div class="phase2-desc" id="phase2-desc"></div>
+                <a class="phase2-cta" id="phase2-cta" href="#" target="_blank" rel="noopener">আরও জানুন</a>
             </div>
         </div>
         <div class="phase2-footer">Poptar WiFi - নিরাপদ ফ্রি ইন্টারনেটে সবার জন্য</div>
@@ -719,6 +723,14 @@
                 document.getElementById('phase2-desc').textContent = currentAd.description || '';
                 if (currentAd.imageUrl) {
                     document.getElementById('phase2-img').src = currentAd.imageUrl;
+                }
+                // Set ad CTA link
+                var ctaBtn = document.getElementById('phase2-cta');
+                if (currentAd.clickUrl) {
+                    ctaBtn.href = currentAd.clickUrl;
+                    ctaBtn.style.display = 'inline-block';
+                } else {
+                    ctaBtn.style.display = 'none';
                 }
             }
 
